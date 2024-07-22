@@ -1,0 +1,16 @@
+[Event "Computer Chess Game"]
+[Site "pl"]
+[Date "2010.04.17"]
+[Round "*"]
+[White "vdbergh"]
+[Black "GNU Chess 5.07.94b"]
+[Result "*"]
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Ng5 d5 5. exd5 Na5 6. Bb5+ Bd7 7. Bxd7+ Qxd7
+8. Nc3 O-O-O 9. O-O Nxd5 10. d3 Nxc3 11. bxc3 Nc6 12. Rb1 h6 13. Nf3 Qe6 14. c4
+g5 15. Bb2 f6 16. Re1 g4 17. Nh4 f5 18. Qe2 Be7 19. g3 Bxh4 20. gxh4 Rhe8 21.
+Bc3 Qf6 22. h5 Qe7 23. Qd2 f4 24. Qe2 Qg5 25. Qe4 Qxh5 26. Rxb7 g3 27. fxg3
+fxg3 28. h4 Kxb7 29. Rb1+ Kc8 30. Qxc6 e4 31. Qa6+ Kd7 32. Qa4+ Ke6 33. Rf1 g2
+34. Qc6+ Rd6 35. Rf6+ Ke7 36. Qxc7+ Rd7 37. Re6+ Kxe6 38. Qc6+ Rd6 39. Qxe4+
+Kd7 40. Qb7+ Kd8 41. Qa8+ Ke7 42. Qb7+ Rd7 43. Bb4+ Kf6 44. Bc3+ Kf7 45. Qxd7+
+Re7 46. Qd4 Re2 47. Qf6+ Ke8 48. Bd4 Rxc2 49. Qe6+ Kf8 50. Qf6+ Ke8 * {xboard exit}
+
