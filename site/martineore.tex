@@ -1,0 +1,1150 @@
+\documentclass{amsart}
+%\usepackage{showkeys}
+\usepackage{amscd,verbatim}
+\numberwithin{equation}{section}
+
+%  amstexincl.tex
+%
+
+%\input{scr}
+%
+%  scr.tex
+%
+\let\cal\mathcal
+\def\Ascr{{\cal A}}
+\def\Bscr{{\cal B}}
+\def\Cscr{{\cal C}}
+\def\Dscr{{\cal D}}
+\def\Escr{{\cal E}}
+\def\Fscr{{\cal F}}
+\def\Gscr{{\cal G}}
+\def\Hscr{{\cal H}}
+\def\Iscr{{\cal I}}
+\def\Jscr{{\cal J}}
+\def\Kscr{{\cal K}}
+\def\Lscr{{\cal L}}
+\def\Mscr{{\cal M}}
+\def\Nscr{{\cal N}}
+\def\Oscr{{\cal O}}
+\def\Pscr{{\cal P}}
+\def\Qscr{{\cal Q}}
+\def\Rscr{{\cal R}}
+\def\Sscr{{\cal S}}
+\def\Tscr{{\cal T}}
+\def\Uscr{{\cal U}}
+\def\Vscr{{\cal V}}
+\def\Wscr{{\cal W}}
+\def\Xscr{{\cal X}}
+\def\Yscr{{\cal Y}}
+\def\Zscr{{\cal Z}}
+%\input {blb}
+%
+%  blb.tex
+%
+\let\blb\mathbb
+\def\CC{{\blb C}}
+\def\XX{{\blb X}}
+\def\FF{{\blb F}}
+\def\QQ{{\blb Q}}
+\def\GG{{\blb G}}
+\def \PP{{\blb P}}
+\def \AA{{\blb A}}
+\def \ZZ{{\blb Z}}
+\def \TT{{\blb T}}
+\def \NN{{\blb N}}
+\def \RR{{\blb R}}
+\def \HH{{\blb H}}
+
+\def\qch{\text{-qch}}
+\def\wqch{\text{-wqch}}
+\def\pwqch{\text{-(w)qch}}
+\def\Ann{\operatorname{Ann}}
+\def\Nil{\operatorname{Nil}}
+\def\Nil{\operatorname{Nil}}
+\newcommand{\proj}{\operatorname{proj}}
+\def\id{\text{id}}
+\def\Id{\operatorname{id}}
+\def\pr{\mathop{\text{pr}}\nolimits}
+\let\st\ast
+\let\at\ast
+\def\Der{\operatorname{Der}}
+\def\Bimod{\operatorname{Bimod}}
+\def\Ab{\mathbb{Ab}}
+\def\Tau{\mathcal{T}}
+\def\Res{\operatorname{Res}}
+\def\ctimes{\mathbin{\hat{\otimes}}}
+\def\Lotimes{\overset{L}{\otimes}}
+\def\quot{/\!\!/}
+\def\ctensor{\mathbin{\hat{\otimes}}}
+\def\Mod{\operatorname{Mod}}
+\def\mod{\operatorname{mod}}
+\def\Gr{\operatorname{Gr}}
+\def\GR{\operatorname{GR}}
+\def\QGr{\operatorname{QGr}}
+\def\qgr{\operatorname{qgr}}
+\def\Hol{\text{-Hol}}
+\def\gr{\operatorname{gr}}
+\def\Lie{\mathop{\text{Lie}}}
+\def\Ch{\mathop{\mathrm{Ch}}}
+\def\CH{\mathop{\mathrm{CH}}}
+\def\length{\mathop{\text{length}}}
+\def\ICh{\mathop{\text{ICh}}}
+\def\Supp{\mathop{\text{\upshape Supp}}}
+\def\ch{\mathop{\text{Ch}}}
+\def\QSch{\mathop{\text{Qsch}}}
+\def\Qch{\mathop{\text{Qch}}}
+\def\coh{\mathop{\text{\upshape{coh}}}}
+\def\charact{\operatorname{char}}
+\def\adm{\operatorname{adm}}
+\def\spec{\operatorname {Spec}}
+\def\coop{{\operatorname {coop}}}
+\def\rad{\operatorname {rad}}
+\def\PC{\operatorname {PC}}
+\def\dis{\operatorname {dis}}
+\def\pc{\operatorname {pc}}
+\def\qpc{\operatorname {qpc}}
+\def\gr{\operatorname {gr}}
+\def\Spec{\operatorname {Spec}}
+\def\Rep{\operatorname {Rep}}
+\def\GL{\operatorname {GL}}
+\def\PGL{\operatorname {PGL}}
+\def\depth{\operatorname {depth}}
+\def\diag{\operatorname {diag}}
+\def\Ext{\operatorname {Ext}}
+\def\Hom{\operatorname {Hom}}
+\def\End{\operatorname {End}}
+\def\RHom{\operatorname {RHom}}
+\def\uRHom{\operatorname {R\mathcal{H}\mathit{om}}}
+\def\Sl{\operatorname {Sl}}
+\def\cd{\operatorname {cd}}
+\def\codim{\operatorname {codim}}
+\def\supp{\operatorname {supp}}
+\def\relint{\operatorname {relint}}
+\def\im{\operatorname {im}}
+\def\tr{\operatorname {Tr}}
+\def\Tr{\operatorname {Tr}}
+\def\coker{\operatorname {coker}}
+\def\ker{\operatorname {ker}}
+\def\Ker{\operatorname {ker}}
+\def\Tor{\operatorname {Tor}}
+\def\End{\operatorname {End}}
+\def\Gal{\operatorname {Gal}}
+\def\for{\operatorname {For}}
+\def\tot{\operatorname {Tot}}
+\def\add{\operatorname {add}}
+\def\rk{\operatorname {rk}}
+\def\For{\operatorname {For}}
+\def\Tot{\operatorname {Tot}}
+\def\ord{\operatorname {ord}}
+\def\Pic{\operatorname {Pic}}
+\def\gkdim{\operatorname {GK dim}}
+\def\Filt{\operatorname {Filt}}
+\def\gldim{\operatorname {gl\,dim}}
+\def\G{\mathop{\underline{\underline{{\Gamma}}}}\nolimits}
+\def\r{\rightarrow}
+\def\l{\leftarrow}
+\def\u{\uparrow}
+\def\d{\downarrow}
+\def\exist{\exists}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Alg}{Alg}
+\DeclareMathOperator{\GrAlg}{GrAlg}
+\DeclareMathOperator{\Rel}{Rel}
+\DeclareMathOperator{\Tors}{Tors}
+\DeclareMathOperator{\tors}{tors}
+\DeclareMathOperator{\HTor}{\mathcal{T}\mathit{or}}
+\DeclareMathOperator{\HHom}{\mathcal{H}\mathit{om}}
+\DeclareMathOperator{\HEnd}{\mathcal{E}\mathit{nd}}
+\DeclareMathOperator{\Nrd}{Nrd}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\ram}{ram}
+\DeclareMathOperator{\Br}{Br}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Prin}{Prin}
+\DeclareMathOperator{\cor}{cor}
+\DeclareMathOperator{\res}{res}
+
+
+\let\dirlim\injlim
+
+
+%
+%  sectionlemma.tex
+%
+% theoremstyle plain
+
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}[lemma]{Proposition}
+\newtheorem{theorem}[lemma]{Theorem}
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{condition}[lemma]{Condition}
+\newtheorem{exercise}[lemma]{Exercise}
+\newtheorem{conclusion}[lemma]{Conclusion}
+\newtheorem{lemmas}{Lemma}[subsection]
+\newtheorem{propositions}[lemmas]{Proposition}
+\newtheorem{theorems}[lemmas]{Theorem}
+\newtheorem{corollarys}[lemmas]{Corollary}
+\newtheorem{conditions}[lemmas]{Condition}
+\newtheorem{conclusions}[lemmas]{Conclusion}
+
+
+
+\newtheorem{sublemma}{Sublemma}\def\thesublemma{}
+\newtheorem{subcorollary}{Corollary}
+\theoremstyle{definition}
+
+\newtheorem{example}[lemma]{Example}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{conjecture}[lemma]{Conjecture}
+\newtheorem{question}[lemma]{Question}
+\newtheorem{examples}[lemmas]{Example}
+\newtheorem{definitions}[lemmas]{Definition}
+\newtheorem{conjectures}[lemmas]{Conjecture}
+\newtheorem{questions}[lemmas]{Question}
+{
+\newtheorem{claim}{Claim}
+\newtheorem{step}{Step}
+\newtheorem{case}{Case}
+\newtheorem*{answer}{Answer}
+\newtheorem{hypothesis}{Hypothesis}
+}
+
+\theoremstyle{remark}
+
+\newtheorem{remark}[lemma]{Remark}
+\newtheorem{remarks}[lemmas]{Remark}
+\newtheorem{notation}{Notation}\def\thenotation{}
+
+\newdimen\uboxsep \uboxsep=1ex
+\def\uboxn#1{\vtop to 0pt{\hrule height 0pt depth 0pt\vskip\uboxsep
+\hbox to 0pt{\hss #1\hss}\vss}}
+
+\def\uboxs#1{\vbox to 0pt{\vss\hbox to 0pt{\hss #1\hss}
+\vskip\uboxsep\hrule height 0pt depth 0pt}}
+
+
+
+\def\debug{\tracingall}
+\def\enddebug{\showlists}
+
+
+
+
+
+\author{Michel Van den Bergh and Martine Van Gastel}
+
+\address{Departement WNI\\ Limburgs Universitair
+Centrum\\ Universitaire Campus\\ Building D\\ 3590
+Diepenbeek\\ Belgium}
+
+\email[M. Van Gastel]{martine.vangastel@luc.ac.be}
+\email[M. Van den Bergh]{michel.vandenbergh@luc.ac.be}
+
+\title[Non-commutative regular local rings]{On the structure of non-commutative regular local rings of
+  dimension two}
+
+\keywords{Ore extensions}
+\subjclass{Primary 16L30}
+
+
+\begin{document}
+
+\begin{abstract}
+In this paper we conjecture that the center of a non-commutative
+complete regular local ring of global dimension two is a formal power
+series ring in two variables. We prove this conjecture in the special
+case of Ore extensions. 
+\end{abstract}
+
+\maketitle
+
+\section{Introduction} \label{ref-1-0}
+
+Below $k$ is a field. 
+In this paper we will be concerned with  rings of the form 
+$C=k\langle \langle x,y
+\rangle \rangle/(r)$ where $r$ only has term of total degree $\ge
+2$ and where the quadratic part of $r$ is  non-degenerate. Such rings have global dimension two \cite{VdBVG} and it may be
+argued that they are the non-commutative analogues of two-dimensional
+regular local rings.
+
+In this paper we propose the following conjecture:
+\begin{conjecture}
+\label{ref-1.1-1}
+Let $C$ be as above. Then the  center of $C$ is either trivial,
+or else it is a formal power series ring in two variables. If the
+quadratic part of $r$ is of the form $yx-xy$   and the
+characteristic  $p$ of $k$ is $>0$ then $Z(C)$ is generated by
+elements  of the form $x^{p^n}+\cdots$ and $y^{p^n}+\cdots$ for some $n>0$.
+\end{conjecture}
+\begin{comment}
+\begin{conjecture}
+    Let $C$ be a non-commutative surface
+    \[k\langle \langle x,y \rangle \rangle /(yx\;-\;qxy\;-\;\psi(x,y))\]
+    where $q \in k^{*}$ and where the total degree of $\psi(x,y) \mbox{
+    is } \geq 3$.
+    \\Then $C$ is finite over its center $Z(C)$ and
+    $Z(C)\:=\:k[[\alpha,\beta]]$, where $\alpha \: = \: x^{p^{m}}\: 
+    +\: \varphi(x)$ and $\beta\:=\:y^{p^{m}}\:+\:\theta(x,y)$, for some $m \in \NN$ 
+    and $\varphi(x),\;\theta(x,y)$ have only terms of total degree $>p^{m}$.
+\end{conjecture}
+\end{comment}
+In this paper we will provide some evidence for this conjecture by
+proving it  in the case that $C$ is given by an Ore extension
+$C=B[[y;\sigma,\delta]]$ where $B$ is $k[[x]]$, $\sigma$ is a
+$k$-linear automorphism of $B$ and $\delta$ is a $k$-linear
+$\sigma$-derivation of $B$. Thus $\delta$ satisfies
+$\delta(ab)\:=\:\sigma(a)\delta(b)\:+\:\delta(a)b$ and $C$ is obtained
+from $B$ by adjoining the variable $y$ subject to the commutation rule
+\begin{equation} \label{ref-1.1-2}
+    y\,b\;=\;\sigma(b)y\;+\;\delta(b)
+\end{equation}
+In other words $C=k\langle\langle x,y\rangle\rangle/(r)$ where $r$ is given
+by $yx-\sigma(x)y-\delta(x)$. Thus for $r$ to have only terms of
+degree $\ge 2$ it is necessary that $\delta(x)$ contains only terms
+of degree $\ge 2$. We assume this throughout.
+
+
+
+We will prove the following theorem:
+
+\begin{theorem} \label{ref-1.2-3}
+If $C$ is an Ore extension as above then Conjecture
+\ref{ref-1.1-1} holds.
+\end{theorem}
+\begin{comment}
+\begin{enumerate} 
+\item
+$C$ has non-trivial center if and only if one of the following
+conditions holds.
+\begin{enumerate}
+\item $\sigma$ and $\delta$ are non-trivial.
+\item $\sigma$ is trivial, $\delta$ is not trivial  and $p>0$.
+\item The order of $\sigma$ is finite and $\ge 2$.
+\end{enumerate}
+
+
+    Assume that $\sigma$ has finite order and that
+    $\delta(x)\,=\,\lambda x^{n}\;+$ higher terms in $x$,where $n \geq 3$.
+    \\ In that case $C$ will be finite over its center $Z(C)$ and
+    $Z(C)\:=\:k[[z,w]]$, where $z\:=\:x^{p^{m}}\:+\:\varphi(x)$ and
+    $w\:=\:y^{p^{m}}\:+\:\theta(x,y)$, for some $m \in \NN$ and
+    $\varphi(x),\;\theta(x,y)$ have only terms of total degree
+    $>p^{m}$.
+\end{theorem}
+\end{comment}
+
+
+
+
+
+Our treatment of the case where $\sigma$ is trivial relied originally on the
+following combinatorial result by  G.~Baron and A.~Schinzel in \cite{BS1}.
+\begin{proposition} \label{ref-1.3-4}
+    For any prime $p$ and any residues $x_{i}$ mod $p$, we have:
+    \[\sum_{\sigma \in S_{p-1}}
+    x_{\sigma(1)}(x_{\sigma(1)}\:+\:x_{\sigma(2)}) \ldots
+    (x_{\sigma(1)}\:+ \ldots +\:x_{\sigma(p-1)}) \]
+    \[ \equiv (x_{1}\:+ \cdots +\:x_{p-1})^{p-1} \hspace{1cm}
+    (\operatorname{mod}\;p) \]
+    where $S_{p-1}$ is the group of all permutations $\sigma$ of
+    $\{1,\ldots,p-1\}$.
+\end{proposition}
+Afterwards we discovered a new approach which is independent of the above
+result. It turns out that we can now even give a new proof of the
+result by  G.~Baron and A.~Schinzel. This proof is produced in the
+final section of this paper. Whereas the proof in \cite{BS1} is rather
+technical, our proof is straightforward and relies on general
+computations with derivations. 
+
+\section{Outline}
+In this section we outline our strategy for proving Theorem
+\ref{ref-1.2-3}. First we dispense with some trivial cases. If $\sigma$
+is trivial and $\delta=\Id$ then there is nothing to prove. 
+In addition it is easy to prove that in the following cases the
+center of $C$ is trivial.
+\begin{enumerate}
+\item $\sigma$ is trivial, $\delta$ is not trivial  and $p=0$.
+\item The order of $\sigma$ is infinite.
+\end{enumerate}
+In subsequent sections we deal with the remaining cases.
+ In Section~\ref{ref-3-5} we discuss the case where $\sigma$ is 
+the identity and $p>0$.
+In Section~\ref{ref-4-8} we focus on the case where $\delta$ 
+is trivial and $\sigma$ is not trivial but has finite order. Finally in  Section~\ref{ref-5-11} 
+ we deal with the case where both $\sigma$ and $\delta$ are
+ non-trivial and $\sigma$ has finite order. In this last case our
+ approach  is somewhat
+ indirect  and we do not obtain nice expressions for the
+ elements generating the center.
+
+
+\section{The case where $\sigma$ is the identity and $p>0$}
+\label{ref-3-5}
+
+It follows  from (\ref{ref-1.1-2}) that in this case the commutation
+relation between $y$ and $x$ is given by
+
+\begin{equation} \label{ref-3.1-6}
+    y\,x\;=\;x\,y\;+\;\delta(x)
+\end{equation}
+
+In this case we prove that $Z(C)$ equals $k[[z,w]]$, where
+$z\,=\,x^{p}$ and \\ $w\,=\,y^{p}\,-\,c_{p}(x)\,y$, with
+$\displaystyle{c_{p}(x)\:=\:\frac{\partial}{\partial x}
+\left( \frac{\partial}{\partial x} \left( \ldots \left(
+\frac{\partial \; \delta(x)}{\partial x} \cdot \delta(x) \right)
+\ldots \cdot \delta(x) \right) \cdot \delta(x) \right)}$, in which 
+ $\displaystyle{\frac{\partial}{\partial x}}$ and
+$\delta(x)$ occur  $(p-1)$ times.
+
+It is obvious that $[x,z]\:=\:0$, Furthermore from
+\[
+[y,z] \,=\, \displaystyle{\sum_{a+b=p-1,a,b \geq 0}x^{a} \delta(x) x^{b}}
+\,=\, p \delta(x) x^{p-1} \,=\, 0
+\]
+we deduce that $z$ also commutes with $y$. Hence $z$ is in the center
+of $C$.
+
+To prove that $w$ is in the center of $C$ we use the following
+ key-lemma. This lemma  will also be  used
+ in the new proof of Proposition~\ref{ref-1.3-4}.
+
+\begin{lemma} \label{ref-3.1-7}
+    Let $f \in B$,
+    and let $g$ be the element $\displaystyle{ \frac{\partial}{\partial
+    x} \left( \frac{ \partial}{ \partial x} \left( \ldots \left(
+    \frac{\partial \; f}{\partial  x} \cdot f \right) \ldots \cdot f
+    \right) \cdot f \right)}$ of $B$, where both
+    $\displaystyle{\frac{\partial}{\partial x}}$ and $f$ occur $(p-1)$
+    times.
+     Then $\displaystyle{ \frac{\partial \;g}{\partial x} \:=\:0}$.
+\end{lemma}
+
+\begin{proof} Without loss of generality we may assume that $f\neq
+    0$. Define the derivation $d$ of $B$ by
+    $\displaystyle{d(b) :~= \frac{ \partial b}{\partial x} \cdot f}$,
+    and
+    consider the differential operator $e\,=\,d^{p}\,-\,g \cdot d$ on $B$. Since
+    the $p$th power of a derivation is also a derivation, it follows
+    that $e$ is also a derivation.
+
+ If we evaluate $e$ in $x$, we get
+    $e(x)\,=\,d^{p}(x) \,-\,g \cdot d(x) \,=\,
+    d^{p-1}(f) \,-\, g \cdot f \,=\, \displaystyle{d^{p-2} \left( \frac{\partial \;
+    f}{\partial x} \cdot f \right) \,-\, g \cdot f \: = \ldots =\: f
+    \cdot \frac{\partial}{\partial x} \left( \frac{ \partial}{ \partial x}
+    \left( \ldots \left( \frac{\partial \; f}{\partial x} \cdot f \right)
+    \ldots \cdot f \right) \cdot f \right) \,-\, g \cdot f} \,=\, 
+    f \cdot g \,-\, g \cdot f \,=\, 0$ and so $e$ is identically zero
+    on $B$.
+  
+In particular $e$ commutes with $d$. Computing with operators, we find
+$0=[d,e]=[d,d^p-g\cdot d]=dg\cdot d$. Evaluating at $x$ and using the
+fact that $f\neq 0$, this yields $\displaystyle{\frac{\partial \; g}{\partial
+  x}=0}$.
+\end{proof}
+
+Let $y_{l}$, respectively $y_{r}$ be left, respectively right
+multiplication by $y$ on $B$. Because $y_{l}$ and $y_{r}$ commute, we
+see that $\displaystyle{[y,-]^{p} \,=\, \sum_{i=0}^{p} \left(
+\begin{array}{c}p\\i \end{array} \right) y_{l}^{i}\;(-y_{r})^{p-i}}$ 
+$=\, y_{l}^{p} \,-\, y_{r}^{p} \,=\,[y^{p},-]$.
+It follows that we have $[y^{p},x] \,=\, [y,[y, \ldots ,[y ,\delta(x)]
+\ldots ]]$ ($(p-1)$ times $y$) and by repeatedly using the fact that
+$\displaystyle{[y,f(x)]\,=\, \frac{\partial \; f(x)}{\partial x}[y,x]
+\,=\, \frac{\partial \; f(x)}{\partial x} \cdot \delta(x)}$, for all
+$f(x) \in B$, we deduce, for $f(x) \,=\, \delta(x)$, $[y^{p},x] \,=\,
+c_{p}(x)\,[y,x]$.
+
+It follows that $w$ commutes with $x$. Let us prove that it also
+commutes with $y$. $\displaystyle{[y,w]  \,=\, [y,c_{p}(x)]\,y
+\,=\, \frac{\partial \; c_{p}(x)}{\partial x} \, [y,x] \, y}$ and
+applying Lemma~\ref{ref-3.1-7} with $f \,=\, \delta(x) \in B$, we
+deduce $[y,w] \,=\, 0$.
+So we obtain $k[[z,w]] \subset Z(C)$.
+
+ Let $Q(Z(C))$ and  $Q(C)$ be respectively the quotientfields of
+$Z(C)$ and $C$.
+Since $\{x^{a}y^{b}\;|\;0 \leq a,b \leq p-1 \}$ is a basis of $C$
+over $k[[z,w]]$, we see that $C$ is free of rank $p^{2}$ over
+$k[[z,w]]$. This implies that 
+$p^{2}~\,=\,~\dim_{k((z,w))}Q(Z(C))~\cdot~\dim_{Q(Z(C))}Q(C)$, so 
+$\dim_{Q(Z(C))}Q(C)~\in~\{1,p,p^{2}\}$.
+Since $C$ is not commutative and  $\dim_{Q(Z(C))}Q(C)$ is a
+square according to   \cite{Cohn}, it follows
+that $\dim_{Q(Z(C))}Q(C)=p^{2}$ and furthermore that $Z(C)$ and
+$k[[z,w]]$ have the same quotientfield.
+
+As indicated above $C$ is free of rank $p^{2}$
+over $k[[z,w]]$. In particular $C$ is finitely generated as a module over
+$k[[z,w]]$. It follows that $Z(C)$ is also finitely generated as a
+module over $k[[z,w]]$ and thus  $Z(C)$ is integral over $k[[z,w]]$.
+Since 
+$k[[z,w]]$ is integrally closed, it  follows that $Z(C) \:=\:
+k[[z,w]]$.
+
+\medskip
+
+ So in order to complete the proof Conjecture~\ref{ref-1.1-1} in
+ this special case, we have to
+show that if $v(\delta(x))\ge 3$ then $v(c_{p}(x)) \,>\, p-1$, where $v$ is the $x$-adic valuation
+on $B$. Therefore, let $c_{r}(x)$ be equal to
+$\displaystyle{\frac{\partial}{\partial x}
+\left( \frac{\partial}{\partial x} \left( \ldots \left(
+\frac{\partial \; \delta(x)}{\partial x} \cdot \delta(x) \right)
+\ldots \cdot \delta(x) \right) \cdot \delta(x) \right)}$ in which
+$\displaystyle{\frac{\partial}{\partial x}}$ and $\delta(x)$ occur
+$(r-1)$ times and this for all $r \geq 2$. 
+\\ We prove by induction that $v(c_r(x))\ge 2(r-1)$.
+
+ Since $v(\delta(x)) \geq 3$, $\displaystyle{v(c_{2}(x))\:=\:v \left(
+\frac{\partial \; \delta(x)}{\partial x} \right) \geq 2}$, 
+so we get by induction that
+\\ $v(c_{r}(x))\:=\:\displaystyle{v \left( \frac{\partial}{\partial x}
+\left( c_{r-1}(x) \cdot \delta(x) \right) \right)} \:=\: v(c_{r-1}(x))
+\,+\, v(\delta(x)) \,-\,1 \geq 2(r-2) \,+\,3\,-\,1\,=\,2(r-1)$. So
+$v(c_{p}(x)) \geq 2(p-1) > p-1$.
+
+
+
+
+\section{The case where $\delta =0$ and $\sigma$ is not trivial but has finite order} \label{ref-4-8}
+In this case the commutation relation between $y$ and $x$ is given by:
+
+\begin{equation} \label{ref-4.1-9}
+    y\,x\,=\,\sigma(x)\,y
+\end{equation}
+
+We will denote the order of $\sigma$ by $n$ and put 
+$A\,=\,B^{\sigma}$. Let $K$, $L$ be the quotientfields of $A$, $B$ 
+respectively.
+We  prove that $Z(C)\,=\,k[[z,y^{n}]]$, where 
+$z\,=\,x\,\sigma(x) \ldots \sigma^{n-1}(x)$.
+Let us first discuss the structure of $A$.
+
+\begin{lemma} \label{ref-4.1-10}
+    $A\,=\,k[[z]]$, with $z$ as above.
+\end{lemma}
+
+\begin{proof}
+    It is obvious that $A$ is a complete discrete valuation ring and 
+    $k$ is a copy of its residue field. So $A$ is a formal power 
+    series ring $k[[u]]$, where $u$ is a uniformizing element. Being 
+    a uniformizing element, $u$ must be of the form 
+    $x^{e}\;+$ higher terms, where $e$ is the ramification index.
+   
+Since $K$ is complete under a discrete valuation, $L$ is 
+    a finite extension of $K$ and the residue class degree equals 1, 
+    we conclude that $e\,=\,[L:K]\,=\,n$.
+    
+It is easy to see that $\sigma(x)\,=\,\zeta\,x\,+$ higher 
+    terms, where $\zeta$ is an $n$th root of unity. So 
+    $z\,=\,x\,\sigma(x) \ldots \sigma^{n-1}(x)$ is of the form 
+    $\pm x^{n}\,+$ higher terms. Therefore $z$ is also a uniformizing 
+    element and furthermore $A=k[[z]]$.
+\end{proof}
+
+It is clear that $A \subset Z(C)$ and that $y^{n}$ belongs to the 
+center of $C$.
+We now look at the other inclusion.
+
+ Let $f$ be in $Z(C)$. We can write $f$, in a unique way, in 
+the form $\displaystyle{\sum_{i \geq 0}a_{i}\,y^{i}}$, where $a_{i} 
+\in B$.
+ Since $f \in Z(C)$, we have (using (\ref{ref-4.1-9})) $0\,=\,[x,f]\,=\, 
+\displaystyle{\sum_{i \geq 0} a_{i}\,(x\,-\,\sigma^{i}(x))\,y^{i}}$. 
+Hence, for all $i \in \NN$, if $a_{i} \,\neq\, 0, \; 
+x\,=\,\sigma^{i}(x)$, so $n$ divides $i$. On the other hand we have 
+$0\,=\,[y,f]\,=\, \displaystyle{\sum_{i \geq 0}(\sigma(a_{i}) \,-\, 
+a_{i}) \,y^{i+1}}$, so $\sigma(a_{i})\,=\,a_{i}$, for all $i$ in 
+$\NN$, which means that $a_{i} \in A$, for all $i$ in $\NN$.
+Therefore $f \in k[[z,y^{n}]]$.
+
+
+  We have now proved that $Z(C)$ is a formal power series ring in the two
+  variables $z,w$.  The remaining claim of
+  Conjecture \ref{ref-1.1-1}  follows from the fact that if
+  $\sigma(x)$ is of the form $x+\cdots$ then
+\begin{itemize}
+\item If $p=0$ and $\sigma$ is non-trivial then its order is infinite  (easily proved).
+\item If $p>0$ and if the order  of $\sigma$ is finite then it is a power of $p$ \cite{SS}.
+\end{itemize}
+
+
+\section{The case where $\sigma$ and $\delta$ are non trivial and
+  $\sigma$ has finite order} \label{ref-5-11}
+
+
+Here we have the following commutationrelation between $y$ and $x$ :
+
+\begin{equation} \label{ref-5.1-12}
+    y \, x \,=\, \sigma(x) \, y \,+\, \delta(x)
+\end{equation}
+
+As before we denote the order of $\sigma$ by $n$ and we assume $n 
+\neq 1$.
+ We put $A \,=\, B^{\sigma}$ and we let $K$ and $L$ be respectevely the 
+quotientfields of $A$ and  $B$.
+We  extend the action of $\sigma$ and $\delta$ to $L$ and we denote
+these  extended maps also by $\sigma$ and $\delta$.
+
+ It was shown in  Lemma~\ref{ref-4.1-10}, that $A$ is 
+the ring of power series over $k$ in 
+\\ $z \,=\, x\,\sigma(x) \ldots 
+\sigma^{n-1}(x) \,\in\, B$.
+
+For convenience we will first work in the polynomial \"Ore extension
+$S \,=\, B[y;\sigma,\delta]$.  We prove:
+
+\begin{theorem} \label{ref-5.1-13}
+    The center $Z(S)$ of $S$ is the ring of polynomials $A[w]$, 
+    where $w$ is a monic (skew) polynomial of degree $n$ in $y$ with 
+    coefficients in $B$. In particular, we find that $S$ is free of rank $n^{2}$ over 
+    $Z(S)$.
+\end{theorem}
+
+The proof of this theorem depends on the following lemma:
+
+\begin{lemma} \label{ref-5.2-14}
+    Let $D$, $D'$ be central simple algebras of the same PI-degree 
+    with centers $Z$, $Z'$, respectively. Assume that $D \subseteq D'$.
+    Then $Z\subseteq Z'$ and furthermore the map $\varphi : D \otimes_{Z} Z' \rightarrow D'$, 
+    defined by $\varphi(d \otimes z') \,:=\, dz'$, is an 
+    isomorphism.
+\end{lemma}
+
+\begin{proof}
+    Denote the PI-degree of $D$ and $D'$ by $m$.
+    The PI-degree of $DZ'$ is equal to $m$ since we have 
+    inclusions $D \subseteq DZ' \subseteq D'$. From $Z' \subseteq 
+    Z(DZ') \subseteq DZ' \subseteq D'$ (where $Z(DZ')$ is the center 
+    of $DZ'$), we deduce that $m^{2} \,=\, [DZ':Z(DZ')] \,\leq\, 
+    [DZ':Z'] \,\leq\, [D':Z'] \,=\, m^{2}$ ,so $[DZ':Z'] \,=\, m^{2} 
+    \,=\, [D':Z']$. This implies $DZ' \,=\, D'$ and in particular
+    $Z\subseteq Z(DZ')= Z(D')=Z'$.
+
+    We conclude that the $\varphi : D \otimes_{Z} Z' \rightarrow D'$ 
+    is an epimorphism. Since $D$ is a central simple algebra, 
+    the same holds for $D \otimes_{Z} Z'$. Thus $D \otimes_{Z} Z'$ is simple 
+    and it follows that $\varphi$ must be an isomorphism.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{ref-5.1-13}]
+    Working out the identity $\delta(x \cdot f) \,=\, \delta(f \cdot 
+    x)$, for all $f \in B$, we deduce:
+    
+    \begin{equation} \label{ref-5.2-15}
+        \delta(f) \,=\, \frac{ \sigma(f) \,-\, f}{\sigma(x) \,-\, x} \cdot 
+        \delta(x)
+    \end{equation}
+    
+    This implies immediately that, if $f \in A$, then $\delta(f) \,=\, 
+    0$, in other words, the polynomial ring $R \,=\, A[y]$ is a 
+    commutative subring of $S$.
+    \\ Now consider $S$ as right $R$-module. The rank of $S$ over $R$ 
+    is $n$, since $B \,=\, k[[x]]$ is free of rank $n$ over $A \,=\, 
+    k[[z]] \,=\, k[[x^{n} \,+\, \mbox{higher terms}]]$.
+    \\ Left multiplication yields an injective ringhomomorphism:
+    
+    \begin{equation} \label{ref-5.3-16}
+        S \hookrightarrow \End_{R}(S_{R})
+    \end{equation}
+    
+    So $S$ satisfies a polynomial identity because $S$ is isomorphic 
+    to a subring of the matrix ring $M_{n}(R)$, which is a PI-ring 
+    since $R$ is commutative. This implies also that the PI-degree 
+    of $S$ is less or equal to the PI-degree of $M_{n}(R)$ which is 
+    $n$. We claim that it is exactly $n$.
+     To see this, filter $S$ by $y$ degree and denote the associated 
+    graded ring by $\gr S$.
+     Since $\gr S \,=\, B[\overline{y};\sigma]$, we see that 
+    $\gr S$ is a domain and furthermore $Z(\gr S) \,=\, 
+    A[\overline{y}^{n}]$ by Section~\ref{ref-3-5}. So 
+    $\gr S$ is a prime ring of rank $n^{2}$ over its center 
+    which implies that its PI-degree is equal to $n$. 
+    Since the PI-degree of $S \,\geq$ PI-degree of 
+    $\gr S$, it now follows that the PI-degree of $S$ is exactly 
+    $n$.
+    
+     Let $E$ be the quotientfield of $S$. As in (\ref{ref-5.3-16}) we have 
+    an inclusion:
+        \begin{equation} \label{ref-5.4-17}
+        i : E \hookrightarrow \End_{K(y)}(E_{K(y)})
+    \end{equation}
+        $E$ is a central simple algebra of PI-degree $n$ and so is 
+    $\End_{K(y)}(E_{K(y)})$. Hence (\ref{ref-5.4-17}) induces, by 
+    Lemma~\ref{ref-5.2-14}, an isomorphism 
+        \begin{equation} \label{ref-5.5-18}
+        \varphi : E \otimes_{Z(E)} K(y) \hookrightarrow \End_{K(y)}(E_{K(y)})   
+    \end{equation}
+        defined by $\varphi(e \otimes f) \,=\, i(e) \cdot f$.
+         This means that we can compute the characteristic polynomial 
+    of each $e \in E$, in $\End_{K(y)}(E_{K(y)})$.
+    
+ Since $S$ is an \"Ore extension, it is also a maximal order by 
+    \cite{MR1} and so it is closed under taking coefficients of 
+    reduced characteristic polynomials.
+     Using this observation we can now explicitly construct central 
+    elements in the center of $S$ and the one we are interested in, is the 
+    reduced norm of $y$.
+    
+By definition this reduced norm may be computed by taking  the image 
+    of $y$ in $\End_{K(y)}(E_{K(y)})$ under (\ref{ref-5.5-18}), i.e. 
+    $\varphi(y \otimes 1) \,=\, i(y)$, where $i(y)$ is left 
+    multiplication by $y$, and then computing the determinant of $i(y)$ 
+    in $\End_{K(y)}(E_{K(y)})$.
+   
+To perform this computation we need a suitable basis for $E \,/\,
+    K(y)$. We pick  
+    a normal basis  $\{f, \sigma(f), \ldots , \sigma^{n-1}(f) \}$ for 
+    $L \,/\, K$, for some $f \in L$ in 
+    \cite{Cohn}. This is still a basis for
+    $E \,/\, K(y)$.
+
+
+
+     We now compute  the matrix of $i(y)$ explicitly.
+     By (\ref{ref-5.1-12}) we get, for all $0 \leq j \leq n-1$, 
+    $i(y)(\sigma^{j}(f)) \,=\, \sigma^{j+1}(f) \cdot y \,+\, 
+    \delta(\sigma^{j}(f))$, and since $\{f, \sigma(f), \ldots , 
+    \sigma^{n-1}(f) \}$ is a basis for $L \,/\, K$, 
+    $i(y)(\sigma^{j}(f)) \,=\, \sigma^{j+1}(f) \cdot y \,+\, 
+    \displaystyle{\sum_{i=0}^{n-1} \sigma^{i}(f) \cdot a_{ji}}$, for 
+    certain $a_{ji} \in K$.
+    
+This means that the matrix of $i(y) \,=\, D \,+\, Cy$, where 
+    $D \,=\, (a_{ji}) \in M_{n}(K)$ and 
+    \[ C = \left( \begin{array}{ccccc} 0 & 1 & 0 & \ldots & 0 \\ 0 & 
+    0 & 1 & \ldots & 0 \\ \vdots & \vdots & \vdots & & \vdots \\ 0 & 
+    0 & 0 & \ldots & 1 \\ 1 & 0 & 0 & \ldots & 0 \end{array} \right) \]
+    the matrix of a cyclic permutation. 
+Hence $\operatorname{Nrd}(y) \,=\, \det(D \,+\, Cy) \,=\, (-1)^{n+1}y^{n} \,+\, \mbox{lower terms 
+    in } y$. 
+    
+     We now take $w \,=\, (-1)^{n+1}\Nrd(y)$. Clearly $A[w] \subset 
+    Z(S)$. Since $B$ is free of rank $n$ over $A$ and $w \,=\, y^{n} 
+    \,+\, \mbox{ lower terms in } y$, $S$ is free of rank $n^{2}$ 
+    over $A[w]$. In particular, $Z(S)$ is integral over $A[w]$. Now 
+    because $A[w] \subset Z(S) \subset S$, we know that $K(w) \subset 
+    Q(Z(S)) \subset E$, where $Q(Z(S))$ is the quotientfield of $Z(S)$. 
+    Since $S$ is free of rank $n^{2}$ over $A[w]$ and $E$ is a central 
+    simple algebra of PI-degree $n$, the dimension of $Q(Z(S))$ over 
+    $K(w)$ must be 1, so $A[w]$ and $Z(S)$ have the same quotientfield.
+    
+The fact that $A[w]$ is integrally closed 
+    and that $Z(S)$ is integral over $A[w]$ now implies that $A[w] \,=\, 
+    Z(S)$.
+\end{proof}
+
+
+
+In the next proposition we will obtain more information on the 
+element $w$ constructed in the above theorem.
+ Let $v$ be the $x$-adic valuation on $B$.
+\begin{proposition} \label{ref-5.3-19}
+    Assume that $v(\delta(x)) \,=\, a$.
+    \\ If $w \,=\, y^{n} \,+\, \displaystyle{\sum_{i=0}^{n-1} 
+    f_{i}(x)\,y^{i}}$, then for $i > 0$ we have $v(f_{i}) \,\geq\, 
+    (a-1)(n-i)$. Furthermore there exists an element $q_0(z)\in
+    k[[z]]$ such that $v(f_0+q_0(z))\ge (a-1)n$.
+\end{proposition}
+
+In the proof of this proposition we need the result of the following 
+lemma:
+
+\begin{lemma} \label{ref-5.4-20}
+    If $f \in B$, then $\displaystyle{v \left( \frac{\sigma(f) \,-\, 
+    f}{\sigma(x) \,-\, x} \right) \geq v(f) \,-\, 1}$.
+\end{lemma}
+
+\begin{proof}
+    Put $r=v(f)$.
+\begin{case} $r \geq 1$
+    \\ Put $h \,=\, \sigma(x) \,-\, x$, then we get 
+    $\displaystyle{\frac{\sigma(f) \,-\, f}{\sigma(x) \,-\, x} \,=\, 
+    \frac{f(\sigma(x)) \,-\, f(x)}{\sigma(x) \,-\, x} \,=\, 
+    \frac{f(x+h) \,-\, f(x)}{h}}$. Since $f(x) \,=\, 
+    \displaystyle{\sum_{i=r}^{+\infty} a_{i}x^{i}}$, for certain 
+    $a_{i} \in k$ with $a_{r} \neq 0$, it is easy to see that 
+    \[\frac{f(x+h) \,-\, f(x)}{h} \,=\, \sum_{i=0}^{+\infty} \left( 
+    \sum_{j=r}^{+\infty} a_{j} \psi_{i,j} h^{j-i-1} \right) x^{i} \]
+    where 
+$\psi_{ij}=\begin{cases} 0&\text{if $i\ge j$}\\
+\frac{j!}{i!(j-i)!} &\text{if $i<j$}
+\end{cases} 
+$.
+    
+So $\displaystyle{v \left( \frac{\sigma(f) \,-\, f}{\sigma(x) 
+    \,-\, x} \right) \,=\, v \left( \frac{f(x+h) \,-\, 
+    f(x)}{h}\right)}\ge \min_i((r-i-1)v(h)+i)\ge r-1$
+    since $v(h) \ge v(x)\ge 1$.
+\end{case}
+\begin{case} $r=0$.
+    \\ In this case we get that $f(x) \,=\, 
+    \displaystyle{\sum_{i=0}^{+\infty} a_{i}x^{i}}$, for certain 
+    $a_{i} \in k$ with $a_{0} \neq 0$.
+     Since $\sigma$ is an automorphism which is also $k$-linear, it 
+    follows that $\displaystyle{v \left( \frac{\sigma(f) \,-\, 
+    f}{\sigma(x) \,-\, x} \right) \,=\, v \left( \frac{\sigma(g) \,-\, 
+    g}{\sigma(x) \,-\, x} \right)}$, where $g \,=\, 
+    \displaystyle{\sum_{i=1}^{+\infty} a_{i}x^{i}}$. Since $v(g) \geq 
+    1$, we get by applying Case 1, $\displaystyle{v \left( \frac{\sigma(f) \,-\, 
+    f}{\sigma(x) \,-\, x} \right)} \geq v(g) \,-\, 1 \geq 0 \geq v(f) 
+    \,-\, 1$. \qed
+\end{case}
+\def\qed{}\end{proof}
+We return now to the proof of Proposition~\ref{ref-5.3-19}.
+\begin{proof}[Proof of Proposition~\ref{ref-5.3-19}]
+    Put $\overline{y} \,=\, x^{-a+1}y$. If we multiply (\ref{ref-5.1-12})
+    on the left with $x^{-a+1}$, we 
+    obtain
+    \begin{equation} \label{ref-5.6-21}
+        \overline{y}\,x \,=\, \sigma(x) \, \overline{y} \,+\, x^{-a+1} \, 
+        \delta(x)
+    \end{equation}
+    Consider the ring $\overline{S} \,=\, 
+    B[\overline{y};\sigma,\overline{\delta}]$, where 
+    $\overline{\delta}$ is the $\sigma$-derivation of $B$ defined by 
+    $\overline{\delta}(b) \,=\, x^{-a+1} \, \delta(b)$.
+     We clearly have inclusions $S \subset \overline{S} \subset 
+    L[y;\sigma,\delta]$.
+    
+ Applying Theorem~\ref{ref-5.1-13} to $\overline{S}$, we find 
+    that $\overline{S}$ has a central element $\overline{w}$ of the 
+    form 
+    \begin{equation} \label{ref-5.7-22}
+        \overline{w} \,=\, \overline{y}^{n} \,+\, \sum_{i=0}^{n-1} g_{i}(x) 
+        \overline{y}^{i}
+    \end{equation}
+    with $g_{i}(x) \in B$.
+     Verifying the commutationrelation of $x^{-a+1}$ and $y$, we 
+    find 
+    \begin{equation} \label{ref-5.8-23}
+        y\,x^{-a+1} \,=\, \sigma(x^{-a+1}) \, y \,+\, \delta(x^{-a+1})
+    \end{equation}
+    For all $f \in B$, we get by (\ref{ref-5.2-15}) and Lemma~\ref{ref-5.4-20} that $v(\delta(f)) \,=\, \displaystyle{v \left( \frac{ 
+    \sigma(f) \,-\, f}{\sigma(x) \,-\, x} \cdot \delta(x) \right)}$ 
+    \\ $\,=\, \displaystyle{v \left( \frac{\sigma(f) \,-\, f}{\sigma(x) \,-\, x} 
+    \right) \,+\, v(\delta(x))} \geq v(f) \,-\, 1 \,+\, a$. 
+    \\ In particular, it follows that $\delta(x^{-a+1}) \in B$.
+    
+ Using (\ref{ref-5.8-23}), we can rewrite $\overline{w}$ in the 
+    following form
+    \[\overline{w} = z^{-a+1}y^{n} + h_{0}(x) + \sum_{i=1}^{n-1} (x 
+    \cdot \sigma(x) \cdot \ldots \cdot \sigma^{i-1}(x))^{-a+1} 
+    h_{i}(x) y^{i} \]
+    where, for all $0 \leq i \leq n-1$, we have $h_{i}(x) \in B$ and 
+    with $z$ the element of $A$ defined in Section~\ref{ref-4-8}.
+    
+ Multiplying $\overline{w}$ with $z^{a-1}$, we get the element 
+    \[y^{n} \,+\, z^{a-1}h_{0}(x) \,+\, \sum_{i=1}^{n-1} 
+    (\sigma^{i}(x) \cdot \ldots \cdot 
+    \sigma^{n-1}(x))^{a-1}h_{i}(x)y^{i}\] 
+    which we will denote by $w'$.
+   
+ Let us write $p_{0}(x)$ for $z^{a-1}h_{0}(x)$ and $p_{i}(x)$ for  
+ $(\sigma^{i}(x) \cdot \ldots 
+    \cdot \sigma^{n-1}(x))^{a-1}h_{i}(x)$, for all $1 
+    \leq i \leq n-1$.
+     Since $v(p_{0}(x)) \,=\, (a-1) \, v(z) \,+\, v(h_{0}(x)) \geq 
+    (a-1) n \geq 0$ and, for all $1 \leq i \leq n-1$, $v(p_{i}(x)) 
+    \,=\, (a-1) \displaystyle{\left( \sum_{j=i}^{n-1} 
+    v(\sigma^{j}(x)) \right)} \,+\, v(h_{i}(x)) \geq (a-1)(n-i) \geq 
+    0$, we see that $w'$ belongs to $S$. $w'$ is also a central 
+    element of $\overline{S}$, so it follows that $w'$ is a central 
+    element of $S$.
+     This means that $w'$ has to be of the form
+    \begin{equation} \label{ref-5.9-24}
+        w' \,=\, \sum q_{i}(z) w^{i}
+    \end{equation}
+    since by Theorem~\ref{ref-5.1-13}, we know that $Z(S) \,=\, 
+    A[w] \,=\, k[[z]][w]$.
+    
+By looking at the degree of $y$, we can reduce (\ref{ref-5.9-24}) to 
+    $w' \,=\, q_{0}(z) \,+\, q_{1}(z) \, w$ and if we look at the 
+    coefficient of $y^{n}$, we see that $q_{1}(z) \,=\, 1$.
+    Hence $f_{i}(x) \,=\, p_{i}(x)$, for all $1 \leq i \leq n-1$, 
+    which implies that $v(f_{i}(x)) \geq (a-1)(n-i)$. Furthermore
+    $p_0(x)=q_0(z)+f_0(x)$ which implies $v( q_0(z)+f_0(x))\ge (a-1)n$. 
+\end{proof} 
+
+\begin{corollary} \label{ref-5.5-25}
+    Let $C$ be the formal power series ring 
+    $k[[x]][[y;\sigma,\delta]]$, where  \mbox{$v(\delta(x)) \geq 3$}. Let $n$ 
+    be the order of $\sigma$. Then the center of $C$ is equal to 
+    $k[[z,w]]$, where $z \,=\, x^{n} \,+\, \varphi(x)$ and $w \,=\, 
+    y^{n} \,+\, \theta(x,y)$ with $\varphi,\theta$ containing only 
+    terms in $x$, $y$ of total degree $>n$.
+\end{corollary}
+
+\begin{proof}
+Let $M\subset S$ be the twosided ideal generated by $x,y$. Clearly $C$
+is equal to the $M$-adic completion of $S$. Let $m$ be the maximal
+ideal of $Z(S)$ generated by $z,w$. It is easy to see that 
+\begin{gather*}
+M^{2N}\subset mS \subset M\\
+m^aS\cap Z(S)=m^a
+\end{gather*}
+Thus the completion of  $Z(S)$ at the induced topology coincides with
+the completion at the $m$-adic topology, which is $k[[z,w]]$.  Since
+$S\subset C$ the PI-degree of $C$ is $\ge n$. On the other hand, using
+the properties of completion every identity in $S$ vanishes in $C$. So
+the PI-degree of $C$ is exactly $n$. Since $Z(C)\supset k[[z,w]]$,
+$\rk_{Z(C)} C=n^2$  and  $k[[z,w]]$ is integrally closed, we prove
+exactly as before that $Z(C)= k[[z,w]]$. 
+\end{proof}
+To complete the proof of  Theorem~\ref{ref-1.2-3} we use the fact that
+in characteristic $p>0$
+ the order of $\sigma$ is a power of $p$
+\cite{SS1}.
+
+
+\section{A new proof of Proposition~\ref{ref-1.3-4}} \label{ref-6-26}
+Let $k$ be a field of characteristic $p > 1$
+and consider the field $k(t_{1}, \dots ,t_{p-1})$, where $t_{1}, 
+\ldots , t_{p-1}$ are variables. Let  $f\,=\, \displaystyle{ 
+\sum_{i=1}^{p-1} f_{i}\,t_{i}} \in k(t_{1}, \ldots ,t_{p-1})[x]$ be arbitrary.
+
+Since $k(t_{1}, \ldots ,t_{p-1})$ is also a field of 
+characteristic $p$
+it follows from Lemma~\ref{ref-3.1-7} that $f$ satisfies
+\begin{equation}
+\label{ref-6.1-27}
+ \frac{\partial^2}{\partial x^2} \left( \frac{\partial}
+{\partial x} \left( \ldots \left( \frac{\partial \; f}{\partial x} 
+\cdot f \right) \ldots \cdot f \right) \cdot f \right) =0
+\end{equation}
+where $\displaystyle{\frac{\partial}{\partial x}}$ occurs $p$ times and 
+$f$ occurs 
+$(p-1)$ times.
+
+It is clear that $\displaystyle{ \frac{\partial \;f}{\partial x} 
+\,=\, \sum_{i=1}^{p-1} \frac{\partial \; f_{i}}{\partial x} \cdot t_{i}}$. 
+Taking the coefficient of $t_{1} 
+\cdot \ldots \cdot t_{p-1}$ in \eqref{ref-6.1-27} we get 
+\[\sum_{\sigma \in S_{p-1}} \frac{\partial^{2}}{\partial x^{2}} 
+\left( \frac{\partial}{\partial x} \left( \ldots \left( 
+\frac{\partial \; f_{\sigma(1)}}{\partial x} \cdot f_{\sigma(2)} 
+\right) \ldots \cdot f_{\sigma(p-2)} \right) \cdot f_{\sigma(p-1} 
+\right) \,=\,0 \]
+for all polynomials $f_{i}$ over a field $k$ of characteristic $p >0$.
+
+
+
+Consider the following expression in the variables $f_{1}, \ldots 
+,f_{p-1}$:
+
+\begin{equation} \label{ref-6.2-28}
+    \sum_{\sigma \in S_{p-1}} \left[ \frac{\partial^{2}}{\partial x^{2}} 
+    \left( \frac{\partial}{\partial x} \left( \ldots \left( 
+    \frac{\partial \; f_{\sigma(1)}}{\partial x} \cdot f_{\sigma(2)} 
+    \right) \ldots \cdot f_{\sigma(p-2)} \right) \cdot 
+    f_{\sigma(p-1)} \right) \right.
+\end{equation}
+\[ \left. -\; \frac{\partial^{p} \; f_{\sigma(1)}}{\partial x^{p}} 
+    \cdot f_{\sigma(2)} \cdot \ldots \cdot f_{\sigma(p-1)} \right] \]
+
+
+(\ref{ref-6.2-28}) has the following properties:
+
+\begin{enumerate}
+    
+    \item[(a)] (\ref{ref-6.2-28})$\:=\:0$, if $f_{1}, \ldots ,f_{p-1}$ are 
+    polynomials over a field $k$ of characteristic $p >0$.
+    
+    \item[(b)] Over any field, we may rewrite (\ref{ref-6.2-28}) in the form
+    
+    \begin{equation} \label{ref-6.3-29}
+        \sum_{0\le u_{1}, \ldots ,u_{p-1}\le p-1} a_{u_{1} \ldots u_{p-1}} \: 
+        \frac{\partial^{u_{1}} \; f_{1}}{\partial x^{u_{1}}} \cdot \ldots 
+        \cdot \frac{\partial^{u_{p-1}} \; f_{p-1}}{\partial x^{u_{p-1}}}
+    \end{equation}
+    such that $a_{u_{1} 
+    \ldots u_{p-1}} \in \ZZ$.
+\end{enumerate}    
+    
+Using these properties we will prove that the coefficients of 
+(\ref{ref-6.3-29}) are multiples of $p$.
+
+Define for  $q,\: n \in \NN$ the symbolic $n$th 
+power $q^{(n)}$ of $q$ as follows:
+\[q^{(n)} \:=\: \left\{ \begin{array}{lll} 1 & & \mbox{if } n\,=\,0 \\
+q \, (q\,-\,1) \ldots (q\,-\,n\,+\,1) & & \mbox{if } n \geq 1 
+\end{array} \right. \]
+Now let $(q_i)_{i=1,\ldots,p-1}\in \NN$ be arbitrary and put $f_{i} \,=\,
+x^{q_{i}}$.
+Then it is easy to see that 
+(\ref{ref-6.3-29}) equals 
+\[\sum_{u_{1}, \ldots ,u_{p-1}} a_{u_{1} \ldots u_{p-1}} \: 
+q_{1}^{(u_{1})} \ldots q_{p-1}^{(u_{p-1})} \: x^{q_{1}-u_{1}} \ldots 
+x^{q_{p-1}-u_{p-1}}\]
+
+Since (\ref{ref-6.3-29}) is zero in $k$ by  property (a) we 
+deduce:
+\begin{equation} \label{ref-6.4-30}
+    \sum_{u_{1}, \ldots ,u_{p-1}} a_{u_{1} \ldots u_{p-1}} \: 
+    q_{1}^{(u_{1})} \ldots q_{p-1}^{(u_{p-1})} \;=\; 0
+\end{equation}
+in $k$.
+
+Let $X$ be the $k$-vectorspace of all functions 
+$h \,:\, k^{p-1} \rightarrow k$. By \cite{BS}
+\[
+\left\{ x_{1}^{u_{1}} \ldots x_{p-1}^{u_{p-1}} \; | \; \mbox{for all } 
+1 \leq i \leq p-1, \; u_{i} \leq p-1 \right\}
+\]
+ is a basis for $X$. 
+We may transform these `normal' monomials into 
+`symbolic' monomials by a triangular matrix whose determinant is equal 
+to 1. It follows that
+\[\left\{ x_{1}^{(u_{1})} \ldots x_{p-1}^{(u_{p-1})} \; | \; 
+\mbox{for all } 1 \leq i \leq p-1, \; u_{i} \leq p-1 \right\}
+\]
+is also 
+a basis for $X$.
+
+Since (\ref{ref-6.4-30}) holds for all $q_{1}, \ldots ,q_{p-1} \in \NN$, 
+this implies that 
+\[\sum_{u_{1}, \ldots ,u_{p-1}} a_{u_{1} \ldots u_{p-1}} \: 
+x_{1}^{(u_{1})} \dots x_{p-1}^{(u_{p-1})} \;=\; 0 \]
+in $k$.
+We conclude that the coefficients $a_{u_{1} \ldots u_{p-1}}$ are 
+zero in $k$ and hence they are divisible by $p$, as elements of $\ZZ$.
+ 
+ Let us look now at the difference of (\ref{ref-6.2-28}) and (\ref{ref-6.3-29}), i.e.
+\begin{equation} \label{ref-6.5-31}
+    \sum_{\sigma \in S_{p-1}} \left[ 
+    \frac{\partial^{2}}{\partial x^{2}} \left( 
+    \frac{\partial}{\partial x} \left( \ldots \left( 
+    \frac{\partial \; f_{\sigma(1)}}{\partial x} \cdot f_{\sigma(2)} 
+    \right) \ldots \cdot f_{\sigma(p-2)} \right) \cdot 
+    f_{\sigma(p-1)} \right) \right. 
+\end{equation}
+\[ \left. -\; \frac{\partial^{p} \; f_{\sigma(1)}}{\partial x^{p}} 
+    \cdot f_{\sigma(2)} \cdot \ldots \cdot f_{\sigma(p-1)} \right] 
+    \;-\; \sum_{u_{1}, \ldots ,u_{p-1}} 
+    a_{u_{1} \ldots u_{p-1}} \: 
+    \frac{\partial^{u_{1}} \; f_{1}}{\partial x^{u_{1}}} 
+    \cdot \ldots \cdot 
+    \frac{\partial^{u_{p-1}} \; f_{p-1}}{\partial x^{u_{p-1}}} \]
+By definition (\ref{ref-6.5-31}) is equal to zero over any field with a 
+derivation.  We will consider \eqref{ref-6.5-31} over the complex numbers $\CC$.
+Let $(v_i)_{i=1,\ldots,p-1}\in \CC$ and put $f_{i}\,=\,e^{v_{i}x}$.
+We deduce that 
+\[ \sum_{\sigma \in S_{p-1}} \left[ v_{\sigma(1)} \, 
+(v_{\sigma(1)}\,+\,v_{\sigma(2)}) \ldots (v_{\sigma(1)}\,+ \ldots +\, 
+v_{\sigma(p-1)})^{2} \; 
+e^{(v_{\sigma(1)} \,+ \ldots +\, v_{\sigma(p-1)})\,x} \right. \]
+\[ \left. -\; v_{\sigma(1)}^{p} \; 
+e^{(v_{\sigma(1)} \,+ \ldots +\, v_{\sigma(p-1)})\,x} \right] \;-\; 
+\sum_{u_{1}, \ldots ,u_{p-1}} a_{u_{1} \ldots u_{p-1}} \: 
+v_{1}^{u_{1}} \ldots v_{p-1}^{u_{p-1}} \: e^{(v_{1} \,+ \ldots +\, 
+v_{p-1})\,x} \;=\;0 \]
+
+If we divide this by $e^{(v_{1} \,+ \ldots +\,v_{p-1})\,x}$, we get, 
+for all $v_{1}, \ldots ,v_{p-1} \in \CC$
+\[ \sum_{\sigma \in S_{p-1}} (\, v_{\sigma(1)} \, 
+(v_{\sigma(1)} \,+\, v_{\sigma(2)}) \ldots 
+(v_{\sigma(1)} \,+ \ldots +\, v_{\sigma(p-1)})^{2} 
+\;-\; v_{\sigma(1)}^{p} \,) \]
+\[ -\; \sum_{u_{1}, \ldots ,u_{p-1}} a_{u_{1} \ldots u_{p-1}} \: 
+v_{1}^{u_{1}} \ldots v_{p-1}^{u_{p-1}} \;=\; 0 \]
+So the polynomial
+\[ \sum_{\sigma \in S_{p-1}} (\, x_{\sigma(1)} \, 
+(x_{\sigma(1)} \,+\, x_{\sigma(2)}) \ldots 
+(x_{\sigma(1)} \,+ \ldots +\, x_{\sigma(p-1)})^{2} 
+\;-\; x_{\sigma(1)}^{p} \,) \]
+\[ -\; \sum_{u_{1}, \ldots ,u_{p-1}} a_{u_{1} \ldots u_{p-1}} \: 
+x_{1}^{u_{1}} \ldots x_{p-1}^{u_{p-1}} \]
+is identically zero.
+
+If we reduce this modulo $p$, we deduce that 
+\[ \left[ \sum_{\sigma \in S_{p-1}} x_{\sigma(1)} \, 
+(x_{\sigma(1)} \,+\, x_{\sigma(2)}) \ldots 
+(x_{\sigma(1)} \,+ \ldots +\, x_{\sigma(p-1)}) \right] \; 
+(x_{1} \,+ \ldots +\, x_{p-1}) \]
+\[ \equiv\; x_{1}^{p} \,+ \ldots +\, x_{p-1}^{p} \;\equiv\;
+(x_{1} \,+ \ldots +\, x_{p-1})^{p} \hspace{1cm} (\mbox{mod}\;p) \]
+Hence Proposition~\ref{ref-1.3-4} is proved.
+
+
+
+%\bibliography{mybibs}
+%\bibliographystyle{amsabbrv}
+
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\,}
+\fi
+\begin{thebibliography}{1}
+
+\bibitem{BS1}
+G.~Baron and A.~Schinzel, {\em An extension of {W}ilson's theorem}, C. R. Math.
+  Rep. Acad. Sci. Canada {\bf 1} (1978/79), no.~2, 115--118.
+
+\bibitem{BS}
+Z.~I. Borevitch and I.~R. Shafarevitch, {\em Number theory}, Academic Press,
+  1966.
+
+\bibitem{Cohn}
+P.~M. Cohn, {\em Algebra}, John Wiley {\&} Sons, 1982.
+
+\bibitem{MR1}
+G.~Maury and J.~Raynaud, {\em Ordres maximaux au sens de {K}. {A}sano},
+  Springer, Berlin, 1980.
+
+\bibitem{SS1}
+S.~Sen, {\em On automorphisms of local fields}, Ann. of Math. (2) {\bf 90}
+  (1969), 33--46.
+
+\bibitem{SS}
+S.~P. Smith and J.~T. Stafford, {\em Regularity of the 4-dimensional {S}klyanin
+  algebra}, Compositio Math. {\bf 83} (1992), 259--289.
+
+\bibitem{VdBVG}
+M.~Van~den Bergh and M.~Van~Gastel, {\em Graded modules of {G}elfand-{K}irillov
+  dimension one over three-dimensional {A}rtin-{S}chelter regular algebras}, J.
+  Algebra {\bf 196} (1997), 251--282.
+
+\end{thebibliography}
+
+
+\begin{comment}
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\,}
+\fi
+\begin{thebibliography}{10}
+
+\bibitem{1}
+M.~Van~den Bergh and M.~Van~Gastel, {\em Graded modules of {G}elfand-{K}irillov
+  dimension one over three-dimensional {A}rtin-{S}chelter regular
+algebras}, \ldots
+
+\bibitem{2}
+G.~Baron and A.~Schinzel,\ldots
+
+\bibitem{3}
+Cohn, vol3
+
+\bibitem{4}
+Shankar Sen
+
+\bibitem{5}
+Maury en Raynaud prop 2.3
+
+\bibitem{6}
+Borevitch en Safarevitch
+
+\end{thebibliography}
+\end{comment}
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+
+

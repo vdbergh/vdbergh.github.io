@@ -1,0 +1,1226 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API reference &mdash; vtjson 2.2.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="canonical" href="https://www.cantate.be/vtsjon/usage.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4e6cfea6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API summary" href="api.html" />
+    <link rel="prev" title="Getting started" href="tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            vtjson
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#validating-objects">Validating objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.validate"><code class="docutils literal notranslate"><span class="pre">validate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.safe_cast"><code class="docutils literal notranslate"><span class="pre">safe_cast()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.make_type"><code class="docutils literal notranslate"><span class="pre">make_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.ValidationError"><code class="docutils literal notranslate"><span class="pre">ValidationError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.SchemaError"><code class="docutils literal notranslate"><span class="pre">SchemaError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#built-in-schemas">Built-in schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.regex"><code class="docutils literal notranslate"><span class="pre">regex</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.glob"><code class="docutils literal notranslate"><span class="pre">glob</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.div"><code class="docutils literal notranslate"><span class="pre">div</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.close_to"><code class="docutils literal notranslate"><span class="pre">close_to</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.email"><code class="docutils literal notranslate"><span class="pre">email</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.ip_address"><code class="docutils literal notranslate"><span class="pre">ip_address</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.url"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.domain_name"><code class="docutils literal notranslate"><span class="pre">domain_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.date_time"><code class="docutils literal notranslate"><span class="pre">date_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.date"><code class="docutils literal notranslate"><span class="pre">date</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.time"><code class="docutils literal notranslate"><span class="pre">time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.anything"><code class="docutils literal notranslate"><span class="pre">anything</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.nothing"><code class="docutils literal notranslate"><span class="pre">nothing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.float_"><code class="docutils literal notranslate"><span class="pre">float_</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modifiers">Modifiers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.one_of"><code class="docutils literal notranslate"><span class="pre">one_of</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.at_least_one_of"><code class="docutils literal notranslate"><span class="pre">at_least_one_of</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.at_most_one_of"><code class="docutils literal notranslate"><span class="pre">at_most_one_of</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.keys"><code class="docutils literal notranslate"><span class="pre">keys</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.interval"><code class="docutils literal notranslate"><span class="pre">interval</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.gt"><code class="docutils literal notranslate"><span class="pre">gt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.ge"><code class="docutils literal notranslate"><span class="pre">ge</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.lt"><code class="docutils literal notranslate"><span class="pre">lt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.le"><code class="docutils literal notranslate"><span class="pre">le</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.size"><code class="docutils literal notranslate"><span class="pre">size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.fields"><code class="docutils literal notranslate"><span class="pre">fields</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.magic"><code class="docutils literal notranslate"><span class="pre">magic</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.filter"><code class="docutils literal notranslate"><span class="pre">filter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wrappers">Wrappers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.union"><code class="docutils literal notranslate"><span class="pre">union</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.intersect"><code class="docutils literal notranslate"><span class="pre">intersect</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.complement"><code class="docutils literal notranslate"><span class="pre">complement</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.lax"><code class="docutils literal notranslate"><span class="pre">lax</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.strict"><code class="docutils literal notranslate"><span class="pre">strict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.quote"><code class="docutils literal notranslate"><span class="pre">quote</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.set_name"><code class="docutils literal notranslate"><span class="pre">set_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.protocol"><code class="docutils literal notranslate"><span class="pre">protocol</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.set_label"><code class="docutils literal notranslate"><span class="pre">set_label</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conditional-schemas">Conditional schemas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.ifthen"><code class="docutils literal notranslate"><span class="pre">ifthen</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.cond"><code class="docutils literal notranslate"><span class="pre">cond</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#type-annotations-integration">Type annotations integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#type-annotations-as-schemas">Type annotations as schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotated">Annotated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-type-annotations">Supported type annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apply-objects">Apply objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.Apply"><code class="docutils literal notranslate"><span class="pre">Apply</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.skip_first"><code class="docutils literal notranslate"><span class="pre">vtjson.skip_first</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#schema-format">Schema format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.compiled_schema"><code class="docutils literal notranslate"><span class="pre">compiled_schema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.compiled_schema.__validate__"><code class="docutils literal notranslate"><span class="pre">compiled_schema.__validate__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.compile"><code class="docutils literal notranslate"><span class="pre">compile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson._compile"><code class="docutils literal notranslate"><span class="pre">_compile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.wrapper"><code class="docutils literal notranslate"><span class="pre">wrapper</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.wrapper.__compile__"><code class="docutils literal notranslate"><span class="pre">wrapper.__compile__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-against-mapping-schemas">Validating against Mapping schemas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.optional_key"><code class="docutils literal notranslate"><span class="pre">optional_key</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-compiling-a-schema">Pre-compiling a schema</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API summary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">vtjson</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="validating-objects">
+<h2>Validating objects<a class="headerlink" href="#validating-objects" title="Link to this heading"></a></h2>
+<p>To validate an object against a schema one may use <a class="reference internal" href="#vtjson.validate" title="vtjson.validate"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.validate()</span></code></a>. If validation fails this throws a <a class="reference internal" href="#vtjson.ValidationError" title="vtjson.ValidationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">vtjson.ValidationError</span></code></a>.
+A suitable written schema can be used as a Python type annotation. <a class="reference internal" href="#vtjson.safe_cast" title="vtjson.safe_cast"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.safe_cast()</span></code></a> verifies if a given object has a given type.
+<a class="reference internal" href="#vtjson.make_type" title="vtjson.make_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.make_type()</span></code></a> transforms a schema into a genuine Python type so that validation can be done using <cite>isinstance()</cite>.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="vtjson.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'object'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.validate" title="Link to this definition"></a></dt>
+<dd><p>Validates the given object against the given schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the given schema</p></li>
+<li><p><strong>obj</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the object to be validated</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – common name for the object to be validated; used in
+non-validation messages</p></li>
+<li><p><strong>strict</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – indicates whether or not the object being validated is
+allowed to have keys/entries which are not in the schema</p></li>
+<li><p><strong>subs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>]</span>) – a dictionary whose keys are labels and whose values are
+substitution schemas for schemas with those labels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#vtjson.ValidationError" title="vtjson.ValidationError"><strong>ValidationError</strong></a> – exception thrown when the object does not
+validate; the exception message contains an explanation about what went
+wrong</p></li>
+<li><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found
+to contain an error</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vtjson.safe_cast">
+<span class="sig-name descname"><span class="pre">safe_cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.safe_cast" title="Link to this definition"></a></dt>
+<dd><p>Validates the given object against the given schema and changes its type
+accordingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">T</span></code>)]</span>) – the given schema</p></li>
+<li><p><strong>obj</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – the object to be validated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">T</span></code>)</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the validated object with its type changed</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#vtjson.ValidationError" title="vtjson.ValidationError"><strong>ValidationError</strong></a> – exception thrown when the object does not
+validate; the exception message contains an explanation about what went
+wrong</p></li>
+<li><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found
+to contain an error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vtjson.make_type">
+<span class="sig-name descname"><span class="pre">make_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.make_type" title="Link to this definition"></a></dt>
+<dd><p>Transforms a schema into a genuine Python type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the given schema</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – sets the <cite>__name__</cite> attribute of the type; if it is not
+supplied then <cite>vtjson</cite> makes an educated guess</p></li>
+<li><p><strong>strict</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – indicates whether or not the object being validated is
+allowed to have keys/entries which are not in the schema</p></li>
+<li><p><strong>debug</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – print feedback on the console if validation fails</p></li>
+<li><p><strong>subs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>]</span>) – a dictionary whose keys are labels and whose values are
+substitution schemas for schemas with those labels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found
+to contain an error</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">_validate_meta</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="vtjson.ValidationError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ValidationError</span></span><a class="headerlink" href="#vtjson.ValidationError" title="Link to this definition"></a></dt>
+<dd><p>Raised if validation fails. The associated message explains what went
+wrong.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="vtjson.SchemaError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SchemaError</span></span><a class="headerlink" href="#vtjson.SchemaError" title="Link to this definition"></a></dt>
+<dd><p>Raised if a schema contains an error.</p>
+</dd></dl>
+
+</section>
+<section id="built-in-schemas">
+<span id="builtins"></span><h2>Built-in schemas<a class="headerlink" href="#built-in-schemas" title="Link to this heading"></a></h2>
+<p>Some built-in schemas take arguments. If no arguments are given then the parentheses can be omitted. So <cite>email</cite> is equivalent to <cite>email()</cite>. Some built-ins have an optional <cite>name</cite> argument. This is used in non-validation messages.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.regex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullmatch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.regex" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This matches the strings which match the given pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regex</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the regular expression pattern</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – common name for the pattern that will be used in
+non-validation messages</p></li>
+<li><p><strong>fullmatch</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – indicates whether or not the full string should be
+matched</p></li>
+<li><p><strong>flags</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – the flags argument used when invoking <cite>re.compile</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.glob">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.glob" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Unix style filename matching. This is implemented using
+<cite>pathlib.PurePath().match()</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the wild card pattern to match</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – common name for the pattern that will be used in
+non-validation messages</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.div">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.div" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This matches the integers <cite>x</cite> such that <cite>(x - remainder) % divisor</cite> == 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>divisor</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – the divisor</p></li>
+<li><p><strong>remainder</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – the remainer</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – common name (e.g. <cite>even</cite> or <cite>odd</cite>) that will be used in
+non-validation messages</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.close_to">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">close_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abs_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.close_to" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This matches the real numbers that are close to <cite>x</cite> in the sense of
+<cite>math.isclose</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rel_tol</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – the maximal allowed relative deviation</p></li>
+<li><p><strong>abs_tol</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – the maximal allowed absolute deviation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.email">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.email" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Checks if the object is a valid email address. This uses the package
+<cite>email_validator</cite>. The <cite>email</cite> schema accepts the same options as
+<cite>validate_email</cite> in loc. cit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kw</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></span>) – optional keyword arguments to be forwarded to
+<cite>email_validator.validate_email</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.ip_address">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ip_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ip_address" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches ip addresses of the specified version which can be 4, 6 or None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>version</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</span>) – the version of the ip protocol</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.url">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#vtjson.url" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches valid urls.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.domain_name">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">domain_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ascii_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.domain_name" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Checks if the object is a valid domain name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ascii_only</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>False</cite> then allow IDNA domain names</p></li>
+<li><p><strong>resolve</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>True</cite> check if the domain names resolves</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.date_time">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">date_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.date_time" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Without argument this represents an ISO 8601 date-time. The <cite>format</cite>
+argument represents a format string for <cite>strftime</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>format</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – format string for <cite>strftime</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.date">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#vtjson.date" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches an ISO 8601 date.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.time">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#vtjson.time" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches an ISO 8601 time.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.anything">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">anything</span></span><a class="headerlink" href="#vtjson.anything" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matchess anything.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.nothing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nothing</span></span><a class="headerlink" href="#vtjson.nothing" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches nothing.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.float_">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">float_</span></span><a class="headerlink" href="#vtjson.float_" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Schema that only matches floats. Not ints.</p>
+</dd></dl>
+
+</section>
+<section id="modifiers">
+<span id="id1"></span><h2>Modifiers<a class="headerlink" href="#modifiers" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.one_of">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">one_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.one_of" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents a dictionary with exactly one key among a collection of
+keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – a collection of keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.at_least_one_of">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">at_least_one_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.at_least_one_of" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents a dictionary with a least one key among a collection of
+keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – a collection of keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.at_most_one_of">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">at_most_one_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.at_most_one_of" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents an dictionary with at most one key among a collection of
+keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – a collection of keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.keys">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.keys" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents a dictionary containing all the keys in a collection of
+keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – a collection of keys</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.interval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.interval" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>lb &lt;= object &lt;= ub</cite>, provided the comparisons make sense.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code></span>) – lower bound; … (ellipsis) means no lower bound</p></li>
+<li><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code></span>) – upper bound; … (ellipsis) means no upper bound</p></li>
+<li><p><strong>strict_lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if True use a strict lower bound</p></li>
+<li><p><strong>strict_ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if True use a strict upper bound</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.gt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.gt" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &gt; lb</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the strict lower bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.ge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ge" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &gt;= lb</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the lower bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.lt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.lt" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &lt; ub</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the strict upper bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.le">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">le</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.le" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &lt;= ub</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the upper bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.size">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.size" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches the objects (which support <cite>len()</cite> such as strings or lists) whose
+length is in the interval <cite>[lb, ub]</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – the lower bound for the length</p></li>
+<li><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – the upper bound for the length; … (ellipsis) means that
+there is no upper bound; <cite>None</cite> means <cite>lb==ub</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.fields">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.fields" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">StringKeyType</span></code>]</p>
+<p>Matches Python objects with attributes <cite>field1, field2, …, fieldN</cite> whose
+corresponding values should validate against <cite>schema1, schema2, …,
+schemaN</cite> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">StringKeyType</span></code>, bound= <code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="#vtjson.optional_key" title="vtjson.optional_key"><code class="xref py py-class docutils literal notranslate"><span class="pre">optional_key</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]), <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>]</span>) – a dictionary associating fields with schemas</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.magic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">magic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mime_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.magic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Checks if a buffer (for example a string or a byte array) has the given
+mime type. This is implemented using the <cite>python-magic</cite> package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mime_type</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – the mime type</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – common name to refer to this mime type</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.filter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.filter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>Applies <cite>callable</cite> to the object and validates the result with <cite>schema</cite>.
+If the callable throws an exception then validation fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>]</span>) – the filter to apply to the object</p></li>
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema used for validation once the filter has been
+applied</p></li>
+<li><p><strong>filter_name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – common name to refer to the filter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="wrappers">
+<span id="id2"></span><h2>Wrappers<a class="headerlink" href="#wrappers" title="Link to this heading"></a></h2>
+<p>Wrappers are schemas that contain references to other schemas.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.union">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">schemas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.union" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>union(schema1, …, schemaN)</cite> if it matches
+one of the schemas <cite>schema1, …, schemaN</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schemas</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – collection of schemas, one of which should match</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.intersect">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">schemas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.intersect" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>intersect(schema1, …, schemaN)</cite> if it
+matches all the schemas <cite>schema1, …, schemaN</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schemas</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – collection of schemas, all of which should match</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.complement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">complement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.complement" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>complement(schema)</cite> if it does not match
+<cite>schema</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema that should not be matched</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.lax">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.lax" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>lax(schema)</cite> if it matches <cite>schema</cite> when
+validated with <cite>strict=False</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – schema that should be validated against with
+<cite>strict=False</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.strict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.strict" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>strict(schema)</cite> if it matches <cite>schema</cite> when
+validated with <cite>strict=True</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – schema that should be validated against with
+<cite>strict=True</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.quote">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">quote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.quote" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>quote(schema)</cite> if it is equal to <cite>schema</cite>.
+For example the schema <cite>str</cite> matches strings but the schema <cite>quote(str)</cite>
+matches the object <cite>str</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema to be quoted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.set_name">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.set_name" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>set_name(schema, name)</cite> if it matches <cite>schema</cite>,
+but the <cite>name</cite> argument will be used in non-validation messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the original schema</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – name for use in non-validation messages</p></li>
+<li><p><strong>reason</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>True</cite> then the original non-validation message
+will not be suppressed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.protocol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.protocol" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>protocol(schema, dict=False)</cite> if <cite>schema</cite> is
+a class (or class like object) and its fields are annotated with schemas
+which validate the corresponding fields in the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – a type annotated class (or class like object such as
+Protocol or TypedDict) serving as prototype</p></li>
+<li><p><strong>dict</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>True</cite> parse the object as a <cite>dict</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema does not support
+type_hints</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.set_label">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.set_label" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>set_label(schema, label1, …, labelN,
+debug=False)</cite> if it matches <cite>schema</cite>, unless the schema is replaced by a
+different one via the <cite>subs</cite> argument to <cite>validate</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema that will be labeled</p></li>
+<li><p><strong>labels</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – labels that will be attached to the schema</p></li>
+<li><p><strong>debug</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – it <cite>True</cite> print a message on the console if the schema
+was changed via substitution</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="conditional-schemas">
+<h2>Conditional schemas<a class="headerlink" href="#conditional-schemas" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.ifthen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ifthen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">if_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">then_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">else_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ifthen" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>If the object matches the <cite>if_schema</cite> then it should also match the
+<cite>then_schema</cite>. If the object does not match the <cite>if_schema</cite> then it should
+match the <cite>else_schema</cite>, if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>if_schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the <cite>if_schema</cite></p></li>
+<li><p><strong>then_schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the <cite>then_schema</cite></p></li>
+<li><p><strong>else_schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – the <cite>else_schema</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.cond">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.cond" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object is successively validated against <cite>if_schema1</cite>, <cite>if_schema2</cite>,
+… until a validation succeeds. When this happens the object should match
+the corresponding <cite>then_schema</cite>. If no <cite>if_schema</cite> succeeds then the
+object is considered to have been validated. If one sets <cite>if_schemaN</cite>
+equal to <cite>anything</cite> then this serves as a catch all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>]</span>) – list of tuples pairing <cite>if_schemas</cite> with <cite>then_schemas</cite></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="type-annotations-integration">
+<span id="type-annotations"></span><h2>Type annotations integration<a class="headerlink" href="#type-annotations-integration" title="Link to this heading"></a></h2>
+<section id="type-annotations-as-schemas">
+<h3>Type annotations as schemas<a class="headerlink" href="#type-annotations-as-schemas" title="Link to this heading"></a></h3>
+<p><cite>vtjson</cite> recognizes the following type annotations as schemas.</p>
+<p><a class="reference internal" href="#annotated"><span class="std std-ref">Annotated</span></a>, <a class="reference internal" href="#mapping"><span class="std std-ref">Mapping[K, V] and subtypes</span></a>, <a class="reference internal" href="#container"><span class="std std-ref">Container[T] and subtypes</span></a>, <a class="reference internal" href="#tuple"><span class="std std-ref">tuple[…] and Tuple[…]</span></a>, <a class="reference internal" href="#protocol"><span class="std std-ref">Protocol</span></a>, <a class="reference internal" href="#namedtuple"><span class="std std-ref">NamedTuple</span></a>, <a class="reference internal" href="#newtype"><span class="std std-ref">NewType</span></a>, <a class="reference internal" href="#typeddict"><span class="std std-ref">TypedDict</span></a>, <a class="reference internal" href="#union"><span class="std std-ref">Union and the | operator</span></a>, <a class="reference internal" href="#any"><span class="std std-ref">Any</span></a>.</p>
+<p>For example <cite>dict[str, str]</cite> is translated internally into the schema <cite>{str: str}</cite>. This is explained further below.</p>
+</section>
+<section id="annotated">
+<span id="id3"></span><h3>Annotated<a class="headerlink" href="#annotated" title="Link to this heading"></a></h3>
+<ul>
+<li><p>More general vtjson schemas can work along Python type annotations by using the <cite>typing.Annotated</cite> contruct. The most naive way to do this is via</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="n">type_annotation</span><span class="p">,</span> <span class="n">vtjson_schema</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>A type checker such as <cite>mypy</cite> will only see the type annotation (<cite>list[object]</cite> in the example), whereas vtjson will only see the vtjson schema (<cite>[int, str, float]</cite> in the example). <cite>skip_first</cite> is a built-in short hand for <cite>Apply(skip_first=True)</cite> (see below) which directs vtjson to ignore the first argument of an <cite>Annotated</cite> schema.</p>
+</li>
+<li><p>In some use cases a <cite>vtjon</cite> schema will meaningfully refine a Python type or type annotation. In that case one should not use <cite>skip_first</cite>. For example:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fields</span><span class="p">({</span><span class="s2">&quot;tzinfo&quot;</span><span class="p">:</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">})]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>defines a <cite>datetime</cite> object whose time zone is <cite>utc</cite>.</p>
+</li>
+<li><p>The built-in schemas already check that an object has the correct type. So for those one should use <cite>skip_first</cite>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>matches even integers.</p>
+</li>
+<li><p>If one wants to pre-compile a schema and still use it as a type annotation (assuming it is valid as such) then one can do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">schema</span> <span class="n">definition</span><span class="o">&gt;</span>
+<span class="n">Schema</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">schema</span><span class="p">,</span> <span class="nb">compile</span><span class="p">(</span><span class="n">schema</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="supported-type-annotations">
+<h3>Supported type annotations<a class="headerlink" href="#supported-type-annotations" title="Link to this heading"></a></h3>
+<p>Note that Python imposes strong restrictions on what constitutes a valid type annotation but <cite>vtjson</cite> is much more lax about this. Enforcing the restrictions is left to the type checkers or the Python interpreter.</p>
+<dl id="typeddict">
+<dt>TypedDict</dt><dd><p>A TypedDict type annotation is, roughly speaking, translated into a <cite>dict</cite> schema. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>internally becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_name</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="s2">&quot;Movie&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>vtjson</cite> supports the <cite>total</cite> option to <cite>TypedDict</cite> as well as the <cite>Required</cite> and <cite>NotRequired</cite> annotations of fields, if they are compatible with the Python version being used.</p>
+</dd>
+</dl>
+<dl id="protocol">
+<dt>Protocol</dt><dd><p>A class implementing a protocol is translated into a <a class="reference internal" href="#vtjson.fields" title="vtjson.fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.fields</span></code></a> schema. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>internally becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_name</span><span class="p">(</span><span class="n">fields</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">}),</span> <span class="s2">&quot;Movie&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl id="namedtuple">
+<dt>NamedTuple</dt><dd><p>A <cite>NamedTuple</cite> class is translated into an <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema encompassing a <cite>tuple</cite> schema and a <a class="reference internal" href="#vtjson.fields" title="vtjson.fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.fields</span></code></a> schema. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>internally becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_name</span><span class="p">(</span><span class="n">intersect</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">fields</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">})),</span> <span class="s2">&quot;Movie&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Annotated</dt><dd><p>This has already been discussed in the section <a class="reference internal" href="#annotated"><span class="std std-ref">Annotated</span></a>. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects.</p>
+</dd>
+</dl>
+<dl class="simple" id="newtype">
+<dt>NewType</dt><dd><p>This is translated into a <a class="reference internal" href="#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_name</span></code></a> schema. E.g. <cite>NewType(‘Movie’, str)</cite> becomes <cite>set_name(str, ‘Movie’)</cite></p>
+</dd>
+</dl>
+<dl class="simple" id="tuple">
+<dt>tuple[…] and Tuple[…]</dt><dd><p>These are translated into the equivalent <cite>tuple</cite> schemas.</p>
+</dd>
+</dl>
+<dl class="simple" id="mapping">
+<dt>Mapping[K, V] and subtypes</dt><dd><p>These validate those objects that are members of the origin type (a subclass of <cite>Mapping</cite>) and whose (key, value) pairs match <cite>(K, V)</cite>.</p>
+</dd>
+</dl>
+<dl class="simple" id="container">
+<dt>Container[T] and subtypes</dt><dd><p>These validate those objects that are members of the origin type (a subclass of <cite>Container</cite>) and whose elements match <cite>T</cite>.</p>
+</dd>
+</dl>
+<dl class="simple" id="union">
+<dt>Union and the | operator</dt><dd><p>These are translated into <a class="reference internal" href="#vtjson.union" title="vtjson.union"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.union</span></code></a>.</p>
+</dd>
+</dl>
+<dl class="simple" id="literal">
+<dt>Literal</dt><dd><p>This is also translated into <a class="reference internal" href="#vtjson.union" title="vtjson.union"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.union</span></code></a>.</p>
+</dd>
+</dl>
+<dl class="simple" id="any">
+<dt>Any</dt><dd><p>This is translated into <a class="reference internal" href="#vtjson.anything" title="vtjson.anything"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.anything</span></code></a>.</p>
+</dd>
+</dl>
+</section>
+<section id="apply-objects">
+<h3>Apply objects<a class="headerlink" href="#apply-objects" title="Link to this heading"></a></h3>
+<ul>
+<li><p>If the list of arguments of an Annotated schema includes <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects then those modify the treatement of the arguments that come before them. We already encountered <a class="reference internal" href="#vtjson.skip_first" title="vtjson.skip_first"><code class="xref py py-data docutils literal notranslate"><span class="pre">vtjson.skip_first</span></code></a> which is a built-in alias for <cite>Apply(skip_first=True)</cite>.</p></li>
+<li><p>Multiple <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects are allowed. E.g. the following contrived schema</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>is equivalent to <cite>float</cite>.</p>
+</li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.Apply">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.Apply" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Modifies the treatement of the previous arguments in an <cite>Annotated</cite> schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skip_first</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – if <cite>True</cite> do not use the first argument (the Python
+type annotation) in an <cite>Annotated</cite> construct for validation because this
+is already covered by the other arguments</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – apply the corresponding <a class="reference internal" href="#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_name</span></code></a> command
+to the previous arguments</p></li>
+<li><p><strong>labels</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – apply the corresponding <a class="reference internal" href="#vtjson.set_label" title="vtjson.set_label"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_label</span></code></a>
+command  to the previous arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="vtjson.skip_first">
+<span class="sig-prename descclassname"><span class="pre">vtjson.</span></span><span class="sig-name descname"><span class="pre">skip_first</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><span class="pre">vtjson.Apply</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">vtjson.Apply(skip_first=True)</span></em><a class="headerlink" href="#vtjson.skip_first" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Do not use the first argument (the Python type annotation) in an <cite>Annotated</cite> construct for validation (likely because it is already covered by the other arguments).</p>
+</div></blockquote>
+</dd></dl>
+
+</section>
+</section>
+<section id="schema-format">
+<h2>Schema format<a class="headerlink" href="#schema-format" title="Link to this heading"></a></h2>
+<p>A schema can be, in order of precedence:</p>
+<ul class="simple">
+<li><p>An instance of the class <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.compiled_schema</span></code></a>.   The class <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.compiled_schema</span></code></a> defines a single abstract method <a class="reference internal" href="#vtjson.compiled_schema.__validate__" title="vtjson.compiled_schema.__validate__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vtjson.compiled_schema.__validate__()</span></code></a> with similar semantics as  <a class="reference internal" href="#vtjson.validate" title="vtjson.validate"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.validate()</span></code></a>.</p></li>
+<li><p>A subclass of <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.compiled_schema</span></code></a> with a no-argument constructor.</p></li>
+<li><p>An object having a <cite>__validate__()</cite> attribute with the same signature as  <a class="reference internal" href="#vtjson.compiled_schema.__validate__" title="vtjson.compiled_schema.__validate__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vtjson.compiled_schema.__validate__()</span></code></a>.</p></li>
+<li><p>An instance of the class <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.wrapper</span></code></a>. The class <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.wrapper</span></code></a> defines a single abstract method <a class="reference internal" href="#vtjson.wrapper.__compile__" title="vtjson.wrapper.__compile__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vtjson.wrapper.__compile__()</span></code></a> that should produce an instance  of <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.compiled_schema</span></code></a>.</p></li>
+<li><p>A Python type annotation such as <cite>list[str]</cite>. See <a class="reference internal" href="#type-annotations"><span class="std std-ref">Type annotations integration</span></a>.</p></li>
+<li><p>A Python type. In that case validation is done by checking membership. For compatibility with Python type annotations, the schema <cite>float</cite> matches both ints and floats. Use <a class="reference internal" href="#vtjson.float_" title="vtjson.float_"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.float_</span></code></a> if you want only floats.</p></li>
+<li><p>A callable. Validation is done by applying the callable to the object. If applying the callable throws an exception then the corresponding message will be part of the non-validation message.</p></li>
+<li><p>An instance of <cite>Sequence</cite> that is not an instance of <cite>str</cite> (e.g a <cite>list</cite> or a <cite>tuple</cite>). Validation is done by first checking membership of the schema type, and then performing validation for each of the entries of the object being validated against the corresponding entries of the schema.</p></li>
+<li><p>An instance of <cite>Mapping</cite>. Validation is done by first checking membership of the schema type, and then performing validation for each of the values of the object being validated against the corresponding values of the schema. Keys are themselves considered as schemas. E.g. <cite>{str: str}</cite> represents a dictionary whose keys and values are both strings. For a more elaborate discussion of validation of mappings see <a class="reference internal" href="#mapping-schemas"><span class="std std-ref">Validating against Mapping schemas</span></a>.</p></li>
+<li><p>A <cite>set</cite>. A set validates an object if the object is a set and the elements of the object are validated by an element of the schema.</p></li>
+<li><p>An arbitrary Python object. Validation is done by checking equality of the schema and the object, except when the schema is <cite>float</cite>, in which case <cite>math.isclose</cite> is used. Below we call such an object a <cite>const schema</cite>.</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.compiled_schema">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compiled_schema</span></span><a class="headerlink" href="#vtjson.compiled_schema" title="Link to this definition"></a></dt>
+<dd><p>The result of compiling a schema. A <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a> is
+produced by the factory function <a class="reference internal" href="#vtjson.compile" title="vtjson.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.compile()</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vtjson.compiled_schema.__validate__">
+<span class="sig-name descname"><span class="pre">__validate__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.compiled_schema.__validate__" title="Link to this definition"></a></dt>
+<dd><p>Validates the given object against the given schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> – the given schema</p></li>
+<li><p><strong>obj</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the object to be validated</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – common name for the object to be validated; used in
+non-validation messages</p></li>
+<li><p><strong>strict</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – indicates whether or not the object being validated is
+allowed to have keys/entries which are not in the schema</p></li>
+<li><p><strong>subs</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>]</span>) – a dictionary whose keys are labels and whose values are
+substitution schemas for schemas with those labels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>an empty string if validation succeeds; otherwise an
+explanation about what went wrong</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vtjson.compile">
+<span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.compile" title="Link to this definition"></a></dt>
+<dd><p>Compiles a schema. Internally invokes <a class="reference internal" href="#vtjson._compile" title="vtjson._compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson._compile()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema that should be compiled</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found
+to contain an error</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vtjson._compile">
+<span class="sig-name descname"><span class="pre">_compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_deferred_compiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson._compile" title="Link to this definition"></a></dt>
+<dd><p>Compiles a schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema that should be compiled</p></li>
+<li><p><strong>_deferred_compiles</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">_mapping</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – an opaque data structure used for handling
+recursive schemas; it should be passed unmodifed to any internal
+invocations of <a class="reference internal" href="#vtjson._compile" title="vtjson._compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson._compile()</span></code></a> or
+<a class="reference internal" href="#vtjson.wrapper.__compile__" title="vtjson.wrapper.__compile__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vtjson.wrapper.__compile__()</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found
+to contain an error</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.wrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wrapper</span></span><a class="headerlink" href="#vtjson.wrapper" title="Link to this definition"></a></dt>
+<dd><p>Base class for schemas that refer to other schemas.</p>
+<p>Handling such schemas is somewhat delicate since <cite>vtjson</cite> allows them to
+be recursive.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="vtjson.wrapper.__compile__">
+<span class="sig-name descname"><span class="pre">__compile__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_deferred_compiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.wrapper.__compile__" title="Link to this definition"></a></dt>
+<dd><p>Compiles a schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_deferred_compiles</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">_mapping</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – an opaque data structure used for handling
+recursive schemas; it should be passed unmodifed to any internal
+invocations of <a class="reference internal" href="#vtjson._compile" title="vtjson._compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson._compile()</span></code></a> or
+<a class="reference internal" href="#vtjson.wrapper.__compile__" title="vtjson.wrapper.__compile__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">vtjson.wrapper.__compile__()</span></code></a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is
+found to contain an error</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<section id="validating-against-mapping-schemas">
+<span id="mapping-schemas"></span><h3>Validating against Mapping schemas<a class="headerlink" href="#validating-against-mapping-schemas" title="Link to this heading"></a></h3>
+<p>For a Mapping schema containing only <cite>const keys</cite> (i.e. keys corresponding to a <cite>const schema</cite>) the interpretation is obvious. Below we discuss the validation of an object against a Mapping schema in the general case.</p>
+<ul class="simple">
+<li><p>First we verify that the type of the object is a subtype of the type of the schema. If not then validation fails.</p></li>
+<li><p>We verify that all non-optional const keys of the schema are also keys of the object. If this is not the case then validation fails.</p></li>
+<li><p>Now we make a list of all the keys of the schema (both optional and non-optional). The result will be called the <cite>key list</cite> below.</p></li>
+<li><p>The object will pass validation if all its keys pass validation. We next discuss how to validate a particular key of the object.</p></li>
+<li><p>If none of the entries of the key list validate the given key and <cite>strict==True</cite> (the default) then the key fails validation. If on the other hand <cite>strict==False</cite> then the key passes.</p></li>
+<li><p>Assuming the fate of the given key hasn’t been decided yet, we now match it against all entries of the key list. If it matches an entry and the corresponding value also validates then the key is validated. Otherwise we keep going through the key list.</p></li>
+<li><p>If the entire key list is consumed then the key fails validation.</p></li>
+</ul>
+<p>A consequence of this algorithm is that non-const keys are automatically optional. So applying the wrapper <a class="reference internal" href="#vtjson.optional_key" title="vtjson.optional_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.optional_key()</span></code></a> to them is meaningless and has no effect.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.optional_key">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">optional_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.optional_key" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">K</span></code>]</p>
+<p>Make a key in a Mapping schema optional. In the common case that the key
+is a string, the same effect can be achieved by appending <cite>?</cite>. If you
+absolutely positively need a non-optional string key that ends in <cite>?</cite>
+you can quote the <cite>?</cite> by preceding it with a backslash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">K</span></code>)</span>) – the key to be made optional</p></li>
+<li><p><strong>_optional</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>False</cite> create a mandatory key; this is normally
+for internal use only</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="pre-compiling-a-schema">
+<h3>Pre-compiling a schema<a class="headerlink" href="#pre-compiling-a-schema" title="Link to this heading"></a></h3>
+<p>An object matches the schema <cite>compile(schema)</cite> if it matches <cite>schema</cite>. <cite>vtjson</cite> compiles a schema before using it for validation, so pre-compiling is not necessary. However for large schemas it may gain some of performance as it needs to be done only once. Compiling is an idempotent operation. It does nothing for an already compiled schema.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API summary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michel Van den Bergh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

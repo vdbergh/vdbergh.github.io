@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API reference &mdash; openlock 1.2.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="canonical" href="https://www.cantate.be/openlock/usage.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=ca842793"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API summary" href="api.html" />
+    <link rel="prev" title="Getting started" href="tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            openlock
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-filelock-object">The FileLock object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.FileLock"><code class="docutils literal notranslate"><span class="pre">FileLock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.FileLock.acquire"><code class="docutils literal notranslate"><span class="pre">FileLock.acquire()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.FileLock.getpid"><code class="docutils literal notranslate"><span class="pre">FileLock.getpid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.FileLock.lock_file"><code class="docutils literal notranslate"><span class="pre">FileLock.lock_file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.FileLock.locked"><code class="docutils literal notranslate"><span class="pre">FileLock.locked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.FileLock.release"><code class="docutils literal notranslate"><span class="pre">FileLock.release()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.FileLock.timeout"><code class="docutils literal notranslate"><span class="pre">FileLock.timeout</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.OpenLockException"><code class="docutils literal notranslate"><span class="pre">OpenLockException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.Timeout"><code class="docutils literal notranslate"><span class="pre">Timeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.InvalidLockFile"><code class="docutils literal notranslate"><span class="pre">InvalidLockFile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.InvalidRelease"><code class="docutils literal notranslate"><span class="pre">InvalidRelease</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.InvalidOption"><code class="docutils literal notranslate"><span class="pre">InvalidOption</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.Defaults"><code class="docutils literal notranslate"><span class="pre">Defaults</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.Defaults.race_delay"><code class="docutils literal notranslate"><span class="pre">Defaults.race_delay</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.Defaults.retry_period"><code class="docutils literal notranslate"><span class="pre">Defaults.retry_period</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openlock.Defaults.tries"><code class="docutils literal notranslate"><span class="pre">Defaults.tries</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.set_defaults"><code class="docutils literal notranslate"><span class="pre">set_defaults()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openlock.get_defaults"><code class="docutils literal notranslate"><span class="pre">get_defaults()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#internals">Internals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-it-work">How does it work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#issues">Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#history">History</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API summary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">openlock</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="the-filelock-object">
+<h2>The FileLock object<a class="headerlink" href="#the-filelock-object" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="openlock.FileLock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileLock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lock_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'openlock.lock'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openlock.FileLock" title="Link to this definition"></a></dt>
+<dd><p>The lock constructor. An <a class="reference internal" href="#openlock.FileLock" title="openlock.FileLock"><code class="xref py py-class docutils literal notranslate"><span class="pre">openlock.FileLock</span></code></a> object
+supports the context manager protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lock_file</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></span>) – the underlying file used for locking;
+the calling process should have read/write access</p></li>
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – the default for the corresponding argument of
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">openlock.acquire()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="openlock.FileLock.acquire">
+<span class="sig-name descname"><span class="pre">acquire</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openlock.FileLock.acquire" title="Link to this definition"></a></dt>
+<dd><p>Attempts to acquires the lock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – specifies the maximum waiting time in seconds
+before a <a class="reference internal" href="#openlock.Timeout" title="openlock.Timeout"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Timeout</span></code></a> exception is raised</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#openlock.Timeout" title="openlock.Timeout"><strong>Timeout</strong></a> – raised when the waiting time for acquiring
+the lock has expired</p></li>
+<li><p><a class="reference internal" href="#openlock.InvalidLockFile" title="openlock.InvalidLockFile"><strong>InvalidLockFile</strong></a> – raised when openlock is unable to create a
+valid lock file</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openlock.FileLock.getpid">
+<span class="sig-name descname"><span class="pre">getpid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#openlock.FileLock.getpid" title="Link to this definition"></a></dt>
+<dd><p>The PID of the process that holds the lock, if any. Otherwise returns <cite>None</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openlock.FileLock.lock_file">
+<span class="sig-name descname"><span class="pre">lock_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></em><a class="headerlink" href="#openlock.FileLock.lock_file" title="Link to this definition"></a></dt>
+<dd><p>The <cite>Path</cite> object representing the lock file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openlock.FileLock.locked">
+<span class="sig-name descname"><span class="pre">locked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#openlock.FileLock.locked" title="Link to this definition"></a></dt>
+<dd><p>True if we hold the lock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openlock.FileLock.release">
+<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#openlock.FileLock.release" title="Link to this definition"></a></dt>
+<dd><p>Releases the lock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#openlock.InvalidRelease" title="openlock.InvalidRelease"><strong>InvalidRelease</strong></a> – raised when we don’t own the lock</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openlock.FileLock.timeout">
+<span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code> <span class="pre">|</span> <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></em><a class="headerlink" href="#openlock.FileLock.timeout" title="Link to this definition"></a></dt>
+<dd><p>The value of the timeout parameter.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="openlock.OpenLockException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OpenLockException</span></span><a class="headerlink" href="#openlock.OpenLockException" title="Link to this definition"></a></dt>
+<dd><p>Base exception raised by the openlock library.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="openlock.Timeout">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Timeout</span></span><a class="headerlink" href="#openlock.Timeout" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openlock.OpenLockException" title="openlock.OpenLockException"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenLockException</span></code></a></p>
+<p>Raised when the waiting time for acquiring a
+<a class="reference internal" href="#openlock.FileLock" title="openlock.FileLock"><code class="xref py py-class docutils literal notranslate"><span class="pre">openlock.FileLock</span></code></a> has expired.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="openlock.InvalidLockFile">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InvalidLockFile</span></span><a class="headerlink" href="#openlock.InvalidLockFile" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openlock.OpenLockException" title="openlock.OpenLockException"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenLockException</span></code></a></p>
+<p>Raised when openlock is unable to create a
+valid lock file in <a class="reference internal" href="#openlock.FileLock.acquire" title="openlock.FileLock.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">openlock.FileLock.acquire()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="openlock.InvalidRelease">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InvalidRelease</span></span><a class="headerlink" href="#openlock.InvalidRelease" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openlock.OpenLockException" title="openlock.OpenLockException"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenLockException</span></code></a></p>
+<p>Raised when <a class="reference internal" href="#openlock.FileLock.release" title="openlock.FileLock.release"><code class="xref py py-meth docutils literal notranslate"><span class="pre">openlock.FileLock.release()</span></code></a> is called
+on a lock we do not own.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="openlock.InvalidOption">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InvalidOption</span></span><a class="headerlink" href="#openlock.InvalidOption" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openlock.OpenLockException" title="openlock.OpenLockException"><code class="xref py py-class docutils literal notranslate"><span class="pre">OpenLockException</span></code></a></p>
+<p>Raised when <a class="reference internal" href="#openlock.set_defaults" title="openlock.set_defaults"><code class="xref py py-func docutils literal notranslate"><span class="pre">openlock.set_defaults()</span></code></a> is used to set
+a non-existing option.</p>
+</dd></dl>
+
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="openlock.Defaults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Defaults</span></span><a class="headerlink" href="#openlock.Defaults" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Default options.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openlock.Defaults.race_delay">
+<span class="sig-name descname"><span class="pre">race_delay</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#openlock.Defaults.race_delay" title="Link to this definition"></a></dt>
+<dd><p>delay before we check that we still have the lock file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openlock.Defaults.retry_period">
+<span class="sig-name descname"><span class="pre">retry_period</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><a class="headerlink" href="#openlock.Defaults.retry_period" title="Link to this definition"></a></dt>
+<dd><p>delay before reattempting to acquire a lock</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openlock.Defaults.tries">
+<span class="sig-name descname"><span class="pre">tries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><a class="headerlink" href="#openlock.Defaults.tries" title="Link to this definition"></a></dt>
+<dd><p>number of attempts to create a valid lock file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openlock.set_defaults">
+<span class="sig-name descname"><span class="pre">set_defaults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#openlock.set_defaults" title="Link to this definition"></a></dt>
+<dd><p>Set defaults.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kw</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Unpack</span></code>[<a class="reference internal" href="#openlock.Defaults" title="openlock.Defaults"><code class="xref py py-class docutils literal notranslate"><span class="pre">Defaults</span></code></a>]</span>) – default parameters</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#openlock.InvalidOption" title="openlock.InvalidOption"><strong>InvalidOption</strong></a> – raised when trying to set a non-existing
+option</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="openlock.get_defaults">
+<span class="sig-name descname"><span class="pre">get_defaults</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#openlock.get_defaults" title="Link to this definition"></a></dt>
+<dd><p>Get defaults.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#openlock.Defaults" title="openlock.Defaults"><code class="xref py py-class docutils literal notranslate"><span class="pre">Defaults</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="internals">
+<h2>Internals<a class="headerlink" href="#internals" title="Link to this heading"></a></h2>
+<section id="how-does-it-work">
+<h3>How does it work<a class="headerlink" href="#how-does-it-work" title="Link to this heading"></a></h3>
+<p>A valid lock file has two lines of text containing respectively:</p>
+<ul class="simple">
+<li><p><cite>pid</cite>: the PID of the process holding the lock;</p></li>
+<li><p><cite>name</cite>: the content of <cite>argv[0]</cite> of the process holding the lock.</p></li>
+</ul>
+<p>A lock file is considered stale if the pair <cite>(pid, name)</cite> does not belong to a Python process in the process table.</p>
+<p>A process that seeks to acquire a lock first atomically tries to create a new lock file. If this succeeds then it has acquired the lock. If it fails then this means that a lock file exists. If it is valid, i.e. not stale and syntactically valid, then this implies that the lock has already been acquired and the process will periodically retry to acquire it - subject to the <cite>timeout</cite> parameter. If the lock file is invalid, then the process atomically overwrites it with its own data. It sleeps <cite>race_delay</cite> seconds and then checks if the lock file has again been overwritten (necessarily by a different process). If not then it has acquired the lock.</p>
+<p>Once the lock is acquired the process installs an exit handler to remove the lock file on exit.</p>
+<p>To release the lock, the process deletes the lock file and uninstalls the exit handler.</p>
+<p>It follows from this description that the algorithm is latency free in the common use case where there are no invalid lock files.</p>
+</section>
+<section id="issues">
+<h3>Issues<a class="headerlink" href="#issues" title="Link to this heading"></a></h3>
+<p>There are no known issues in the common use case where there are no invalid lock files. In general the following is true:</p>
+<ul class="simple">
+<li><p>The algorithm for dealing with invalid lock files fails if a process needs more time than indicated by the <cite>race_delay</cite> parameter to create a new lock file after detecting the absence of a valid one. The library will issue a warning if it thinks the system is too slow for the algorithm to work correctly and it will recommend to increase the value of the <cite>race_delay</cite> parameter.</p></li>
+<li><p>Since PIDs are only unique over the lifetime of a process, it may be, although it is very unlikely, that the data <cite>(pid, name)</cite> matches a Python process different from the one that created the lock file. In that case the algorithm fails to recognize the lock file as stale.</p></li>
+</ul>
+</section>
+<section id="history">
+<h3>History<a class="headerlink" href="#history" title="Link to this heading"></a></h3>
+<p>This is a refactored version of the locking algorithm used by the worker for the Fishtest web application <a class="reference external" href="https://tests.stockfishchess.org/tests">https://tests.stockfishchess.org/tests</a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API summary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michel Van den Bergh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

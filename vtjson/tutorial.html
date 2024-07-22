@@ -1,0 +1,943 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; vtjson 2.2.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="canonical" href="https://www.cantate.be/vtsjon/tutorial.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4e6cfea6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API reference" href="usage.html" />
+    <link rel="prev" title="Welcome to vtjson’s documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            vtjson
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#real-world-examples">Real world examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-1">Example 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2">Example 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API summary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">vtjson</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p><cite>vtjson</cite> is available via pip:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>vtjson
+</pre></div>
+</div>
+</section>
+<section id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading"></a></h2>
+<p>Here is a simple schema:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">book_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;editor?&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following conventions were used:</p>
+<ul class="simple">
+<li><p>As in typescript, a (string) key ending in <cite>?</cite> represents an optional key. The corresponding schema (the item the key points to) will only be used for validation when the key is present in the object that should be validated. A key can also be made optional by wrapping it as <a class="reference internal" href="usage.html#vtjson.optional_key" title="vtjson.optional_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.optional_key()</span></code></a>.</p></li>
+<li><p>If in a list/tuple the last entry is <cite>…</cite> (ellipsis) it means that the next to last entry will be repeated zero or more times. In this way generic types can be created. For example the schema <cite>[str, …]</cite> represents a list of strings.</p></li>
+</ul>
+<p>Let’s try to validate some book objects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">good_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1936</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">bad_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;1936&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">good_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;good_book&quot;</span><span class="p">)</span>
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As expected <cite>vtjson</cite> throws an exception for the second object:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+</pre></div>
+</div>
+<p>We can turn the <cite>book_schema</cite> into a genuine Python type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Book</span> <span class="o">=</span> <span class="n">make_type</span><span class="p">(</span><span class="n">book_schema</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is good_book an instance of Book? </span><span class="si">{</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">good_book</span><span class="p">,</span><span class="w"> </span><span class="n">Book</span><span class="p">)</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is bad_book an instance of Book? </span><span class="si">{</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">bad_book</span><span class="p">,</span><span class="w"> </span><span class="n">Book</span><span class="p">)</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Is good_book an instance of Book? True!
+Is bad_book an instance of Book? False!
+</pre></div>
+</div>
+<p>We may also rewrite the <cite>book_schema</cite> as a valid Python type annotation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NotRequired</span><span class="p">,</span> <span class="n">TypedDict</span>
+
+<span class="k">class</span> <span class="nc">book_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+  <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>Attempting to validate the bad book raises a similar exception as before:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book is not of type &#39;book_schema&#39;: bad_book[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+</pre></div>
+</div>
+<p><a class="reference internal" href="usage.html#vtjson.safe_cast" title="vtjson.safe_cast"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.safe_cast()</span></code></a> functions exactly like <cite>cast</cite> except that it also verifies at run time that the given object matches the given schema.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">book2</span> <span class="o">=</span> <span class="n">safe_cast</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">good_book</span><span class="p">)</span>
+<span class="n">book3</span> <span class="o">=</span> <span class="n">safe_cast</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The exception thrown is similar.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: object is not of type &#39;book_schema&#39;: object[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+</pre></div>
+</div>
+<p>Schemas can of course be more complicated and in particular they can be nested</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">person_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;[a-zA-Z. ]*&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;email?&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+  <span class="s2">&quot;website?&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">book_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">person_schema</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;editor?&quot;</span><span class="p">:</span> <span class="n">person_schema</span><span class="p">,</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">regex</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">email</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">url</span></code> are built-in schemas. See <a class="reference internal" href="usage.html#builtins"><span class="std std-ref">Built-in schemas</span></a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">intersect</span></code> is a <cite>wrapper</cite>. See <a class="reference internal" href="usage.html#wrappers"><span class="std std-ref">Wrappers</span></a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">ge</span></code> is a <cite>modifier</cite>. See <a class="reference internal" href="usage.html#modifiers"><span class="std std-ref">Modifiers</span></a>. It should be obvious that the schema</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>represents an integer greater or equal than 1900.</p>
+<p>Let’s validate an object not fitting the schema.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bad_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;margaret@gmailcom&quot;</span><span class="p">}],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;1936&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (value:&#39;margaret@gmailcom&#39;) is not of type &#39;email&#39;: The part after the @-sign is not valid. It should have a period.
+</pre></div>
+</div>
+<p>As before we can rewrite the new <cite>book_schema</cite> as a valid type annotation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">NotRequired</span><span class="p">,</span> <span class="n">TypedDict</span>
+
+<span class="k">class</span> <span class="nc">person_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;[a-zA-Z. ]*&quot;</span><span class="p">)]</span>
+  <span class="n">email</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]]</span>
+  <span class="n">website</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">]]</span>
+
+<span class="k">class</span> <span class="nc">book_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
+  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
+  <span class="n">year</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Many constraints expressible in <cite>vtjson</cite> schemas cannot be expressed in the language of type annotations. That’s where <cite>typing.Annotated</cite> comes in. Consider the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Type checkers such as <cite>mypy</cite> only see the <cite>str</cite> part of this schema, but <cite>vtjson</cite> sees everything. For more information see <a class="reference internal" href="usage.html#type-annotations"><span class="std std-ref">Type annotations integration</span></a>. There is a small caveat here: <code class="xref py py-class docutils literal notranslate"><span class="pre">email</span></code> in fact already checks that the object is a string. So as further explained in <a class="reference internal" href="usage.html#type-annotations"><span class="std std-ref">Type annotations integration</span></a>, it is more efficient to write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here it makes little difference, but the gain in efficiency may be important for larger schemas.</p>
+<p>Let’s check that validation also works with type annotations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book is not of type &#39;book_schema&#39;: bad_book[&#39;authors&#39;][0] is not of type &#39;person_schema&#39;: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (value:&#39;margaret@gmailcom&#39;) is not of type &#39;email&#39;: The part after the @-sign is not valid. It should have a period.
+</pre></div>
+</div>
+</section>
+<section id="real-world-examples">
+<h2>Real world examples<a class="headerlink" href="#real-world-examples" title="Link to this heading"></a></h2>
+<section id="example-1">
+<span id="example1"></span><h3>Example 1<a class="headerlink" href="#example-1" title="Link to this heading"></a></h3>
+<p>Below we give the schema of a recent version of the run object in the mongodb database underlying the Fishtest web application <a class="reference external" href="https://tests.stockfishchess.org/tests">https://tests.stockfishchess.org/tests</a>. For the latest version see <a class="reference external" href="https://raw.githubusercontent.com/official-stockfish/fishtest/master/server/fishtest/schemas.py">https://raw.githubusercontent.com/official-stockfish/fishtest/master/server/fishtest/schemas.py</a>.
+See <a class="reference internal" href="#example2"><span class="std std-ref">Example 2</span></a> for a version of this example that is compatible with Python type annotations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
+
+<span class="kn">from</span> <span class="nn">vtjson</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">at_most_one_of</span><span class="p">,</span>
+    <span class="n">div</span><span class="p">,</span>
+    <span class="n">fields</span><span class="p">,</span>
+    <span class="n">ge</span><span class="p">,</span>
+    <span class="n">glob</span><span class="p">,</span>
+    <span class="n">gt</span><span class="p">,</span>
+    <span class="n">ifthen</span><span class="p">,</span>
+    <span class="n">intersect</span><span class="p">,</span>
+    <span class="n">ip_address</span><span class="p">,</span>
+    <span class="n">keys</span><span class="p">,</span>
+    <span class="n">lax</span><span class="p">,</span>
+    <span class="n">one_of</span><span class="p">,</span>
+    <span class="n">quote</span><span class="p">,</span>
+    <span class="n">regex</span><span class="p">,</span>
+    <span class="n">set_name</span><span class="p">,</span>
+    <span class="n">union</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">username</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[!-~][ -~]{0,30}[!-~]&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="p">)</span>
+<span class="n">net_name</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;nn-[a-f0-9]</span><span class="si">{12}</span><span class="s2">.nnue&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;net_name&quot;</span><span class="p">)</span>
+<span class="n">tc</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([1-9]\d*/)?\d+(\.\d+)?(\+\d+(\.\d+)?)?&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tc&quot;</span><span class="p">)</span>
+<span class="n">str_int</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[1-9]\d*&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;str_int&quot;</span><span class="p">)</span>
+<span class="n">sha</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-f0-9]</span><span class="si">{40}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sha&quot;</span><span class="p">)</span>
+<span class="n">country_code</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[A-Z][A-Z]&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;country_code&quot;</span><span class="p">)</span>
+<span class="n">run_id</span> <span class="o">=</span> <span class="n">set_name</span><span class="p">(</span><span class="n">ObjectId</span><span class="o">.</span><span class="n">is_valid</span><span class="p">,</span> <span class="s2">&quot;run_id&quot;</span><span class="p">)</span>
+<span class="n">uuid</span> <span class="o">=</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[0-9a-zA-Z]{2,}(-[a-f0-9]</span><span class="si">{4}</span><span class="s2">)</span><span class="si">{3}</span><span class="s2">-[a-f0-9]</span><span class="si">{12}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;uuid&quot;</span><span class="p">)</span>
+<span class="n">epd_file</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.epd&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;epd_file&quot;</span><span class="p">)</span>
+<span class="n">pgn_file</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.pgn&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pgn_file&quot;</span><span class="p">)</span>
+<span class="n">even</span> <span class="o">=</span> <span class="n">div</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;even&quot;</span><span class="p">)</span>
+<span class="n">datetime_utc</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fields</span><span class="p">({</span><span class="s2">&quot;tzinfo&quot;</span><span class="p">:</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">}))</span>
+
+<span class="n">uint</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">suint</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">ufloat</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">sufloat</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">valid_results</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;losses&quot;</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;draws&quot;</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;wins&quot;</span><span class="p">]</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;pentanomial&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">l</span> <span class="o">+</span> <span class="n">d</span> <span class="o">+</span> <span class="n">w</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">w</span> <span class="o">-</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">R</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="ow">and</span> <span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">d</span> <span class="o">&gt;=</span> <span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+
+
+<span class="n">zero_results</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;wins&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;draws&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;losses&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;crashes&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;time_losses&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;pentanomial&quot;</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">if_bad_then_zero_stats_and_not_active</span> <span class="o">=</span> <span class="n">ifthen</span><span class="p">(</span>
+    <span class="n">keys</span><span class="p">(</span><span class="s2">&quot;bad&quot;</span><span class="p">),</span> <span class="n">lax</span><span class="p">({</span><span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="n">quote</span><span class="p">(</span><span class="n">zero_results</span><span class="p">)})</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">final_results_must_match</span><span class="p">(</span><span class="n">run</span><span class="p">):</span>
+    <span class="n">rr</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">zero_results</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;pentanomial&quot;</span><span class="p">:</span>
+                <span class="n">rr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;pentanomial&quot;</span><span class="p">]):</span>
+                    <span class="n">rr</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">p</span>
+    <span class="k">if</span> <span class="n">rr</span> <span class="o">!=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The final results </span><span class="si">{</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> do not match the computed results </span><span class="si">{</span><span class="n">rr</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">cores_must_match</span><span class="p">(</span><span class="n">run</span><span class="p">):</span>
+    <span class="n">cores</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;active&quot;</span><span class="p">]:</span>
+            <span class="n">cores</span> <span class="o">+=</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;worker_info&quot;</span><span class="p">][</span><span class="s2">&quot;concurrency&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cores</span> <span class="o">!=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;cores&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Cores mismatch. Cores from tasks: </span><span class="si">{</span><span class="n">cores</span><span class="si">}</span><span class="s2">. Cores from &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;run: </span><span class="si">{</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;cores&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">workers_must_match</span><span class="p">(</span><span class="n">run</span><span class="p">):</span>
+    <span class="n">workers</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;active&quot;</span><span class="p">]:</span>
+            <span class="n">workers</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">workers</span> <span class="o">!=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;workers&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Workers mismatch. Workers from tasks: </span><span class="si">{</span><span class="n">workers</span><span class="si">}</span><span class="s2">. Workers from &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;run: </span><span class="si">{</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;workers&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="n">valid_aggregated_data</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span>
+    <span class="n">final_results_must_match</span><span class="p">,</span>
+    <span class="n">cores_must_match</span><span class="p">,</span>
+    <span class="n">workers_must_match</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">worker_info_schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;uname&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="s2">&quot;concurrency&quot;</span><span class="p">:</span> <span class="n">suint</span><span class="p">,</span>
+    <span class="s2">&quot;max_memory&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+    <span class="s2">&quot;min_threads&quot;</span><span class="p">:</span> <span class="n">suint</span><span class="p">,</span>
+    <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+    <span class="s2">&quot;python_version&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">],</span>
+    <span class="s2">&quot;gcc_version&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">],</span>
+    <span class="s2">&quot;compiler&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="s2">&quot;clang++&quot;</span><span class="p">,</span> <span class="s2">&quot;g++&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;unique_key&quot;</span><span class="p">:</span> <span class="n">uuid</span><span class="p">,</span>
+    <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s2">&quot;ARCH&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="s2">&quot;nps&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+    <span class="s2">&quot;near_github_api_limit&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="s2">&quot;remote_addr&quot;</span><span class="p">:</span> <span class="n">ip_address</span><span class="p">,</span>
+    <span class="s2">&quot;country_code&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="n">country_code</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">results_schema</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;wins&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;losses&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;draws&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;crashes&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;time_losses&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;pentanomial&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">valid_results</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">runs_schema</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;_id?&quot;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
+        <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
+        <span class="s2">&quot;tc_base&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+        <span class="s2">&quot;base_same_as_master&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;rescheduled_from?&quot;</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span>
+        <span class="s2">&quot;approved&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;approver&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;failed&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;is_green&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;is_yellow&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="s2">&quot;workers&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;cores&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+        <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="n">results_schema</span><span class="p">,</span>
+        <span class="s2">&quot;results_info?&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;style&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;base_tag&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;new_tag&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;base_nets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">net_name</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+                <span class="s2">&quot;new_nets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">net_name</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+                <span class="s2">&quot;num_games&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span><span class="n">uint</span><span class="p">,</span> <span class="n">even</span><span class="p">),</span>
+                <span class="s2">&quot;tc&quot;</span><span class="p">:</span> <span class="n">tc</span><span class="p">,</span>
+                <span class="s2">&quot;new_tc&quot;</span><span class="p">:</span> <span class="n">tc</span><span class="p">,</span>
+                <span class="s2">&quot;book&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="n">epd_file</span><span class="p">,</span> <span class="n">pgn_file</span><span class="p">),</span>
+                <span class="s2">&quot;book_depth&quot;</span><span class="p">:</span> <span class="n">str_int</span><span class="p">,</span>
+                <span class="s2">&quot;threads&quot;</span><span class="p">:</span> <span class="n">suint</span><span class="p">,</span>
+                <span class="s2">&quot;resolved_base&quot;</span><span class="p">:</span> <span class="n">sha</span><span class="p">,</span>
+                <span class="s2">&quot;resolved_new&quot;</span><span class="p">:</span> <span class="n">sha</span><span class="p">,</span>
+                <span class="s2">&quot;master_sha&quot;</span><span class="p">:</span> <span class="n">sha</span><span class="p">,</span>
+                <span class="s2">&quot;official_master_sha&quot;</span><span class="p">:</span> <span class="n">sha</span><span class="p">,</span>
+                <span class="s2">&quot;msg_base&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;msg_new&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;base_options&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;new_options&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;base_signature&quot;</span><span class="p">:</span> <span class="n">str_int</span><span class="p">,</span>
+                <span class="s2">&quot;new_signature&quot;</span><span class="p">:</span> <span class="n">str_int</span><span class="p">,</span>
+                <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+                <span class="s2">&quot;tests_repo&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+                <span class="s2">&quot;auto_purge&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s2">&quot;throughput&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                <span class="s2">&quot;itp&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                <span class="s2">&quot;adjudication&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                <span class="s2">&quot;sprt?&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+                        <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+                        <span class="s2">&quot;elo0&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                        <span class="s2">&quot;elo1&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                        <span class="s2">&quot;elo_model&quot;</span><span class="p">:</span> <span class="s2">&quot;normalized&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;accepted&quot;</span><span class="p">,</span> <span class="s2">&quot;rejected&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;llr&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                        <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="n">suint</span><span class="p">,</span>
+                        <span class="s2">&quot;lower_bound&quot;</span><span class="p">:</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span>
+                        <span class="s2">&quot;upper_bound&quot;</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span>
+                        <span class="s2">&quot;lost_samples?&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                        <span class="s2">&quot;illegal_update?&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                        <span class="s2">&quot;overshoot?&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;last_update&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                            <span class="s2">&quot;skipped_updates&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                            <span class="s2">&quot;ref0&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;m0&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;sq0&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;ref1&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;m1&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;sq1&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="n">one_of</span><span class="p">(</span><span class="s2">&quot;overshoot&quot;</span><span class="p">,</span> <span class="s2">&quot;lost_samples&quot;</span><span class="p">),</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;spsa?&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                    <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                    <span class="s2">&quot;raw_params&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="s2">&quot;iter&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                    <span class="s2">&quot;num_iter&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;c_end&quot;</span><span class="p">:</span> <span class="n">sufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;r_end&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">sufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;a_end&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="o">...</span><span class="p">,</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;param_history?&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span>
+                            <span class="p">{</span><span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">},</span>
+                            <span class="o">...</span><span class="p">,</span>
+                        <span class="p">],</span>
+                        <span class="o">...</span><span class="p">,</span>
+                    <span class="p">],</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="n">at_most_one_of</span><span class="p">(</span><span class="s2">&quot;sprt&quot;</span><span class="p">,</span> <span class="s2">&quot;spsa&quot;</span><span class="p">),</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">intersect</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;num_games&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span><span class="n">uint</span><span class="p">,</span> <span class="n">even</span><span class="p">),</span>
+                    <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                    <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
+                    <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                    <span class="s2">&quot;residual?&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                    <span class="s2">&quot;residual_color?&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="s2">&quot;bad?&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="n">results_schema</span><span class="p">,</span>
+                    <span class="s2">&quot;worker_info&quot;</span><span class="p">:</span> <span class="n">worker_info_schema</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">if_bad_then_zero_stats_and_not_active</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="o">...</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;bad_tasks?&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;num_games&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span><span class="n">uint</span><span class="p">,</span> <span class="n">even</span><span class="p">),</span>
+                <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
+                <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                <span class="s2">&quot;residual_color&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="s2">&quot;bad&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
+                <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="n">results_schema</span><span class="p">,</span>
+                <span class="s2">&quot;worker_info&quot;</span><span class="p">:</span> <span class="n">worker_info_schema</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="o">...</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;approved&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;approver&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;approver&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;is_green&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;is_yellow&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;is_yellow&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;is_green&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;failed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;workers&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="o">...</span><span class="p">]})),</span>
+    <span class="n">valid_aggregated_data</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2">
+<span id="example2"></span><h3>Example 2<a class="headerlink" href="#example-2" title="Link to this heading"></a></h3>
+<p>This is a rewrite of <a class="reference internal" href="#example1"><span class="std std-ref">Example 1</span></a> that is compatible with Python type annotations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">NotRequired</span><span class="p">,</span> <span class="n">TypedDict</span>
+
+<span class="kn">from</span> <span class="nn">bson.objectid</span> <span class="kn">import</span> <span class="n">ObjectId</span>
+
+<span class="kn">from</span> <span class="nn">vtjson</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">at_most_one_of</span><span class="p">,</span>
+    <span class="n">div</span><span class="p">,</span>
+    <span class="n">fields</span><span class="p">,</span>
+    <span class="n">ge</span><span class="p">,</span>
+    <span class="n">glob</span><span class="p">,</span>
+    <span class="n">gt</span><span class="p">,</span>
+    <span class="n">ifthen</span><span class="p">,</span>
+    <span class="n">intersect</span><span class="p">,</span>
+    <span class="n">ip_address</span><span class="p">,</span>
+    <span class="n">keys</span><span class="p">,</span>
+    <span class="n">lax</span><span class="p">,</span>
+    <span class="n">one_of</span><span class="p">,</span>
+    <span class="n">quote</span><span class="p">,</span>
+    <span class="n">regex</span><span class="p">,</span>
+    <span class="n">skip_first</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">username</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[!-~][ -~]{0,30}[!-~]&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">net_name</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;nn-[a-f0-9]</span><span class="si">{12}</span><span class="s2">.nnue&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;net_name&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">tc</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([1-9]\d*/)?\d+(\.\d+)?(\+\d+(\.\d+)?)?&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;tc&quot;</span><span class="p">),</span> <span class="n">skip_first</span>
+<span class="p">]</span>
+<span class="n">str_int</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[1-9]\d*&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;str_int&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">sha</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-f0-9]</span><span class="si">{40}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sha&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">country_code</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[A-Z][A-Z]&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;country_code&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">run_id</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ObjectId</span><span class="o">.</span><span class="n">is_valid</span><span class="p">]</span>
+<span class="n">uuid</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="nb">str</span><span class="p">,</span>
+    <span class="n">regex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[0-9a-zA-Z]{2,}(-[a-f0-9]</span><span class="si">{4}</span><span class="s2">)</span><span class="si">{3}</span><span class="s2">-[a-f0-9]</span><span class="si">{12}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;uuid&quot;</span><span class="p">),</span>
+    <span class="n">skip_first</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">epd_file</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.epd&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;epd_file&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">pgn_file</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.pgn&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pgn_file&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">even</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;even&quot;</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+<span class="n">datetime_utc</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fields</span><span class="p">({</span><span class="s2">&quot;tzinfo&quot;</span><span class="p">:</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">})]</span>
+
+<span class="n">uint</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">suint</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">ufloat</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">sufloat</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+
+
+<span class="k">class</span> <span class="nc">results_type</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">wins</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">losses</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">draws</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">crashes</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">time_losses</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">pentanomial</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">],</span> <span class="n">skip_first</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">valid_results</span><span class="p">(</span><span class="n">R</span><span class="p">:</span> <span class="n">results_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">l</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;losses&quot;</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;draws&quot;</span><span class="p">],</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;wins&quot;</span><span class="p">]</span>
+    <span class="n">Rp</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="s2">&quot;pentanomial&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">l</span> <span class="o">+</span> <span class="n">d</span> <span class="o">+</span> <span class="n">w</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Rp</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="n">w</span> <span class="o">-</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="ow">and</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">d</span> <span class="o">&gt;=</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">Rp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>
+
+
+<span class="n">results_schema</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">results_type</span><span class="p">,</span>
+    <span class="n">valid_results</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">worker_info_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">uname</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">architecture</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">concurrency</span><span class="p">:</span> <span class="n">suint</span>
+    <span class="n">max_memory</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">min_threads</span><span class="p">:</span> <span class="n">suint</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">version</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">python_version</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">],</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">gcc_version</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">,</span> <span class="n">uint</span><span class="p">],</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">compiler</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;clang++&quot;</span><span class="p">,</span> <span class="s2">&quot;g++&quot;</span><span class="p">]</span>
+    <span class="n">unique_key</span><span class="p">:</span> <span class="n">uuid</span>
+    <span class="n">modified</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">ARCH</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">nps</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">near_github_api_limit</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">remote_addr</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">]</span>
+    <span class="n">country_code</span><span class="p">:</span> <span class="n">country_code</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;?&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">overshoot_type</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">last_update</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">skipped_updates</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">ref0</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">m0</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">sq0</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">ref1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">m1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">sq1</span><span class="p">:</span> <span class="n">ufloat</span>
+
+
+<span class="k">class</span> <span class="nc">sprt_type</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">beta</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">elo0</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">elo1</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">elo_model</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;normalized&quot;</span><span class="p">]</span>
+    <span class="n">state</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;accepted&quot;</span><span class="p">,</span> <span class="s2">&quot;rejected&quot;</span><span class="p">]</span>
+    <span class="n">llr</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="n">suint</span>
+    <span class="n">lower_bound</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">upper_bound</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">lost_samples</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">uint</span><span class="p">]</span>
+    <span class="n">illegal_update</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">uint</span><span class="p">]</span>
+    <span class="n">overshoot</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">overshoot_type</span><span class="p">]</span>
+
+
+<span class="n">sprt_schema</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">sprt_type</span><span class="p">,</span>
+    <span class="n">one_of</span><span class="p">(</span><span class="s2">&quot;overshoot&quot;</span><span class="p">,</span> <span class="s2">&quot;lost_samples&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">param_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">start</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="nb">min</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="nb">max</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">c_end</span><span class="p">:</span> <span class="n">sufloat</span>
+    <span class="n">r_end</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">c</span><span class="p">:</span> <span class="n">sufloat</span>
+    <span class="n">a_end</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span>
+
+
+<span class="k">class</span> <span class="nc">param_history_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">c</span><span class="p">:</span> <span class="n">ufloat</span>
+
+
+<span class="k">class</span> <span class="nc">spsa_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">A</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">raw_params</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">iter</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">num_iter</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">param_schema</span><span class="p">]</span>
+    <span class="n">param_history</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">param_history_schema</span><span class="p">]]]</span>
+
+
+<span class="k">class</span> <span class="nc">args_type</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">base_tag</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">new_tag</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">base_nets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">net_name</span><span class="p">]</span>
+    <span class="n">new_nets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">net_name</span><span class="p">]</span>
+    <span class="n">num_games</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">even</span><span class="p">]</span>
+    <span class="n">tc</span><span class="p">:</span> <span class="n">tc</span>
+    <span class="n">new_tc</span><span class="p">:</span> <span class="n">tc</span>
+    <span class="n">book</span><span class="p">:</span> <span class="n">epd_file</span> <span class="o">|</span> <span class="n">pgn_file</span>
+    <span class="n">book_depth</span><span class="p">:</span> <span class="n">str_int</span>
+    <span class="n">threads</span><span class="p">:</span> <span class="n">suint</span>
+    <span class="n">resolved_base</span><span class="p">:</span> <span class="n">sha</span>
+    <span class="n">resolved_new</span><span class="p">:</span> <span class="n">sha</span>
+    <span class="n">master_sha</span><span class="p">:</span> <span class="n">sha</span>
+    <span class="n">official_master_sha</span><span class="p">:</span> <span class="n">sha</span>
+    <span class="n">msg_base</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">msg_new</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">base_options</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">new_options</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">base_signature</span><span class="p">:</span> <span class="n">str_int</span>
+    <span class="n">new_signature</span><span class="p">:</span> <span class="n">str_int</span>
+    <span class="n">username</span><span class="p">:</span> <span class="n">username</span>
+    <span class="n">tests_repo</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+    <span class="n">auto_purge</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">throughput</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">itp</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">priority</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">adjudication</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">sprt</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">sprt_schema</span><span class="p">]</span>
+    <span class="n">spsa</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">spsa_schema</span><span class="p">]</span>
+
+
+<span class="n">args_schema</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">args_type</span><span class="p">,</span>
+    <span class="n">at_most_one_of</span><span class="p">(</span><span class="s2">&quot;sprt&quot;</span><span class="p">,</span> <span class="s2">&quot;spsa&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">task_type</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">num_games</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">even</span><span class="p">]</span>
+    <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">last_updated</span><span class="p">:</span> <span class="n">datetime_utc</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">residual</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">residual_color</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">bad</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="kc">True</span><span class="p">]]</span>
+    <span class="n">stats</span><span class="p">:</span> <span class="n">results_schema</span>
+    <span class="n">worker_info</span><span class="p">:</span> <span class="n">worker_info_schema</span>
+
+
+<span class="n">zero_results</span><span class="p">:</span> <span class="n">results_type</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;wins&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;draws&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;losses&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;crashes&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;time_losses&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;pentanomial&quot;</span><span class="p">:</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">if_bad_then_zero_stats_and_not_active</span> <span class="o">=</span> <span class="n">ifthen</span><span class="p">(</span>
+    <span class="n">keys</span><span class="p">(</span><span class="s2">&quot;bad&quot;</span><span class="p">),</span> <span class="n">lax</span><span class="p">({</span><span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="n">quote</span><span class="p">(</span><span class="n">zero_results</span><span class="p">)})</span>
+<span class="p">)</span>
+
+<span class="n">task_schema</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">task_type</span><span class="p">,</span>
+    <span class="n">if_bad_then_zero_stats_and_not_active</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">bad_task_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">num_games</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">uint</span><span class="p">,</span> <span class="n">even</span><span class="p">]</span>
+    <span class="n">active</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span>
+    <span class="n">last_updated</span><span class="p">:</span> <span class="n">datetime_utc</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">residual</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">residual_color</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">bad</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span>
+    <span class="n">task_id</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">stats</span><span class="p">:</span> <span class="n">results_schema</span>
+    <span class="n">worker_info</span><span class="p">:</span> <span class="n">worker_info_schema</span>
+
+
+<span class="k">class</span> <span class="nc">results_info_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">runs_type</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">_id</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">ObjectId</span><span class="p">]</span>
+    <span class="n">version</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime_utc</span>
+    <span class="n">last_updated</span><span class="p">:</span> <span class="n">datetime_utc</span>
+    <span class="n">tc_base</span><span class="p">:</span> <span class="n">ufloat</span>
+    <span class="n">base_same_as_master</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">rescheduled_from</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">run_id</span><span class="p">]</span>
+    <span class="n">approved</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">approver</span><span class="p">:</span> <span class="n">username</span> <span class="o">|</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+    <span class="n">finished</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">deleted</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">failed</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">is_green</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">is_yellow</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">workers</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">cores</span><span class="p">:</span> <span class="n">uint</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">results_schema</span>
+    <span class="n">results_info</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">results_info_schema</span><span class="p">]</span>
+    <span class="n">args</span><span class="p">:</span> <span class="n">args_schema</span>
+    <span class="n">tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">task_schema</span><span class="p">]</span>
+    <span class="n">bad_tasks</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">bad_task_schema</span><span class="p">]]</span>
+
+
+<span class="k">def</span> <span class="nf">final_results_must_match</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">runs_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">rr</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">zero_results</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;stats&quot;</span><span class="p">]</span>
+        <span class="c1"># mypy does not support variable keys for</span>
+        <span class="c1"># TypedDict</span>
+        <span class="n">rr</span><span class="p">[</span><span class="s2">&quot;wins&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;wins&quot;</span><span class="p">]</span>
+        <span class="n">rr</span><span class="p">[</span><span class="s2">&quot;losses&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;losses&quot;</span><span class="p">]</span>
+        <span class="n">rr</span><span class="p">[</span><span class="s2">&quot;draws&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;draws&quot;</span><span class="p">]</span>
+        <span class="n">rr</span><span class="p">[</span><span class="s2">&quot;crashes&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;crashes&quot;</span><span class="p">]</span>
+        <span class="n">rr</span><span class="p">[</span><span class="s2">&quot;time_losses&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;time_losses&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;pentanomial&quot;</span><span class="p">]):</span>
+            <span class="n">rr</span><span class="p">[</span><span class="s2">&quot;pentanomial&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">p</span>
+    <span class="k">if</span> <span class="n">rr</span> <span class="o">!=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The final results </span><span class="si">{</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> do not match the computed results </span><span class="si">{</span><span class="n">rr</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">cores_must_match</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">runs_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">cores</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;active&quot;</span><span class="p">]:</span>
+            <span class="n">cores</span> <span class="o">+=</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;worker_info&quot;</span><span class="p">][</span><span class="s2">&quot;concurrency&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cores</span> <span class="o">!=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;cores&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Cores mismatch. Cores from tasks: </span><span class="si">{</span><span class="n">cores</span><span class="si">}</span><span class="s2">. Cores from &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;run: </span><span class="si">{</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;cores&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">workers_must_match</span><span class="p">(</span><span class="n">run</span><span class="p">:</span> <span class="n">runs_type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">workers</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">t</span><span class="p">[</span><span class="s2">&quot;active&quot;</span><span class="p">]:</span>
+            <span class="n">workers</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">workers</span> <span class="o">!=</span> <span class="n">run</span><span class="p">[</span><span class="s2">&quot;workers&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Workers mismatch. Workers from tasks: </span><span class="si">{</span><span class="n">workers</span><span class="si">}</span><span class="s2">. Workers from &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;run: </span><span class="si">{</span><span class="n">run</span><span class="p">[</span><span class="s1">&#39;workers&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="n">valid_aggregated_data</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span>
+    <span class="n">final_results_must_match</span><span class="p">,</span>
+    <span class="n">cores_must_match</span><span class="p">,</span>
+    <span class="n">workers_must_match</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">runs_schema</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span>
+    <span class="n">runs_type</span><span class="p">,</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;approved&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;approver&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;approver&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;is_green&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;is_yellow&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;is_yellow&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;is_green&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;failed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;workers&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})),</span>
+    <span class="n">lax</span><span class="p">(</span><span class="n">ifthen</span><span class="p">({</span><span class="s2">&quot;finished&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="o">...</span><span class="p">]})),</span>
+    <span class="n">valid_aggregated_data</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to vtjson’s documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="API reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michel Van den Bergh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
