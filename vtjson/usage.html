@@ -221,6 +221,68 @@ vtjson.vtjson.ValidationError: book[&#39;year&#39;] (value:&#39;1936&#39;) is no
 vtjson.vtjson.ValidationError: object is not of type &#39;book_schema&#39;: object[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
 </pre></div>
 </div>
+<p>Schemas can of course be nested</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">person_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;email?&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+  <span class="s2">&quot;website?&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">book_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">person_schema</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;editor?&quot;</span><span class="p">:</span> <span class="n">person_schema</span><span class="p">,</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><cite>email</cite> and <cite>url</cite> are built-in schemas. See <a class="reference internal" href="#builtins"><span class="std std-ref">Built-in schemas</span></a>.</p>
+<p>Let’s validate an object not fitting the schema.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bad_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;margaret@gmailcom&quot;</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;1936&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (value:&#39;margaret@gmailcom&#39;) is not of type &#39;email&#39;: The part after the @-sign is not valid. It should have a period.
+</pre></div>
+</div>
+<p>As before we can rewrite the new <cite>book_schema</cite> as a valid type annotation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
+
+<span class="k">class</span> <span class="nc">person_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">email</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]]</span>
+  <span class="n">website</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">]]</span>
+
+<span class="k">class</span> <span class="nc">book_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
+  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]]</span>
+  <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>The contraint that a string should be an email address cannot be expressed in the language of type annotations. That’s where <cite>typing.Annotated</cite> comes in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Type checkers such as <cite>mypy</cite> only see the <cite>str</cite> part of this schema, but <cite>vtjson</cite> sees everything. For more information see <a class="reference internal" href="#type-annotations"><span class="std std-ref">Type annotations integration</span></a>.</p>
+<p>Let’s check that validation also works with type annotations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book is not of type &#39;book_schema&#39;: bad_book[&#39;authors&#39;][0] is not of type &#39;person_schema&#39;: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (value:&#39;margaret@gmailcom&#39;) is not of type &#39;email&#39;: The part after the @-sign is not valid. It should have a period.
+</pre></div>
+</div>
 </section>
 <section id="validating-objects">
 <h2>Validating objects<a class="headerlink" href="#validating-objects" title="Link to this heading"></a></h2>
@@ -316,7 +378,7 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 
 </section>
 <section id="built-in-schemas">
-<h2>Built-in schemas<a class="headerlink" href="#built-in-schemas" title="Link to this heading"></a></h2>
+<span id="builtins"></span><h2>Built-in schemas<a class="headerlink" href="#built-in-schemas" title="Link to this heading"></a></h2>
 <p>Some built-in schemas take arguments. If no arguments are given then the parentheses can be omitted. So <cite>email</cite> is equivalent to <cite>email()</cite>. Some built-ins have an optional <cite>name</cite> argument. This is used in non-validation messages.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.regex">
@@ -472,6 +534,7 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 </section>
 <section id="wrappers">
 <h2>Wrappers<a class="headerlink" href="#wrappers" title="Link to this heading"></a></h2>
+<p>Wrappers may be used to combine a collection of schemas into a new schema.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.union">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">schemas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.union" title="Link to this definition"></a></dt>
@@ -568,7 +631,7 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema that will be labeled</p></li>
 <li><p><strong>labels</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – labels that will be attached to the schema</p></li>
-<li><p><strong>debug</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – it <cite>True</cite> pring a message will on the console if the schema was changed via substitution</p></li>
+<li><p><strong>debug</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – it <cite>True</cite> print a message on the console if the schema was changed via substitution</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
