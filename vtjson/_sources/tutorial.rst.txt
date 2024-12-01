@@ -1,5 +1,5 @@
-Tutorial
-========
+Getting started
+===============
 
 Installation
 ------------
@@ -12,7 +12,7 @@ Installation
 
 
    
-Examples
+Tutorial
 --------
 
 .. testsetup:: *

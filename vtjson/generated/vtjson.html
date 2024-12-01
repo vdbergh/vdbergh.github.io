@@ -43,7 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">API reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API summary</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">vtjson</a></li>
@@ -104,11 +104,11 @@
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.anything" title="vtjson.anything"><code class="xref py py-obj docutils literal notranslate"><span class="pre">anything</span></code></a>()</p></td>
 <td><p>Matchess anything.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">at_least_one_of</span></code>(*args)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.at_least_one_of" title="vtjson.at_least_one_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">at_least_one_of</span></code></a>(*args)</p></td>
+<td><p>This represents a dictionary with a least one key among a collection of keys.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">at_most_one_of</span></code>(*args)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.at_most_one_of" title="vtjson.at_most_one_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">at_most_one_of</span></code></a>(*args)</p></td>
+<td><p>This represents an dictionary with at most one key among a collection of keys.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.close_to" title="vtjson.close_to"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close_to</span></code></a>(x[, rel_tol, abs_tol])</p></td>
 <td><p>This matches the real numbers that are close to <cite>x</cite> in the sense of <cite>math.isclose</cite>.</p></td>
@@ -140,19 +140,19 @@
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.email" title="vtjson.email"><code class="xref py py-obj docutils literal notranslate"><span class="pre">email</span></code></a>(**kw)</p></td>
 <td><p>Checks if the object is a valid email address.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code>(d)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.fields" title="vtjson.fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code></a>(d)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code>(filter, schema[, filter_name])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.filter" title="vtjson.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filter, schema[, filter_name])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ge</span></code>(lb)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.ge" title="vtjson.ge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ge</span></code></a>(lb)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.glob" title="vtjson.glob"><code class="xref py py-obj docutils literal notranslate"><span class="pre">glob</span></code></a>(pattern[, name])</p></td>
 <td><p>Unix style filename matching.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gt</span></code>(lb)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.gt" title="vtjson.gt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gt</span></code></a>(lb)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifthen</span></code>(if_schema, then_schema[, else_schema])</p></td>
@@ -161,25 +161,25 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intersect</span></code></a>(*schemas)</p></td>
 <td><p>An object matches the schema <cite>intersect(schema1, ..., schemaN)</cite> if it matches all the schemas <cite>schema1, ..., schemaN</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval</span></code>(lb, ub[, strict_lb, strict_ub])</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.interval" title="vtjson.interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval</span></code></a>(lb, ub[, strict_lb, strict_ub])</p></td>
+<td><p>This checks if <cite>lb &lt;= object &lt;= ub</cite>, provided the comparisons make sense.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.ip_address" title="vtjson.ip_address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ip_address</span></code></a>([version])</p></td>
 <td><p>Matches ip addresses of the specified version which can be 4, 6 or None.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code>(*args)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.keys" title="vtjson.keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code></a>(*args)</p></td>
+<td><p>This represents a dictionary containing all the keys in a collection of keys</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.lax" title="vtjson.lax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lax</span></code></a>(schema)</p></td>
 <td><p>An object matches the schema <cite>lax(schema)</cite> if it matches <cite>schema</cite> when validated with <cite>strict=False</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">le</span></code>(ub)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.le" title="vtjson.le"><code class="xref py py-obj docutils literal notranslate"><span class="pre">le</span></code></a>(ub)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">lt</span></code>(ub)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.lt" title="vtjson.lt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lt</span></code></a>(ub)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magic</span></code>(mime_type[, name])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.magic" title="vtjson.magic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magic</span></code></a>(mime_type[, name])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.nothing" title="vtjson.nothing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nothing</span></code></a>()</p></td>
@@ -188,8 +188,8 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">number</span></code>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_of</span></code>(*args)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.one_of" title="vtjson.one_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_of</span></code></a>(*args)</p></td>
+<td><p>This represents a dictionary with exactly one key among a collection of keys.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.optional_key" title="vtjson.optional_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optional_key</span></code></a>(key)</p></td>
 <td><p>Make a key in a Mapping schema optional.</p></td>
@@ -209,7 +209,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_name</span></code></a>(schema, name[, reason])</p></td>
 <td><p>An object matches the schema <cite>set_name(schema, name, reason=False)</cite> if it matches <cite>schema</cite>, but the <cite>name</cite> argument will be used in non-validation messages.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code>(lb[, ub])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.size" title="vtjson.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code></a>(lb[, ub])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.strict" title="vtjson.strict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strict</span></code></a>(schema)</p></td>
