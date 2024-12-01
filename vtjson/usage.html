@@ -448,11 +448,14 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code></span>) – lowerbound; … (ellipsis) means no lowerbound</p></li>
-<li><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code></span>) – upperbound; … (ellipsis) means no upperbound</p></li>
-<li><p><strong>strict_lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if True use a strict lowerbound</p></li>
-<li><p><strong>strict_ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if True use a strict upperbound</p></li>
+<li><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code></span>) – lower bound; … (ellipsis) means no lower bound</p></li>
+<li><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code></span>) – upper bound; … (ellipsis) means no upper bound</p></li>
+<li><p><strong>strict_lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if True use a strict lower bound</p></li>
+<li><p><strong>strict_ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if True use a strict upper bound</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found to contain an error</p>
 </dd>
 </dl>
 </dd></dl>
@@ -460,27 +463,75 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.gt">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.gt" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This checks if <cite>object &gt; lb</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the strict lower bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.ge">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ge" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This checks if <cite>object &gt;= lb</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the lower bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.lt">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.lt" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This checks if <cite>object &lt; ub</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the strict upper bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.le">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">le</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.le" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>This checks if <cite>object &lt;= ub</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the upper bound</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.size">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.size" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Matches the objects (which support <cite>len()</cite> such as strings or lists) whose length is in the interval <cite>[lb, ub]</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – the lower bound for the length</p></li>
+<li><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code> | <code class="xref py py-class docutils literal notranslate"><span class="pre">EllipsisType</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – the upper bound for the length; … (ellipsis) means that there is no upper bound; <cite>None</cite> means <cite>lb==ub</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#vtjson.SchemaError" title="vtjson.SchemaError"><strong>SchemaError</strong></a> – exception thrown when the schema definition is found to contain an error</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.fields">

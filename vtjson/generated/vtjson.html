@@ -147,13 +147,13 @@
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.ge" title="vtjson.ge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ge</span></code></a>(lb)</p></td>
-<td><p></p></td>
+<td><p>This checks if <cite>object &gt;= lb</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.glob" title="vtjson.glob"><code class="xref py py-obj docutils literal notranslate"><span class="pre">glob</span></code></a>(pattern[, name])</p></td>
 <td><p>Unix style filename matching.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.gt" title="vtjson.gt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gt</span></code></a>(lb)</p></td>
-<td><p></p></td>
+<td><p>This checks if <cite>object &gt; lb</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifthen</span></code>(if_schema, then_schema[, else_schema])</p></td>
 <td><p></p></td>
@@ -174,10 +174,10 @@
 <td><p>An object matches the schema <cite>lax(schema)</cite> if it matches <cite>schema</cite> when validated with <cite>strict=False</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.le" title="vtjson.le"><code class="xref py py-obj docutils literal notranslate"><span class="pre">le</span></code></a>(ub)</p></td>
-<td><p></p></td>
+<td><p>This checks if <cite>object &lt;= ub</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.lt" title="vtjson.lt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lt</span></code></a>(ub)</p></td>
-<td><p></p></td>
+<td><p>This checks if <cite>object &lt; ub</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.magic" title="vtjson.magic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magic</span></code></a>(mime_type[, name])</p></td>
 <td><p></p></td>
@@ -210,7 +210,7 @@
 <td><p>An object matches the schema <cite>set_name(schema, name, reason=False)</cite> if it matches <cite>schema</cite>, but the <cite>name</cite> argument will be used in non-validation messages.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.size" title="vtjson.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code></a>(lb[, ub])</p></td>
-<td><p></p></td>
+<td><p>Matches the objects (which support <cite>len()</cite> such as strings or lists) whose length is in the interval <cite>[lb, ub]</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.strict" title="vtjson.strict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strict</span></code></a>(schema)</p></td>
 <td><p>An object matches the schema <cite>strict(schema)</cite> if it matches <cite>schema</cite> when validated with <cite>strict=True</cite>.</p></td>
