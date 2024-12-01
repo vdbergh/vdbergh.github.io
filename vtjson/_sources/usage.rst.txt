@@ -15,7 +15,7 @@ Tutorial
 
 .. testsetup:: *
 
-   from vtjson import email, ge, intersect, make_type, regex, safe_cast, url, validate
+   from vtjson import email, ge, intersect, make_type, regex, safe_cast, skip_first, url, validate
 
 Here is a simple schema:
 
@@ -178,13 +178,19 @@ As before we can rewrite the new `book_schema` as a valid type annotation
      editor: NotRequired[list[person_schema]]
      year: Annotated[int, ge(1900)]
 
-Many constraints expressible in `vtjson` schemas cannot be expressed in the language of type annotations. That's where `typing.Annotated` comes in:
+Many constraints expressible in `vtjson` schemas cannot be expressed in the language of type annotations. That's where `typing.Annotated` comes in. Consider the following example:
 
 .. testcode::
    
    Annotated[str, email]
 
-Type checkers such as `mypy` only see the `str` part of this schema, but `vtjson` sees everything. For more information see :ref:`type_annotations`.
+Type checkers such as `mypy` only see the `str` part of this schema, but `vtjson` sees everything. For more information see :ref:`type_annotations`. There is a small caveat here: :py:class:`email` in fact already checks that the object is a string. So as further explained in :ref:`type_annotations`, it is more efficient to write:
+
+.. testcode::
+
+   Annotated[str, email, skip_first]
+
+Here it makes little difference, but the gain in efficiency may be important for larger schemas.
 
 Let's check that validation also works with type annotations:
 
