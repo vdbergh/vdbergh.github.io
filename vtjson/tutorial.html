@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial &mdash; vtjson 2.1.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a7898dfc"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API reference" href="usage.html" />
+    <link rel="prev" title="Welcome to vtjson’s documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            vtjson
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-to-go-from-here">Where to go from here</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API summary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">vtjson</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading"></a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p><cite>vtjson</cite> is available via pip:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>vtjson
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Here is a simple schema:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">book_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;editor?&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following conventions were used:</p>
+<ul class="simple">
+<li><p>As in typescript, a (string) key ending in <cite>?</cite> represents an optional key. The corresponding schema (the item the key points to) will only be used for validation when the key is present in the object that should be validated. A key can also be made optional by wrapping it as <a class="reference internal" href="usage.html#vtjson.optional_key" title="vtjson.optional_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.optional_key()</span></code></a>.</p></li>
+<li><p>If in a list/tuple the last entry is <cite>…</cite> (ellipsis) it means that the next to last entry will be repeated zero or more times. In this way generic types can be created. For example the schema <cite>[str, …]</cite> represents a list of strings.</p></li>
+</ul>
+<p>Let’s try to validate some book objects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">good_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="mi">1936</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">bad_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;1936&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">good_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;good_book&quot;</span><span class="p">)</span>
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As expected <cite>vtjson</cite> throws an exception for the second object:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+</pre></div>
+</div>
+<p>We can turn the <cite>book_schema</cite> into a genuine Python type.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Book</span> <span class="o">=</span> <span class="n">make_type</span><span class="p">(</span><span class="n">book_schema</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is good_book an instance of Book? </span><span class="si">{</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">good_book</span><span class="p">,</span><span class="w"> </span><span class="n">Book</span><span class="p">)</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is bad_book an instance of Book? </span><span class="si">{</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">bad_book</span><span class="p">,</span><span class="w"> </span><span class="n">Book</span><span class="p">)</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Is good_book an instance of Book? True!
+Is bad_book an instance of Book? False!
+</pre></div>
+</div>
+<p>We may also rewrite the <cite>book_schema</cite> as a valid Python type annotation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NotRequired</span><span class="p">,</span> <span class="n">TypedDict</span>
+
+<span class="k">class</span> <span class="nc">book_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+  <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
+</pre></div>
+</div>
+<p>Attempting to validate the bad book raises the same exception as before:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: book[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+</pre></div>
+</div>
+<p><a class="reference internal" href="usage.html#vtjson.safe_cast" title="vtjson.safe_cast"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.safe_cast()</span></code></a> functions exactly like <cite>cast</cite> except that it also verifies at run time that the given object matches the given schema.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">book2</span> <span class="o">=</span> <span class="n">safe_cast</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">good_book</span><span class="p">)</span>
+<span class="n">book3</span> <span class="o">=</span> <span class="n">safe_cast</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The exception thrown is similar.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: object is not of type &#39;book_schema&#39;: object[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+</pre></div>
+</div>
+<p>Schemas can of course be more complicated and in particular they can be nested</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">person_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;[a-zA-Z. ]*&quot;</span><span class="p">),</span>
+  <span class="s2">&quot;email?&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+  <span class="s2">&quot;website?&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">book_schema</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">person_schema</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;editor?&quot;</span><span class="p">:</span> <span class="n">person_schema</span><span class="p">,</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">regex</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">email</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">url</span></code> are built-in schemas. See <a class="reference internal" href="usage.html#builtins"><span class="std std-ref">Built-in schemas</span></a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">intersect</span></code> is a <cite>wrapper</cite>. See <a class="reference internal" href="usage.html#wrappers"><span class="std std-ref">Wrappers</span></a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">ge</span></code> is a <cite>modifier</cite>. See <a class="reference internal" href="usage.html#modifiers"><span class="std std-ref">Modifiers</span></a>. It should be obvious that the schema</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>represents an integer greater or equal than 1900.</p>
+<p>Let’s validate an object not fitting the schema.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bad_book</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;margaret@gmailcom&quot;</span><span class="p">}],</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;1936&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (value:&#39;margaret@gmailcom&#39;) is not of type &#39;email&#39;: The part after the @-sign is not valid. It should have a period.
+</pre></div>
+</div>
+<p>As before we can rewrite the new <cite>book_schema</cite> as a valid type annotation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">NotRequired</span><span class="p">,</span> <span class="n">TypedDict</span>
+
+<span class="k">class</span> <span class="nc">person_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;[a-zA-Z. ]*&quot;</span><span class="p">)]</span>
+  <span class="n">email</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]]</span>
+  <span class="n">website</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">]]</span>
+
+<span class="k">class</span> <span class="nc">book_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
+  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]]</span>
+  <span class="n">year</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Many constraints expressible in <cite>vtjson</cite> schemas cannot be expressed in the language of type annotations. That’s where <cite>typing.Annotated</cite> comes in. Consider the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Type checkers such as <cite>mypy</cite> only see the <cite>str</cite> part of this schema, but <cite>vtjson</cite> sees everything. For more information see <a class="reference internal" href="usage.html#type-annotations"><span class="std std-ref">Type annotations integration</span></a>. There is a small caveat here: <code class="xref py py-class docutils literal notranslate"><span class="pre">email</span></code> in fact already checks that the object is a string. So as further explained in <a class="reference internal" href="usage.html#type-annotations"><span class="std std-ref">Type annotations integration</span></a>, it is more efficient to write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here it makes little difference, but the gain in efficiency may be important for larger schemas.</p>
+<p>Let’s check that validation also works with type annotations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+    ...
+    raise ValidationError(message)
+vtjson.vtjson.ValidationError: bad_book is not of type &#39;book_schema&#39;: bad_book[&#39;authors&#39;][0] is not of type &#39;person_schema&#39;: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (value:&#39;margaret@gmailcom&#39;) is not of type &#39;email&#39;: The part after the @-sign is not valid. It should have a period.
+</pre></div>
+</div>
+</section>
+<section id="where-to-go-from-here">
+<h2>Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to vtjson’s documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="API reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michel Van den Bergh.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
