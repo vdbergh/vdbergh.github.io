@@ -71,6 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.nothing"><code class="docutils literal notranslate"><span class="pre">nothing</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#modifiers">Modifiers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#wrappers">Wrappers</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.union"><code class="docutils literal notranslate"><span class="pre">union</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.intersect"><code class="docutils literal notranslate"><span class="pre">intersect</span></code></a></li>
@@ -221,9 +222,9 @@ vtjson.vtjson.ValidationError: book[&#39;year&#39;] (value:&#39;1936&#39;) is no
 vtjson.vtjson.ValidationError: object is not of type &#39;book_schema&#39;: object[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
 </pre></div>
 </div>
-<p>Schemas can of course be nested</p>
+<p>Schemas can of course be more complicated and in particular they can be nested</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">person_schema</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;[a-zA-Z. ]*&quot;</span><span class="p">),</span>
   <span class="s2">&quot;email?&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
   <span class="s2">&quot;website?&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
 <span class="p">}</span>
@@ -232,15 +233,19 @@ vtjson.vtjson.ValidationError: object is not of type &#39;book_schema&#39;: obje
   <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
   <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">person_schema</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
   <span class="s2">&quot;editor?&quot;</span><span class="p">:</span> <span class="n">person_schema</span><span class="p">,</span>
-  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+  <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)),</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><cite>email</cite> and <cite>url</cite> are built-in schemas. See <a class="reference internal" href="#builtins"><span class="std std-ref">Built-in schemas</span></a>.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">regex</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">email</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">url</span></code> are built-in schemas. See <a class="reference internal" href="#builtins"><span class="std std-ref">Built-in schemas</span></a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">intersect</span></code> is a <cite>wrapper</cite>. See <a class="reference internal" href="#wrappers"><span class="std std-ref">Wrappers</span></a>. <code class="xref py py-class docutils literal notranslate"><span class="pre">ge</span></code> is a <cite>modifier</cite>. See <a class="reference internal" href="#modifiers"><span class="std std-ref">Modifiers</span></a>. It should be obvious that the schema</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>represents an integer greater or equal than 1900.</p>
 <p>Let’s validate an object not fitting the schema.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bad_book</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gone with the Wind&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;margaret@gmailcom&quot;</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Margaret Mitchell&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span><span class="s2">&quot;margaret@gmailcom&quot;</span><span class="p">}],</span>
   <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;1936&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -254,10 +259,10 @@ vtjson.vtjson.ValidationError: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (
 </pre></div>
 </div>
 <p>As before we can rewrite the new <cite>book_schema</cite> as a valid type annotation</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">NotRequired</span><span class="p">,</span> <span class="n">TypedDict</span>
 
 <span class="k">class</span> <span class="nc">person_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
-  <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">(</span><span class="s2">&quot;[a-zA-Z. ]*&quot;</span><span class="p">)]</span>
   <span class="n">email</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]]</span>
   <span class="n">website</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">]]</span>
 
@@ -265,10 +270,10 @@ vtjson.vtjson.ValidationError: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (
   <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
   <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
   <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]]</span>
-  <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">year</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)]</span>
 </pre></div>
 </div>
-<p>The contraint that a string should be an email address cannot be expressed in the language of type annotations. That’s where <cite>typing.Annotated</cite> comes in:</p>
+<p>Many constraints expressible in <cite>vtjson</cite> schemas cannot be expressed in the language of type annotations. That’s where <cite>typing.Annotated</cite> comes in:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -532,8 +537,11 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 </dd></dl>
 
 </section>
+<section id="modifiers">
+<span id="id1"></span><h2>Modifiers<a class="headerlink" href="#modifiers" title="Link to this heading"></a></h2>
+</section>
 <section id="wrappers">
-<h2>Wrappers<a class="headerlink" href="#wrappers" title="Link to this heading"></a></h2>
+<span id="id2"></span><h2>Wrappers<a class="headerlink" href="#wrappers" title="Link to this heading"></a></h2>
 <p>Wrappers may be used to combine a collection of schemas into a new schema.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.union">
