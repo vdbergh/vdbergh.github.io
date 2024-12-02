@@ -122,8 +122,8 @@
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.complement" title="vtjson.complement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">complement</span></code></a>(schema)</p></td>
 <td><p>An object matches the schema <cite>complement(schema)</cite> if it does not match <cite>schema</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cond</span></code>(*args)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.cond" title="vtjson.cond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cond</span></code></a>(*args)</p></td>
+<td><p>An object is successively validated against <cite>if_schema1</cite>, <cite>if_schema2</cite>, .</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.date" title="vtjson.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date</span></code></a>()</p></td>
 <td><p>Matches an ISO 8601 date.</p></td>
@@ -141,10 +141,10 @@
 <td><p>Checks if the object is a valid email address.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.fields" title="vtjson.fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code></a>(d)</p></td>
-<td><p></p></td>
+<td><p>Matches Python objects with attributes <cite>field1, field2, ..., fieldN</cite> whose corresponding values should validate against <cite>schema1, schema2, ..., schemaN</cite> respectively</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.filter" title="vtjson.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(filter, schema[, filter_name])</p></td>
-<td><p></p></td>
+<td><p>Applies <cite>callable</cite> to the object and validates the result with <cite>schema</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.ge" title="vtjson.ge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ge</span></code></a>(lb)</p></td>
 <td><p>This checks if <cite>object &gt;= lb</cite>.</p></td>
@@ -155,8 +155,8 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.gt" title="vtjson.gt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gt</span></code></a>(lb)</p></td>
 <td><p>This checks if <cite>object &gt; lb</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifthen</span></code>(if_schema, then_schema[, else_schema])</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.ifthen" title="vtjson.ifthen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ifthen</span></code></a>(if_schema, then_schema[, else_schema])</p></td>
+<td><p>If the object matches the <cite>if_schema</cite> then it should also match the <cite>then_schema</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intersect</span></code></a>(*schemas)</p></td>
 <td><p>An object matches the schema <cite>intersect(schema1, ..., schemaN)</cite> if it matches all the schemas <cite>schema1, ..., schemaN</cite>.</p></td>
@@ -180,7 +180,7 @@
 <td><p>This checks if <cite>object &lt; ub</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.magic" title="vtjson.magic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">magic</span></code></a>(mime_type[, name])</p></td>
-<td><p></p></td>
+<td><p>Checks if a buffer (for example a string or a byte array) has the given mime type.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.nothing" title="vtjson.nothing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nothing</span></code></a>()</p></td>
 <td><p>Matches nothing.</p></td>
