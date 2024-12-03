@@ -129,11 +129,14 @@
 <li class="toctree-l4"><a class="reference internal" href="#vtjson.optional_key"><code class="docutils literal notranslate"><span class="pre">optional_key</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-compiling-a-schema">Pre-compiling a schema</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example1.html">Example 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example2.html">Example 2</a></li>
 </ul>
 
         </div>
@@ -989,6 +992,10 @@ Union (or the equivalent operator |), Any.
 </dl>
 </dd></dl>
 
+</section>
+<section id="pre-compiling-a-schema">
+<h3>Pre-compiling a schema<a class="headerlink" href="#pre-compiling-a-schema" title="Link to this heading"></a></h3>
+<p>An object matches the schema <cite>compile(schema)</cite> if it matches <cite>schema</cite>. <cite>vtjson</cite> compiles a schema before using it for validation, so pre-compiling is not necessary. However for large schemas it may gain some of performance as it needs to be done only once. Compiling is an idempotent operation. It does nothing for an already compiled schema.</p>
 </section>
 </section>
 </section>
