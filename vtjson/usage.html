@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.complement"><code class="docutils literal notranslate"><span class="pre">complement</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.lax"><code class="docutils literal notranslate"><span class="pre">lax</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.strict"><code class="docutils literal notranslate"><span class="pre">strict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtjson.quote"><code class="docutils literal notranslate"><span class="pre">quote</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.set_name"><code class="docutils literal notranslate"><span class="pre">set_name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.protocol"><code class="docutils literal notranslate"><span class="pre">protocol</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtjson.set_label"><code class="docutils literal notranslate"><span class="pre">set_label</span></code></a></li>
@@ -656,6 +657,17 @@ A suitable written schema can be used as a Python type annotation. <a class="ref
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="vtjson.quote">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">quote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.quote" title="Link to this definition"></a></dt>
+<dd><p>An object matches the schema <cite>quote(schema)</cite> if it is equal to <cite>schema</cite>. For example the schema <cite>str</cite> matches strings but the schema <cite>quote(str)</cite> matches the object <cite>str</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the schema to be quoted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="vtjson.set_name">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.set_name" title="Link to this definition"></a></dt>
 <dd><p>An object matches the schema <cite>set_name(schema, name, reason=False)</cite> if it matches <cite>schema</cite>, but the <cite>name</cite> argument will be used in non-validation messages.</p>
@@ -801,7 +813,7 @@ Union (or the equivalent operator |), Any.
 </div>
 <p>internally becomes <cite>intersect(tuple, fields({“title”: str, “price”: float}))</cite>.</p>
 </li>
-<li><p><cite>Annotated</cite> has already been discussed. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <cite>Apply</cite> objects.</p></li>
+<li><p><cite>Annotated</cite> has already been discussed. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects.</p></li>
 <li><p><cite>NewType</cite> is translated into a <a class="reference internal" href="#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_name</span></code></a> schema. E.g. <cite>NewType(‘Movie’, str)</cite> becomes <cite>set_name(str, ‘Movie’)</cite></p></li>
 <li><p><cite>tuple[…]</cite> and <cite>Tuple[…]</cite> are translated into the equivalent <cite>tuple</cite> schemas.</p></li>
 <li><p><cite>Mapping[S, T]</cite> and subtypes validate those objects that are members of the origin type (a subclass of <cite>Mapping</cite>) and whose (key, value) pairs match <cite>(S, T)</cite>.</p></li>
@@ -841,7 +853,7 @@ Union (or the equivalent operator |), Any.
 <dt class="sig sig-object py" id="vtjson.skip_first">
 <span class="sig-prename descclassname"><span class="pre">vtjson.</span></span><span class="sig-name descname"><span class="pre">skip_first</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><span class="pre">vtjson.Apply</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">vtjson.Apply(skip_first=True)</span></em><a class="headerlink" href="#vtjson.skip_first" title="Link to this definition"></a></dt>
 <dd><blockquote>
-<div><p>Do not use the first argument (the Python type annotation) in an <cite>Annotated</cite> construct for validation because this is already covered by the other arguments.</p>
+<div><p>Do not use the first argument (the Python type annotation) in an <cite>Annotated</cite> construct for validation (likely because it is already covered by the other arguments).</p>
 </div></blockquote>
 </dd></dl>
 

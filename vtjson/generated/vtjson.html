@@ -114,7 +114,7 @@
 <td><p>This matches the real numbers that are close to <cite>x</cite> in the sense of <cite>math.isclose</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">comparable</span></code>(*args, **kwargs)</p></td>
-<td><p></p></td>
+<td><p>Base class for objects that are comparable with each other.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compiled_schema</span></code></a>()</p></td>
 <td><p>The result of compiling a schema.</p></td>
@@ -186,7 +186,7 @@
 <td><p>Matches nothing.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">number</span></code>()</p></td>
-<td><p></p></td>
+<td><p>A deprecated alias for <cite>float</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.one_of" title="vtjson.one_of"><code class="xref py py-obj docutils literal notranslate"><span class="pre">one_of</span></code></a>(*args)</p></td>
 <td><p>This represents a dictionary with exactly one key among a collection of keys.</p></td>
@@ -197,8 +197,8 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.protocol" title="vtjson.protocol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">protocol</span></code></a>(schema[, dict])</p></td>
 <td><p>An object matches the schema <cite>protocol(schema, dict=False)</cite> if <cite>schema</cite> is a class (or class like object) and its fields are annotated with schemas which validate the corresponding fields in the object.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">quote</span></code>(schema)</p></td>
-<td><p></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../usage.html#vtjson.quote" title="vtjson.quote"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quote</span></code></a>(schema)</p></td>
+<td><p>An object matches the schema <cite>quote(schema)</cite> if it is equal to <cite>schema</cite>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="../usage.html#vtjson.regex" title="vtjson.regex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">regex</span></code></a>(regex[, name, fullmatch, flags])</p></td>
 <td><p>This matches the strings which match the given pattern.</p></td>
