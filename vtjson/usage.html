@@ -106,6 +106,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#type-annotations-as-schemas">Type annotations as schemas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#annotated">Annotated</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-type-annotations">Supported type annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apply-objects">Apply objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.Apply"><code class="docutils literal notranslate"><span class="pre">Apply</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vtjson.skip_first"><code class="docutils literal notranslate"><span class="pre">vtjson.skip_first</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#schema-format">Schema format</a><ul>
@@ -771,6 +776,75 @@ Union (or the equivalent operator |), Any.
 <section id="supported-type-annotations">
 <h3>Supported type annotations<a class="headerlink" href="#supported-type-annotations" title="Link to this heading"></a></h3>
 <p>Note that Python imposes strong restrictions on what constitutes a valid type annotation but <cite>vtjson</cite> is much more lax about this. Enforcing the restrictions is left to the type checkers or the Python interpreter.</p>
+<ul>
+<li><p><cite>TypedDict</cite>. A TypedDict type annotation is translated into a <cite>dict</cite> schema. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>internally becomes <cite>{“title”: str, “price”: float}</cite>. <cite>vtjson</cite> supports the <cite>total</cite> option to <cite>TypedDict</cite> as well as the <cite>Required</cite> and <cite>NotRequired</cite> annotations of fields, if they are compatible with the Python version being used.</p>
+</li>
+<li><p><cite>Protocol</cite>. A class implementing a protocol is translated into a <a class="reference internal" href="#vtjson.fields" title="vtjson.fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.fields</span></code></a> schema. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>internally becomes <cite>fields({“title”: str, “price”: float})</cite>.</p>
+</li>
+<li><p><cite>NamedTuple</cite>. A <cite>NamedTuple</cite> class is translated an <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema encompassing a <cite>tuple</cite> schema and a <a class="reference internal" href="#vtjson.fields" title="vtjson.fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.fields</span></code></a> schema. E.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
+</pre></div>
+</div>
+<p>internally becomes <cite>intersect(tuple, fields({“title”: str, “price”: float}))</cite>.</p>
+</li>
+<li><p><cite>Annotated</cite> has already been discussed. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <cite>Apply</cite> objects.</p></li>
+<li><p><cite>NewType</cite> is translated into a <a class="reference internal" href="#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_name</span></code></a> schema. E.g. <cite>NewType(‘Movie’, str)</cite> becomes <cite>set_name(str, ‘Movie’)</cite></p></li>
+<li><p><cite>tuple[…]</cite> and <cite>Tuple[…]</cite> are translated into the equivalent <cite>tuple</cite> schemas.</p></li>
+<li><p><cite>Mapping[S, T]</cite> and subtypes validate those objects that are members of the origin type (a subclass of <cite>Mapping</cite>) and whose (key, value) pairs match <cite>(S, T)</cite>.</p></li>
+<li><p><cite>Container[T]</cite> and subtypes validate those objects that are members of the origin type (a subclass of <cite>Container</cite>) and whose elements match <cite>T</cite>.</p></li>
+<li><p><cite>Union</cite> and the <cite>|</cite> operator are translated into <a class="reference internal" href="#vtjson.union" title="vtjson.union"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.union</span></code></a>.</p></li>
+<li><p><cite>Literal</cite> is also translated into <a class="reference internal" href="#vtjson.union" title="vtjson.union"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.union</span></code></a>.</p></li>
+<li><p><cite>Any</cite> is translated into <a class="reference internal" href="#vtjson.anything" title="vtjson.anything"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.anything</span></code></a>.</p></li>
+</ul>
+</section>
+<section id="apply-objects">
+<h3>Apply objects<a class="headerlink" href="#apply-objects" title="Link to this heading"></a></h3>
+<ul>
+<li><p>If the list of arguments of an Annotated schema includes <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects then those modify the treatement of the arguments that come before them. We already encountered <a class="reference internal" href="#vtjson.skip_first" title="vtjson.skip_first"><code class="xref py py-data docutils literal notranslate"><span class="pre">vtjson.skip_first</span></code></a> which is a built-in alias for <cite>Apply(skip_first=True)</cite>.</p></li>
+<li><p>Multiple <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects are allowed. E.g. the following contrived schema</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>is equivalent to <cite>float</cite>.</p>
+</li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="vtjson.Apply">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.Apply" title="Link to this definition"></a></dt>
+<dd><p>Modifies the treatement of the previous arguments in an <cite>Annotated</cite> schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skip_first</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – if <cite>True</cite> do not use the first argument (the Python type annotation) in an <cite>Annotated</cite> construct for validation because this is already covered by the other arguments</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – apply the corresponding <a class="reference internal" href="#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_name</span></code></a> command  to the previous arguments</p></li>
+<li><p><strong>labels</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>] | <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span>) – apply the corresponding <a class="reference internal" href="#vtjson.set_label" title="vtjson.set_label"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_label</span></code></a> command  to the previous arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="vtjson.skip_first">
+<span class="sig-prename descclassname"><span class="pre">vtjson.</span></span><span class="sig-name descname"><span class="pre">skip_first</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><span class="pre">vtjson.Apply</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">vtjson.Apply(skip_first=True)</span></em><a class="headerlink" href="#vtjson.skip_first" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Do not use the first argument (the Python type annotation) in an <cite>Annotated</cite> construct for validation because this is already covered by the other arguments.</p>
+</div></blockquote>
+</dd></dl>
+
 </section>
 </section>
 <section id="schema-format">
