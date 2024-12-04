@@ -270,7 +270,6 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
     <span class="n">ip_address</span><span class="p">,</span>
     <span class="n">keys</span><span class="p">,</span>
     <span class="n">lax</span><span class="p">,</span>
-    <span class="n">number</span><span class="p">,</span>
     <span class="n">one_of</span><span class="p">,</span>
     <span class="n">quote</span><span class="p">,</span>
     <span class="n">regex</span><span class="p">,</span>
@@ -294,8 +293,8 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
 
 <span class="n">uint</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="n">suint</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">unumber</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">sunumber</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">ufloat</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">sufloat</span> <span class="o">=</span> <span class="n">intersect</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">valid_results</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
@@ -388,7 +387,7 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
     <span class="s2">&quot;unique_key&quot;</span><span class="p">:</span> <span class="n">uuid</span><span class="p">,</span>
     <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="s2">&quot;ARCH&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="s2">&quot;nps&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
+    <span class="s2">&quot;nps&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
     <span class="s2">&quot;near_github_api_limit&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="s2">&quot;remote_addr&quot;</span><span class="p">:</span> <span class="n">ip_address</span><span class="p">,</span>
     <span class="s2">&quot;country_code&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="n">country_code</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">),</span>
@@ -412,7 +411,7 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
         <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
         <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
         <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
-        <span class="s2">&quot;tc_base&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
+        <span class="s2">&quot;tc_base&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
         <span class="s2">&quot;base_same_as_master&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
         <span class="s2">&quot;rescheduled_from?&quot;</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span>
         <span class="s2">&quot;approved&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
@@ -455,19 +454,19 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
                 <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
                 <span class="s2">&quot;tests_repo&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
                 <span class="s2">&quot;auto_purge&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-                <span class="s2">&quot;throughput&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                <span class="s2">&quot;itp&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
+                <span class="s2">&quot;throughput&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                <span class="s2">&quot;itp&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                 <span class="s2">&quot;adjudication&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                 <span class="s2">&quot;sprt?&quot;</span><span class="p">:</span> <span class="n">intersect</span><span class="p">(</span>
                     <span class="p">{</span>
                         <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
                         <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
-                        <span class="s2">&quot;elo0&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                        <span class="s2">&quot;elo1&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
+                        <span class="s2">&quot;elo0&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                        <span class="s2">&quot;elo1&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                         <span class="s2">&quot;elo_model&quot;</span><span class="p">:</span> <span class="s2">&quot;normalized&quot;</span><span class="p">,</span>
                         <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">union</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;accepted&quot;</span><span class="p">,</span> <span class="s2">&quot;rejected&quot;</span><span class="p">),</span>
-                        <span class="s2">&quot;llr&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
+                        <span class="s2">&quot;llr&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                         <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="n">suint</span><span class="p">,</span>
                         <span class="s2">&quot;lower_bound&quot;</span><span class="p">:</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span>
                         <span class="s2">&quot;upper_bound&quot;</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">19</span><span class="p">),</span>
@@ -476,41 +475,41 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
                         <span class="s2">&quot;overshoot?&quot;</span><span class="p">:</span> <span class="p">{</span>
                             <span class="s2">&quot;last_update&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
                             <span class="s2">&quot;skipped_updates&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
-                            <span class="s2">&quot;ref0&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;m0&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;sq0&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                            <span class="s2">&quot;ref1&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;m1&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;sq1&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
+                            <span class="s2">&quot;ref0&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;m0&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;sq0&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;ref1&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;m1&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;sq1&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
                         <span class="p">},</span>
                     <span class="p">},</span>
                     <span class="n">one_of</span><span class="p">(</span><span class="s2">&quot;overshoot&quot;</span><span class="p">,</span> <span class="s2">&quot;lost_samples&quot;</span><span class="p">),</span>
                 <span class="p">),</span>
                 <span class="s2">&quot;spsa?&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                    <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
+                    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                    <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
                     <span class="s2">&quot;raw_params&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                     <span class="s2">&quot;iter&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
                     <span class="s2">&quot;num_iter&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
                     <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
                         <span class="p">{</span>
                             <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
-                            <span class="s2">&quot;c_end&quot;</span><span class="p">:</span> <span class="n">sunumber</span><span class="p">,</span>
-                            <span class="s2">&quot;r_end&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">sunumber</span><span class="p">,</span>
-                            <span class="s2">&quot;a_end&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span>
-                            <span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
+                            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                            <span class="s2">&quot;c_end&quot;</span><span class="p">:</span> <span class="n">sufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;r_end&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">sufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;a_end&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span>
+                            <span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                         <span class="p">},</span>
                         <span class="o">...</span><span class="p">,</span>
                     <span class="p">],</span>
                     <span class="s2">&quot;param_history?&quot;</span><span class="p">:</span> <span class="p">[</span>
                         <span class="p">[</span>
-                            <span class="p">{</span><span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">unumber</span><span class="p">},</span>
+                            <span class="p">{</span><span class="s2">&quot;theta&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">ufloat</span><span class="p">},</span>
                             <span class="o">...</span><span class="p">,</span>
                         <span class="p">],</span>
                         <span class="o">...</span><span class="p">,</span>
@@ -526,7 +525,7 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
                     <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
                     <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
                     <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
-                    <span class="s2">&quot;residual?&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
+                    <span class="s2">&quot;residual?&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                     <span class="s2">&quot;residual_color?&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                     <span class="s2">&quot;bad?&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                     <span class="s2">&quot;stats&quot;</span><span class="p">:</span> <span class="n">results_schema</span><span class="p">,</span>
@@ -542,7 +541,7 @@ See <a class="reference internal" href="#example2"><span class="std std-ref">Exa
                 <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
                 <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_utc</span><span class="p">,</span>
                 <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
-                <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span>
+                <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
                 <span class="s2">&quot;residual_color&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                 <span class="s2">&quot;bad&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">uint</span><span class="p">,</span>
