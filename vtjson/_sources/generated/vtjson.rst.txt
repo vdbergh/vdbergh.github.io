@@ -33,6 +33,7 @@
       email
       fields
       filter
+      float_
       ge
       glob
       gt
