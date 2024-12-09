@@ -1085,14 +1085,18 @@ found to contain an error</p>
 <p>A consequence of this algorithm is that non-const keys are automatically optional. So applying the wrapper <a class="reference internal" href="#vtjson.optional_key" title="vtjson.optional_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.optional_key()</span></code></a> to them is meaningless and has no effect.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.optional_key">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">optional_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.optional_key" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">optional_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.optional_key" title="Link to this definition"></a></dt>
 <dd><p>Make a key in a Mapping schema optional. In the common case that the key
 is a string, the same effect can be achieved by appending <cite>?</cite>. If you
 absolutely positively need a non-optional string key that ends in <cite>?</cite>
 you can quote the <cite>?</cite> by preceding it with a backslash.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">K</span></code>)</span>) – the key to be made optional</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code>(<code class="docutils literal notranslate"><span class="pre">K</span></code>)</span>) – the key to be made optional</p></li>
+<li><p><strong>_optional</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>False</cite> create a mandatory key; this is normally
+for internal use only</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
