@@ -855,6 +855,10 @@ Union (or the equivalent operator |), Any.
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="n">type_annotation</span><span class="p">,</span> <span class="n">vtjson_schema</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
 </pre></div>
 </div>
+<p>For example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">object</span><span class="p">],</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">skip_first</span><span class="p">]</span>
+</pre></div>
+</div>
 <p>A type checker such as <cite>mypy</cite> will only see the type annotation (<cite>list[object]</cite> in the example), whereas vtjson will only see the vtjson schema (<cite>[int, str, float]</cite> in the example). <cite>skip_first</cite> is a built-in short hand for <cite>Apply(skip_first=True)</cite> (see below) which directs vtjson to ignore the first argument of an <cite>Annotated</cite> schema.</p>
 </li>
 <li><p>In some use cases a <cite>vtjon</cite> schema will meaningfully refine a Python type or type annotation. In that case one should not use <cite>skip_first</cite>. For example:</p>
