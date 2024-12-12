@@ -78,9 +78,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#openlock.get_defaults"><code class="docutils literal notranslate"><span class="pre">get_defaults()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#how-does-it-work">How does it work</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#issues">Issues</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#history">History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internals">Internals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-it-work">How does it work</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#issues">Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#history">History</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API summary</a></li>
@@ -301,8 +304,10 @@ option</p>
 </dd></dl>
 
 </section>
+<section id="internals">
+<h2>Internals<a class="headerlink" href="#internals" title="Link to this heading"></a></h2>
 <section id="how-does-it-work">
-<h2>How does it work<a class="headerlink" href="#how-does-it-work" title="Link to this heading"></a></h2>
+<h3>How does it work<a class="headerlink" href="#how-does-it-work" title="Link to this heading"></a></h3>
 <p>A valid lock file has two lines of text containing respectively:</p>
 <ul class="simple">
 <li><p><cite>pid</cite>: the PID of the process holding the lock;</p></li>
@@ -315,7 +320,7 @@ option</p>
 <p>In follows from this description that the algorithm is latency free in the common use case where there are no invalid lock files.</p>
 </section>
 <section id="issues">
-<h2>Issues<a class="headerlink" href="#issues" title="Link to this heading"></a></h2>
+<h3>Issues<a class="headerlink" href="#issues" title="Link to this heading"></a></h3>
 <p>There are no known issues in the common use case where there are no invalid lock files. In general the following is true:</p>
 <ul class="simple">
 <li><p>The algorithm for dealing with invalid lock files fails if a process needs more time than indicated by the <cite>race_delay</cite> parameter to create a new lock file after detecting the absence of a valid one. The library will issue a warning if it thinks the system is too slow for the algorithm to work correctly and it will recommend to increase the value of the <cite>race_delay</cite> parameter.</p></li>
@@ -323,8 +328,9 @@ option</p>
 </ul>
 </section>
 <section id="history">
-<h2>History<a class="headerlink" href="#history" title="Link to this heading"></a></h2>
+<h3>History<a class="headerlink" href="#history" title="Link to this heading"></a></h3>
 <p>This is a refactored version of the locking algorithm used by the worker for the Fishtest web application <a class="reference external" href="https://tests.stockfishchess.org/tests">https://tests.stockfishchess.org/tests</a>.</p>
+</section>
 </section>
 </section>
 
