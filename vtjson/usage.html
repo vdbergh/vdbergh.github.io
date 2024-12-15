@@ -841,15 +841,11 @@ found to contain an error</p>
 <section id="type-annotations-as-schemas">
 <h3>Type annotations as schemas<a class="headerlink" href="#type-annotations-as-schemas" title="Link to this heading"></a></h3>
 <p><cite>vtjson</cite> recognizes the following type annotations as schemas.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Annotated, Mapping[...,...] and subtypes, Container[...] and subtypes,
-tuple[...], Tuple[...], Protocol, NamedTuple, Literal, NewType, TypedDict,
-Union (or the equivalent operator |), Any.
-</pre></div>
-</div>
+<p><a class="reference internal" href="#annotated"><span class="std std-ref">Annotated</span></a>, <a class="reference internal" href="#mapping"><span class="std std-ref">Mapping[K, V] and subtypes</span></a>, <a class="reference internal" href="#container"><span class="std std-ref">Container[T] and subtypes</span></a>, <a class="reference internal" href="#tuple"><span class="std std-ref">tuple[…] and Tuple[…]</span></a>, <a class="reference internal" href="#protocol"><span class="std std-ref">Protocol</span></a>, <a class="reference internal" href="#namedtuple"><span class="std std-ref">NamedTuple</span></a>, <a class="reference internal" href="#newtype"><span class="std std-ref">NewType</span></a>, <a class="reference internal" href="#typeddict"><span class="std std-ref">TypedDict</span></a>, <a class="reference internal" href="#union"><span class="std std-ref">Union and the | operator</span></a>, <a class="reference internal" href="#any"><span class="std std-ref">Any</span></a>.</p>
 <p>For example <cite>dict[str, str]</cite> is translated internally into the schema <cite>{str: str}</cite>. This is explained further below.</p>
 </section>
 <section id="annotated">
-<h3>Annotated<a class="headerlink" href="#annotated" title="Link to this heading"></a></h3>
+<span id="id3"></span><h3>Annotated<a class="headerlink" href="#annotated" title="Link to this heading"></a></h3>
 <ul>
 <li><p>More general vtjson schemas can work along Python type annotations by using the <cite>typing.Annotated</cite> contruct. The most naive way to do this is via</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="n">type_annotation</span><span class="p">,</span> <span class="n">vtjson_schema</span><span class="p">,</span> <span class="n">skip_first</span><span class="p">]</span>
@@ -878,7 +874,7 @@ Union (or the equivalent operator |), Any.
 <section id="supported-type-annotations">
 <h3>Supported type annotations<a class="headerlink" href="#supported-type-annotations" title="Link to this heading"></a></h3>
 <p>Note that Python imposes strong restrictions on what constitutes a valid type annotation but <cite>vtjson</cite> is much more lax about this. Enforcing the restrictions is left to the type checkers or the Python interpreter.</p>
-<dl>
+<dl id="typeddict">
 <dt>TypedDict</dt><dd><p>A TypedDict type annotation is translated into a <cite>dict</cite> schema. E.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
   <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
@@ -887,6 +883,8 @@ Union (or the equivalent operator |), Any.
 </div>
 <p>internally becomes <cite>{“title”: str, “price”: float}</cite>. <cite>vtjson</cite> supports the <cite>total</cite> option to <cite>TypedDict</cite> as well as the <cite>Required</cite> and <cite>NotRequired</cite> annotations of fields, if they are compatible with the Python version being used.</p>
 </dd>
+</dl>
+<dl id="protocol">
 <dt>Protocol</dt><dd><p>A class implementing a protocol is translated into a <a class="reference internal" href="#vtjson.fields" title="vtjson.fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.fields</span></code></a> schema. E.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
   <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
@@ -895,6 +893,8 @@ Union (or the equivalent operator |), Any.
 </div>
 <p>internally becomes <cite>fields({“title”: str, “price”: float})</cite>.</p>
 </dd>
+</dl>
+<dl id="namedtuple">
 <dt>NamedTuple</dt><dd><p>A <cite>NamedTuple</cite> class is translated into an <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema encompassing a <cite>tuple</cite> schema and a <a class="reference internal" href="#vtjson.fields" title="vtjson.fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.fields</span></code></a> schema. E.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
   <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
@@ -903,20 +903,34 @@ Union (or the equivalent operator |), Any.
 </div>
 <p>internally becomes <cite>intersect(tuple, fields({“title”: str, “price”: float}))</cite>.</p>
 </dd>
-<dt>Annotated</dt><dd><p>This has already been discussed. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects.</p>
+<dt>Annotated</dt><dd><p>This has already been discussed in the section <a class="reference internal" href="#annotated"><span class="std std-ref">Annotated</span></a>. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects.</p>
 </dd>
+</dl>
+<dl class="simple" id="newtype">
 <dt>NewType</dt><dd><p>This is translated into a <a class="reference internal" href="#vtjson.set_name" title="vtjson.set_name"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.set_name</span></code></a> schema. E.g. <cite>NewType(‘Movie’, str)</cite> becomes <cite>set_name(str, ‘Movie’)</cite></p>
 </dd>
+</dl>
+<dl class="simple" id="tuple">
 <dt>tuple[…] and Tuple[…]</dt><dd><p>These are translated into the equivalent <cite>tuple</cite> schemas.</p>
 </dd>
+</dl>
+<dl class="simple" id="mapping">
 <dt>Mapping[K, V] and subtypes</dt><dd><p>These validate those objects that are members of the origin type (a subclass of <cite>Mapping</cite>) and whose (key, value) pairs match <cite>(K, V)</cite>.</p>
 </dd>
+</dl>
+<dl class="simple" id="container">
 <dt>Container[T] and subtypes</dt><dd><p>These validate those objects that are members of the origin type (a subclass of <cite>Container</cite>) and whose elements match <cite>T</cite>.</p>
 </dd>
+</dl>
+<dl class="simple" id="union">
 <dt>Union and the | operator</dt><dd><p>These are translated into <a class="reference internal" href="#vtjson.union" title="vtjson.union"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.union</span></code></a>.</p>
 </dd>
+</dl>
+<dl class="simple" id="literal">
 <dt>Literal</dt><dd><p>This is also translated into <a class="reference internal" href="#vtjson.union" title="vtjson.union"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.union</span></code></a>.</p>
 </dd>
+</dl>
+<dl class="simple" id="any">
 <dt>Any</dt><dd><p>This is translated into <a class="reference internal" href="#vtjson.anything" title="vtjson.anything"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.anything</span></code></a>.</p>
 </dd>
 </dl>
