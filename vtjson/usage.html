@@ -858,6 +858,14 @@ found to contain an error</p>
 <p>A type checker such as <cite>mypy</cite> will only see the type annotation (<cite>list[object]</cite> in the example), whereas vtjson will only see the vtjson schema (<cite>[int, str, float]</cite> in the example). <cite>skip_first</cite> is a built-in short hand for <cite>Apply(skip_first=True)</cite> (see below) which directs vtjson to ignore the first argument of an <cite>Annotated</cite> schema.</p>
 </li>
 <li><p>In some use cases a <cite>vtjon</cite> schema will meaningfully refine a Python type or type annotation. In that case one should not use <cite>skip_first</cite>. For example:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fields</span><span class="p">({</span><span class="s2">&quot;tzinfo&quot;</span><span class="p">:</span> <span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">})]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>defines a <cite>datetime</cite> object whose time zone is <cite>utc</cite>.</p>
+</li>
+<li><p>The built-in schemas already check that an object has the correct type. So for those one should use <cite>skip_first</cite>. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">skip_first</span><span class="p">]</span>
 </pre></div>
 </div>
