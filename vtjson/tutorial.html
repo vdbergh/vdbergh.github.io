@@ -153,14 +153,14 @@ Is bad_book an instance of Book? False!
   <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
 </pre></div>
 </div>
-<p>Attempting to validate the bad book raises the same exception as before:</p>
+<p>Attempting to validate the bad book raises a similar exception as before:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">validate</span><span class="p">(</span><span class="n">book_schema</span><span class="p">,</span> <span class="n">bad_book</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_book&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
     ...
     raise ValidationError(message)
-vtjson.vtjson.ValidationError: book[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
+vtjson.vtjson.ValidationError: bad_book is not of type &#39;book_schema&#39;: bad_book[&#39;year&#39;] (value:&#39;1936&#39;) is not of type &#39;int&#39;
 </pre></div>
 </div>
 <p><a class="reference internal" href="usage.html#vtjson.safe_cast" title="vtjson.safe_cast"><code class="xref py py-func docutils literal notranslate"><span class="pre">vtjson.safe_cast()</span></code></a> functions exactly like <cite>cast</cite> except that it also verifies at run time that the given object matches the given schema.</p>
