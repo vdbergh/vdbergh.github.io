@@ -222,7 +222,7 @@ vtjson.vtjson.ValidationError: bad_book[&#39;authors&#39;][0][&#39;email&#39;] (
 <span class="k">class</span> <span class="nc">book_schema</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
   <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
   <span class="n">authors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
-  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]]</span>
+  <span class="n">editor</span><span class="p">:</span> <span class="n">NotRequired</span><span class="p">[</span><span class="n">person_schema</span><span class="p">]</span>
   <span class="n">year</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">ge</span><span class="p">(</span><span class="mi">1900</span><span class="p">)]</span>
 </pre></div>
 </div>
