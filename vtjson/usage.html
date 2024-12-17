@@ -738,16 +738,15 @@ matches the object <cite>str</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.set_name">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.set_name" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>set_name(schema, name, reason=False)</cite> if it
-matches <cite>schema</cite>, but the <cite>name</cite> argument will be used in non-validation
-messages.</p>
+<dd><p>An object matches the schema <cite>set_name(schema, name)</cite> if it matches <cite>schema</cite>,
+but the <cite>name</cite> argument will be used in non-validation messages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>schema</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></span>) – the original schema</p></li>
 <li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – name for use in non-validation messages</p></li>
-<li><p><strong>reason</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – indicates whether the original non-validation message
-should be suppressed</p></li>
+<li><p><strong>reason</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – if <cite>True</cite> then the original non-validation message
+will not be suppressed</p></li>
 </ul>
 </dd>
 </dl>
@@ -883,13 +882,17 @@ found to contain an error</p>
 <h3>Supported type annotations<a class="headerlink" href="#supported-type-annotations" title="Link to this heading"></a></h3>
 <p>Note that Python imposes strong restrictions on what constitutes a valid type annotation but <cite>vtjson</cite> is much more lax about this. Enforcing the restrictions is left to the type checkers or the Python interpreter.</p>
 <dl id="typeddict">
-<dt>TypedDict</dt><dd><p>A TypedDict type annotation is translated into a <cite>dict</cite> schema. E.g.</p>
+<dt>TypedDict</dt><dd><p>A TypedDict type annotation is, roughly speaking, translated into a <cite>dict</cite> schema. E.g.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
   <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
   <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>internally becomes <cite>{“title”: str, “price”: float}</cite>. <cite>vtjson</cite> supports the <cite>total</cite> option to <cite>TypedDict</cite> as well as the <cite>Required</cite> and <cite>NotRequired</cite> annotations of fields, if they are compatible with the Python version being used.</p>
+<p>internally becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_name</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="s2">&quot;Movie&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>vtjson</cite> supports the <cite>total</cite> option to <cite>TypedDict</cite> as well as the <cite>Required</cite> and <cite>NotRequired</cite> annotations of fields, if they are compatible with the Python version being used.</p>
 </dd>
 </dl>
 <dl id="protocol">
@@ -899,7 +902,10 @@ found to contain an error</p>
   <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>internally becomes <cite>fields({“title”: str, “price”: float})</cite>.</p>
+<p>internally becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_name</span><span class="p">(</span><span class="n">fields</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">}),</span> <span class="s2">&quot;Movie&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 <dl id="namedtuple">
@@ -909,7 +915,10 @@ found to contain an error</p>
   <span class="n">price</span><span class="p">:</span> <span class="nb">float</span>
 </pre></div>
 </div>
-<p>internally becomes <cite>intersect(tuple, fields({“title”: str, “price”: float}))</cite>.</p>
+<p>internally becomes</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">set_name</span><span class="p">(</span><span class="n">intersect</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">fields</span><span class="p">({</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">})),</span> <span class="s2">&quot;Movie&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 <dt>Annotated</dt><dd><p>This has already been discussed in the section <a class="reference internal" href="#annotated"><span class="std std-ref">Annotated</span></a>. It is translated into a suitable <a class="reference internal" href="#vtjson.intersect" title="vtjson.intersect"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.intersect</span></code></a> schema. The handling of <cite>Annotated</cite> schemas can be influenced by <a class="reference internal" href="#vtjson.Apply" title="vtjson.Apply"><code class="xref py py-class docutils literal notranslate"><span class="pre">vtjson.Apply</span></code></a> objects.</p>
 </dd>
