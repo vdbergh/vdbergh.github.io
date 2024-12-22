@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API reference &mdash; vtjson 2.2.3 documentation</title>
+  <title>API reference &mdash; vtjson 2.2.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -14,7 +14,7 @@
     <link rel="canonical" href="https://www.cantate.be/vtsjon/usage.html" />
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=85e56e6b"></script>
+      <script src="_static/documentation_options.js?v=4e6cfea6"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -279,7 +279,8 @@ wrong.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.regex">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fullmatch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.regex" title="Link to this definition"></a></dt>
-<dd><p>This matches the strings which match the given pattern.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This matches the strings which match the given pattern.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -301,7 +302,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.glob">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">glob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.glob" title="Link to this definition"></a></dt>
-<dd><p>Unix style filename matching. This is implemented using
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Unix style filename matching. This is implemented using
 <cite>pathlib.PurePath().match()</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -321,7 +323,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.div">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">div</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.div" title="Link to this definition"></a></dt>
-<dd><p>This matches the integers <cite>x</cite> such that <cite>(x - remainder) % divisor</cite> == 0.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This matches the integers <cite>x</cite> such that <cite>(x - remainder) % divisor</cite> == 0.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -341,7 +344,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.close_to">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">close_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abs_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.close_to" title="Link to this definition"></a></dt>
-<dd><p>This matches the real numbers that are close to <cite>x</cite> in the sense of
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This matches the real numbers that are close to <cite>x</cite> in the sense of
 <cite>math.isclose</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -360,7 +364,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.email">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.email" title="Link to this definition"></a></dt>
-<dd><p>Checks if the object is a valid email address. This uses the package
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Checks if the object is a valid email address. This uses the package
 <cite>email_validator</cite>. The <cite>email</cite> schema accepts the same options as
 <cite>validate_email</cite> in loc. cit.</p>
 <dl class="field-list simple">
@@ -374,7 +379,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.ip_address">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ip_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ip_address" title="Link to this definition"></a></dt>
-<dd><p>Matches ip addresses of the specified version which can be 4, 6 or None.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches ip addresses of the specified version which can be 4, 6 or None.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>version</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code>[<code class="docutils literal notranslate"><span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]</span>) – the version of the ip protocol</p>
@@ -389,13 +395,15 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.url">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#vtjson.url" title="Link to this definition"></a></dt>
-<dd><p>Matches valid urls.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches valid urls.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.domain_name">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">domain_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ascii_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.domain_name" title="Link to this definition"></a></dt>
-<dd><p>Checks if the object is a valid domain name.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Checks if the object is a valid domain name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -409,7 +417,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.date_time">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">date_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.date_time" title="Link to this definition"></a></dt>
-<dd><p>Without argument this represents an ISO 8601 date-time. The <cite>format</cite>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Without argument this represents an ISO 8601 date-time. The <cite>format</cite>
 argument represents a format string for <cite>strftime</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -421,31 +430,36 @@ argument represents a format string for <cite>strftime</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.date">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#vtjson.date" title="Link to this definition"></a></dt>
-<dd><p>Matches an ISO 8601 date.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches an ISO 8601 date.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.time">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#vtjson.time" title="Link to this definition"></a></dt>
-<dd><p>Matches an ISO 8601 time.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches an ISO 8601 time.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.anything">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">anything</span></span><a class="headerlink" href="#vtjson.anything" title="Link to this definition"></a></dt>
-<dd><p>Matchess anything.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matchess anything.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.nothing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nothing</span></span><a class="headerlink" href="#vtjson.nothing" title="Link to this definition"></a></dt>
-<dd><p>Matches nothing.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches nothing.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.float_">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">float_</span></span><a class="headerlink" href="#vtjson.float_" title="Link to this definition"></a></dt>
-<dd><p>Schema that only matches floats. Not ints.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Schema that only matches floats. Not ints.</p>
 </dd></dl>
 
 </section>
@@ -454,7 +468,8 @@ argument represents a format string for <cite>strftime</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.one_of">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">one_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.one_of" title="Link to this definition"></a></dt>
-<dd><p>This represents a dictionary with exactly one key among a collection of
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents a dictionary with exactly one key among a collection of
 keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -466,7 +481,8 @@ keys.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.at_least_one_of">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">at_least_one_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.at_least_one_of" title="Link to this definition"></a></dt>
-<dd><p>This represents a dictionary with a least one key among a collection of
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents a dictionary with a least one key among a collection of
 keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -478,7 +494,8 @@ keys.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.at_most_one_of">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">at_most_one_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.at_most_one_of" title="Link to this definition"></a></dt>
-<dd><p>This represents an dictionary with at most one key among a collection of
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents an dictionary with at most one key among a collection of
 keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -490,7 +507,8 @@ keys.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.keys">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.keys" title="Link to this definition"></a></dt>
-<dd><p>This represents a dictionary containing all the keys in a collection of
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This represents a dictionary containing all the keys in a collection of
 keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -502,7 +520,8 @@ keys.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.interval">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.interval" title="Link to this definition"></a></dt>
-<dd><p>This checks if <cite>lb &lt;= object &lt;= ub</cite>, provided the comparisons make sense.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>lb &lt;= object &lt;= ub</cite>, provided the comparisons make sense.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -522,7 +541,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.gt">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.gt" title="Link to this definition"></a></dt>
-<dd><p>This checks if <cite>object &gt; lb</cite>.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &gt; lb</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the strict lower bound</p>
@@ -537,7 +557,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.ge">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ge" title="Link to this definition"></a></dt>
-<dd><p>This checks if <cite>object &gt;= lb</cite>.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &gt;= lb</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>lb</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the lower bound</p>
@@ -552,7 +573,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.lt">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.lt" title="Link to this definition"></a></dt>
-<dd><p>This checks if <cite>object &lt; ub</cite>.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &lt; ub</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the strict upper bound</p>
@@ -567,7 +589,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.le">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">le</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.le" title="Link to this definition"></a></dt>
-<dd><p>This checks if <cite>object &lt;= ub</cite>.</p>
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>This checks if <cite>object &lt;= ub</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ub</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">comparable</span></code></span>) – the upper bound</p>
@@ -582,7 +605,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.size">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.size" title="Link to this definition"></a></dt>
-<dd><p>Matches the objects (which support <cite>len()</cite> such as strings or lists) whose
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Matches the objects (which support <cite>len()</cite> such as strings or lists) whose
 length is in the interval <cite>[lb, ub]</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -602,7 +626,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.fields">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.fields" title="Link to this definition"></a></dt>
-<dd><p>Matches Python objects with attributes <cite>field1, field2, …, fieldN</cite> whose
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">StringKeyType</span></code>]</p>
+<p>Matches Python objects with attributes <cite>field1, field2, …, fieldN</cite> whose
 corresponding values should validate against <cite>schema1, schema2, …,
 schemaN</cite> respectively.</p>
 <dl class="field-list simple">
@@ -619,7 +644,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.magic">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">magic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mime_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.magic" title="Link to this definition"></a></dt>
-<dd><p>Checks if a buffer (for example a string or a byte array) has the given
+<dd><p>Bases: <a class="reference internal" href="#vtjson.compiled_schema" title="vtjson.compiled_schema"><code class="xref py py-class docutils literal notranslate"><span class="pre">compiled_schema</span></code></a></p>
+<p>Checks if a buffer (for example a string or a byte array) has the given
 mime type. This is implemented using the <cite>python-magic</cite> package.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -638,7 +664,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.filter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.filter" title="Link to this definition"></a></dt>
-<dd><p>Applies <cite>callable</cite> to the object and validates the result with <cite>schema</cite>.
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>Applies <cite>callable</cite> to the object and validates the result with <cite>schema</cite>.
 If the callable throws an exception then validation fails.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -659,11 +686,12 @@ found to contain an error</p>
 </section>
 <section id="wrappers">
 <span id="id2"></span><h2>Wrappers<a class="headerlink" href="#wrappers" title="Link to this heading"></a></h2>
-<p>Wrappers may be used to combine a collection of schemas into a new schema.</p>
+<p>Wrappers are schemas that contain references to other schemas.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.union">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">schemas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.union" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>union(schema1, …, schemaN)</cite> if it matches
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>union(schema1, …, schemaN)</cite> if it matches
 one of the schemas <cite>schema1, …, schemaN</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -675,7 +703,8 @@ one of the schemas <cite>schema1, …, schemaN</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.intersect">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">intersect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">schemas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.intersect" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>intersect(schema1, …, schemaN)</cite> if it
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>intersect(schema1, …, schemaN)</cite> if it
 matches all the schemas <cite>schema1, …, schemaN</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -687,7 +716,8 @@ matches all the schemas <cite>schema1, …, schemaN</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.complement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">complement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.complement" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>complement(schema)</cite> if it does not match
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>complement(schema)</cite> if it does not match
 <cite>schema</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -699,7 +729,8 @@ matches all the schemas <cite>schema1, …, schemaN</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.lax">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.lax" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>lax(schema)</cite> if it matches <cite>schema</cite> when
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>lax(schema)</cite> if it matches <cite>schema</cite> when
 validated with <cite>strict=False</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -712,7 +743,8 @@ validated with <cite>strict=False</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.strict">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.strict" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>strict(schema)</cite> if it matches <cite>schema</cite> when
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>strict(schema)</cite> if it matches <cite>schema</cite> when
 validated with <cite>strict=True</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -725,7 +757,8 @@ validated with <cite>strict=True</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.quote">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">quote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.quote" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>quote(schema)</cite> if it is equal to <cite>schema</cite>.
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>quote(schema)</cite> if it is equal to <cite>schema</cite>.
 For example the schema <cite>str</cite> matches strings but the schema <cite>quote(str)</cite>
 matches the object <cite>str</cite>.</p>
 <dl class="field-list simple">
@@ -738,7 +771,8 @@ matches the object <cite>str</cite>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.set_name">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.set_name" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>set_name(schema, name)</cite> if it matches <cite>schema</cite>,
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>set_name(schema, name)</cite> if it matches <cite>schema</cite>,
 but the <cite>name</cite> argument will be used in non-validation messages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -755,7 +789,8 @@ will not be suppressed</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.protocol">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.protocol" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>protocol(schema, dict=False)</cite> if <cite>schema</cite> is
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>protocol(schema, dict=False)</cite> if <cite>schema</cite> is
 a class (or class like object) and its fields are annotated with schemas
 which validate the corresponding fields in the object.</p>
 <dl class="field-list simple">
@@ -776,7 +811,8 @@ type_hints</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.set_label">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.set_label" title="Link to this definition"></a></dt>
-<dd><p>An object matches the schema <cite>set_label(schema, label1, …, labelN,
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object matches the schema <cite>set_label(schema, label1, …, labelN,
 debug=False)</cite> if it matches <cite>schema</cite>, unless the schema is replaced by a
 different one via the <cite>subs</cite> argument to <cite>validate</cite>.</p>
 <dl class="field-list simple">
@@ -801,7 +837,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.ifthen">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ifthen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">if_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">then_schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">else_schema</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.ifthen" title="Link to this definition"></a></dt>
-<dd><p>If the object matches the <cite>if_schema</cite> then it should also match the
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>If the object matches the <cite>if_schema</cite> then it should also match the
 <cite>then_schema</cite>. If the object does not match the <cite>if_schema</cite> then it should
 match the <cite>else_schema</cite>, if present.</p>
 <dl class="field-list simple">
@@ -818,7 +855,8 @@ match the <cite>else_schema</cite>, if present.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.cond">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.cond" title="Link to this definition"></a></dt>
-<dd><p>An object is successively validated against <cite>if_schema1</cite>, <cite>if_schema2</cite>,
+<dd><p>Bases: <a class="reference internal" href="#vtjson.wrapper" title="vtjson.wrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></a></p>
+<p>An object is successively validated against <cite>if_schema1</cite>, <cite>if_schema2</cite>,
 … until a validation succeeds. When this happens the object should match
 the corresponding <cite>then_schema</cite>. If no <cite>if_schema</cite> succeeds then the
 object is considered to have been validated. If one sets <cite>if_schemaN</cite>
@@ -966,7 +1004,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.Apply">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.Apply" title="Link to this definition"></a></dt>
-<dd><p>Modifies the treatement of the previous arguments in an <cite>Annotated</cite> schema.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Modifies the treatement of the previous arguments in an <cite>Annotated</cite> schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1129,7 +1168,8 @@ found to contain an error</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="vtjson.optional_key">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">optional_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#vtjson.optional_key" title="Link to this definition"></a></dt>
-<dd><p>Make a key in a Mapping schema optional. In the common case that the key
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">K</span></code>]</p>
+<p>Make a key in a Mapping schema optional. In the common case that the key
 is a string, the same effect can be achieved by appending <cite>?</cite>. If you
 absolutely positively need a non-optional string key that ends in <cite>?</cite>
 you can quote the <cite>?</cite> by preceding it with a backslash.</p>
